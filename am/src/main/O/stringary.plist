@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>sizeAry</key>
+	<array>
+		<string>B</string>
+		<string>KB</string>
+		<string>MB</string>
+		<string>GB</string>
+	</array>
+	<key>dateAry</key>
+	<array>
+		<string>时</string>
+		<string>天</string>
+		<string>月</string>
+		<string>年</string>
+	</array>
+	<key>openaslist1</key>
+	<array>
+		<string>文本文件</string>
+		<string>图片文件</string>
+		<string>视频文件</string>
+		<string>音频文件</string>
+		<string>安装文件</string>
+		<string>inflate</string>
+	</array>
+	<key>openaslist2</key>
+	<array>
+		<string>文本文件</string>
+		<string>图片文件</string>
+		<string>视频文件</string>
+		<string>音频文件</string>
+		<string>安装文件</string>
+	</array>
+	<key>pickerOptions</key>
+	<array>
+		<string>查看组别</string>
+		<string>站点名称</string>
+		<string>查看邮箱</string>
+		<string>查看手机</string>
+		<string>通行证号</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>welcomeVC</key>
+	<string>HomeVC</string>
+	<key>rootVC</key>
+	<string>HomeVC</string>
+	<key>navVC</key>
+	<string>HomeVC</string>
+	<key>introVC</key>
+	<string>HomeVC</string>
+	<key>lockVC</key>
+	<string>HomeVC</string>
+	<key>loginVC</key>
+	<string>HomeVC</string>
+</dict>
+</plist>

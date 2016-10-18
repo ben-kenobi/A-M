@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>items</key>
+		<array>
+			<dict>
+				<key>title</key>
+				<string></string>
+				<key>icon</key>
+				<string>at</string>
+				<key>vc</key>
+				<string>BaseVC</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string></string>
+				<key>icon</key>
+				<string>filesystem</string>
+				<key>vc</key>
+				<string>BaseVC</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string></string>
+				<key>icon</key>
+				<string>contacts</string>
+				<key>vc</key>
+				<string>BaseVC</string>
+			</dict>
+			<dict>
+				<key>title</key>
+				<string></string>
+				<key>icon</key>
+				<string>logoff</string>
+				<key>vc</key>
+				<string>BaseVC</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

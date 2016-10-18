@@ -1,0 +1,113 @@
+//
+//  PrefixHeader.pch
+//  day21-ui-lottery03
+//
+//  Created by apple on 15/10/19.
+//  Copyright (c) 2015年 itheima. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
+
+#define iScreen \
+                [UIScreen mainScreen]
+#define iScreenW iScreen.bounds.size.width
+#define iScreenH iScreen.bounds.size.height
+#define iBundle [NSBundle mainBundle]
+
+#define iPref(name)[[NSUserDefaults alloc] initWithSuiteName:(name)]
+
+
+#define iApp [UIApplication sharedApplication]
+#define iFm  [NSFileManager defaultManager]
+#define iRes(res)  [[NSBundle mainBundle]pathForResource:(res) ofType:0]
+
+#define  iRes4dict(res)  [NSDictionary dictionaryWithContentsOfFile:iRes(res)]
+
+#define iRes4ary(res) [NSArray arrayWithContentsOfFile:iRes(res)]
+
+#define iURL(name) [NSURL URLWithString:(name)]
+
+#define iData(name) [NSData dataWithContentsOfURL:iURL(name)]
+
+#define iData4F(name) [NSData dataWithContentsOfFile:(name)]
+
+#define imgFromData(name) [UIImage imageWithData:iData(name)]
+
+#define imgFromData4F(name) [UIImage imageWithData:iData4F(name)]
+
+#define imgFromF(name) [UIImage imageWithContentsOfFile:(name)]
+
+#define img(name) [UIImage imageNamed:(name)]
+
+#define iNotiCenter [NSNotificationCenter defaultCenter]
+
+//#define iVersion [[[UIDevice currentDevice]systemVersion]floatValue]
+
+
+#define iLazy4Dict(na1,na2) -(NSMutableDictionary *)na1{\
+                            if(!na2){\
+                                na2=[NSMutableDictionary  dictionary];\
+                            }\
+                            return na2;\
+                        }
+
+#define iLazy4Ary(na1,na2) -(NSMutableArray *)na1{\
+                            if(!na2){\
+                            na2=[NSMutableArray  array];\
+                            }\
+                            return na2;\
+                            }
+#define iColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+#define iGlobalBG iColor(230,230,230,1)
+#define iFont(size) [UIFont systemFontOfSize:(size)]
+#define iBFont(size) [UIFont boldSystemFontOfSize:(size)]
+
+
+#define iFormatStr(...) ([NSString stringWithFormat:__VA_ARGS__])
+
+#define iStBH 20
+#define iNavH 44
+#define iTopBarH (iStBH+iNavH)
+#define iTabBarH 49
+
+#ifdef DEBUG
+#define iLog(...) NSLog(__VA_ARGS__)
+
+
+#define iBaseURL @"http://"
+
+#else
+#define iLog(...)
+
+#define iBaseURL @"http://"
+
+#endif
+
+
+
+#define iCommonLog(desc) \
+iLog(@"\nfile：%@\nline：%d\nmethod：%s\ndesc：%@", [NSString stringWithUTF8String:__FILE__], __LINE__,  __FUNCTION__, desc);
+#define iCommonLog2(desc)\
+iLog(@"\nclass:%@\nline:%d\ndesc:%@",[self class],__LINE__,desc);
+
+
+
+
+
+
+
+
+
+#ifdef  __OBJC__
+//#import "YFCate.h"
+//#import "YFConst.h"
+//#import "IProUtil.h"
+//#import "YFUserInfo.h"
+#endif
