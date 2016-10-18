@@ -12,7 +12,7 @@ import UIKit
 
 
 
-let iScr = UIScreen.main
+let iScr = UIScreen.mainScreen()
 var iScrW:CGFloat {
 get{
     return iScr.bounds.size.width
@@ -23,79 +23,102 @@ get{
     return iScr.bounds.size.height
 }
 }
-let iBundle = Bundle.main
-let iInfoDict:[String:AnyObject] = iBundle.infoDictionary! as [String : AnyObject]
-let iLoop = RunLoop.main
-let iApp = UIApplication.shared
+let iBundle = NSBundle.mainBundle()
+let iInfoDict:[String:AnyObject] = iBundle.infoDictionary!
+let iLoop = NSRunLoop.mainRunLoop()
+let iApp = UIApplication.sharedApplication()
 let iAppDele = iApp.delegate as! AppDelegate
-let iFm = FileManager.default
-let iScale=UIScreen.main.scale
-let iNotiCenter = NotificationCenter.default
+let iFm = NSFileManager.defaultManager()
+let iScale=UIScreen.mainScreen().scale
+let iNotiCenter = NSNotificationCenter.defaultCenter()
 
-let iVersion = Float(UIDevice.current.systemVersion)
+let iVersion = Float(UIDevice.currentDevice().systemVersion)
 
 let iStBH:CGFloat = 20
 let iNavH:CGFloat = 44
 let iTopBarH:CGFloat = (iStBH+iNavH)
 let iTabBarH:CGFloat = 49
-let namespace:String = Bundle.main.infoDictionary!["CFBundleName"] as! String
+let namespace:String = NSBundle.mainBundle().infoDictionary!["CFBundleName"] as! String
 
 
 let iBaseURL:String = "http://"
 //let iBaseURL:String "http://"
 
 
-func iCommonLog2(_ desc:AnyObject,file:String=#file,line:Int=#line,fun:String=#function) {
+func iCommonLog2(desc:AnyObject,file:String=#file,line:Int=#line,fun:String=#function) {
     iPrint(String(format: "file：%@    line：%d    function：%@     desc：\(desc)",file,line,fun))
 }
 
 
-func iCommonLog(_ desc:AnyObject,file:String=#file,line:Int=#line){
-    iPrint(String(format:"class:%@   line:%d   desc:\(desc)",file.components(separatedBy: "/").last ?? "",line))
+func iCommonLog(desc:AnyObject,file:String=#file,line:Int=#line){
+    iPrint(String(format:"class:%@   line:%d   desc:\(desc)",file.componentsSeparatedByString("/").last ?? "",line))
 }
 
-func iPrint(_ items: Any...){
+func iPrint(items: Any...){
     //    #if DEBUG
     print(items)
     //    #endif
 }
 
-func idelay(_ sec:TimeInterval,asy:Bool,cb:(()->())){
-    (asy ? DispatchQueue.global(priority: 0):DispatchQueue.main).asyncAfter(deadline: 0 + Double(Int64(sec * 1e9)) / Double(NSEC_PER_SEC),execute: cb)
+func idelay(sec:NSTimeInterval,asy:Bool,cb:(()->())){
+    dispatch_after(dispatch_time(0, Int64(sec * 1e9)),asy ? dispatch_get_global_queue(0, 0):dispatch_get_main_queue(),cb)
 }
 
 
 
-
-func iRes(_ res:String,bundle:Bundle=Bundle.main)->String?{
-    return bundle.path(forResource: res, ofType: nil)
+func iResUrl(res:String,bundle:NSBundle=NSBundle.mainBundle())->NSURL?{
+   return  bundle.URLForResource(res, withExtension: nil)
 }
-func iBundle(_ iden:String)->Bundle?{
+
+func iRes(res:String,bundle:NSBundle=NSBundle.mainBundle())->String?{
+    return bundle.pathForResource(res, ofType: nil)
+}
+func iBundle(iden:String)->NSBundle?{
     if let path = iRes(iden){
         
-        return Bundle(path: path )
+        return NSBundle(path: path )
     }
     return nil
 }
 
-func iPref(_ name:String?=nil)->UserDefaults?{
-    return UserDefaults(suiteName: name)
+func iPref(name:String?=nil)->NSUserDefaults?{
+    return NSUserDefaults(suiteName: name)
 }
 
 
-func iColor(_ r:Int,_ g:Int,_ b:Int,_ a:CGFloat=1)->UIColor{
+func iColor(r:Int,_ g:Int,_ b:Int,_ a:CGFloat=1)->UIColor{
     return UIColor(red: CGFloat(r)/255, green: CGFloat(g)/255, blue: CGFloat(b)/255, alpha: a)
 }
-func iColor(_ val:Int)->UIColor{
-    return UIColor(red: CGFloat((val & 0xff0000)>>16)/255, green: CGFloat((val & 0xff00)>>8)/255, blue: CGFloat((val & 0xff))/255, alpha: CGFloat(val >>> 24)/255)
+func iColor(val:Int64)->UIColor{
+    return UIColor(red: CGFloat((val & 0xff0000)>>16)/255, green: CGFloat((val & 0xff00)>>8)/255, blue: CGFloat((val & 0xff))/255, alpha: CGFloat(Int(val) >>> 24)/255)
 }
 
-func iimg(_ color:UIColor)->UIImage{
-    let rect=CGRect(x: 0, y: 0, width: 1, height: 1);
+func iColor(hexstri:String?)->UIColor?{
+    guard let hexstri = hexstri else{
+        return nil
+    }
+    let hexstr=hexstri.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString
+    var from:Int=0
+    var to:Int=2
+    var fs:[Int]=[0,0,0,1]
+    var i:Int=0
+    while(from<hexstr.len-1&&from<8){
+        if(hexstr.len-from<to){to=hexstr.len-from}
+        var val:UInt32 = 0
+        (NSScanner.localizedScannerWithString((hexstr as NSString).substringWithRange(NSMakeRange(from, to))) as! NSScanner).scanHexInt(&val)
+        fs[i]=Int(val)
+        i += 1
+        from+=to
+    }
+    return iColor(fs[0],fs[1],fs[2],CGFloat(fs[3]))
+}
+
+func iimg(color:UIColor)->UIImage{
+    let rect=CGRectMake(0, 0, 1, 1);
     UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
     let context = UIGraphicsGetCurrentContext();
-    context?.setFillColor(color.cgColor);
-    context?.fill(rect)
+    CGContextSetFillColorWithColor(context!, color.CGColor);
+    CGContextFillRect(context!, rect)
     let img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return img!;
@@ -104,57 +127,67 @@ func iimg(_ color:UIColor)->UIImage{
 func irandColor()->UIColor{
     return iColor(irand(256), irand(256), irand(256))
 }
-func irand(_ base:Int=Int(UInt32.max))->Int{
+func irand(base:UInt32=UInt32.max)->Int{
+    return Int(arc4random_uniform(base))
+}
+
+func localizeStr(str:String)->String{
+   
+    let temp1 = str.stringByReplacingOccurrencesOfString("\\u", withString: "\\U")
+    let temp2=temp1.stringByReplacingOccurrencesOfString("\"", withString: "\\\"")
+    let temp3 = "\"\(temp2)\""
     
-    return Int(arc4random_uniform(UInt32(base)))
+    let data = temp3.dataUsingEncoding(4)
+    let str = NSPropertyListSerialization.propertyListFromData(data!, mutabilityOption: NSPropertyListMutabilityOptions.Immutable, format: nil, errorDescription: nil)!.description
+    return str
 }
 
 
 
-func iFont(_ size:CGFloat)->UIFont{
-    return UIFont.systemFont(ofSize: size)
+func iFont(size:CGFloat)->UIFont{
+    return UIFont.systemFontOfSize(size)
 }
 
-func ibFont(_ size:CGFloat)->UIFont{
-    return UIFont.boldSystemFont(ofSize: size)
+func ibFont(size:CGFloat)->UIFont{
+    return UIFont.boldSystemFontOfSize(size)
 }
 
-func iUrl(_ str:String?)->URL?{
+func iUrl(str:String?)->NSURL?{
     guard let url=str else{
         return nil
     }
-    return URL(string: url)
+    return NSURL(string: url)
 }
 
-func iReq(_ str:String)->URLRequest{
+func iReq(str:String)->NSURLRequest{
     if let url=iUrl(str){
-        return URLRequest(url: url)
+        return NSURLRequest(URL: url)
     }
-    return URLRequest()
+    return NSURLRequest()
 }
-func imReq(_ str:String)->NSMutableURLRequest{
+func imReq(str:String)->NSMutableURLRequest{
     guard let url=iUrl(str) else{
         return NSMutableURLRequest()
     }
-    return NSMutableURLRequest(url: url)
+    return NSMutableURLRequest(URL: url)
 }
 
-func iData(_ name:String?)->Data?{
+func iData(name:String?)->NSData?{
     
     guard let url=iUrl(name) else{
         return nil
     }
-    return  (try? Data(contentsOf: url))
+    return  NSData(contentsOfURL:url)
 }
 
-func iData4F(_ name:String?)->Data?{
+func iData4F(name:String?)->NSData?{
     guard let name=name else{
         return nil
     }
-    return (try? Data(contentsOf: URL(fileURLWithPath: name)))
+    return NSData(contentsOfFile:name)
 }
 
-func imgFromData(_ name:String?)->UIImage?{
+func imgFromData(name:String?)->UIImage?{
     guard let data=iData(name) else{
         return nil
     }
@@ -162,7 +195,7 @@ func imgFromData(_ name:String?)->UIImage?{
 }
 
 
-func  imgFromData4F(_ name:String?)->UIImage? {
+func  imgFromData4F(name:String?)->UIImage? {
     guard let data=iData4F(name) else{
         return nil
     }
@@ -170,13 +203,13 @@ func  imgFromData4F(_ name:String?)->UIImage? {
 }
 
 
-func imgFromF(_ name:String?)->UIImage?{
+func imgFromF(name:String?)->UIImage?{
     guard let name=name else{
         return nil
     }
     return UIImage(contentsOfFile: name)
 }
-func iimg(_ name:String?)->UIImage?{
+func iimg(name:String?)->UIImage?{
     guard let name=name else{
         return nil
     }
@@ -185,9 +218,9 @@ func iimg(_ name:String?)->UIImage?{
     }
     return UIImage(named: name)
 }
-func idxof(_ ary:[String],tar:String?)->Int{
+func idxof(ary:[String],tar:String?)->Int{
     if let tar = tar{
-        for (i,str) in ary.enumerated(){
+        for (i,str) in ary.enumerate(){
             if str == tar{
                 return i
             }
@@ -196,47 +229,98 @@ func idxof(_ ary:[String],tar:String?)->Int{
     return -1
 }
 
+func prosWithClz(clz:AnyClass)->[String]{
+    var count:UInt32 = 0
+    let propertiesInAClass:UnsafeMutablePointer<Ivar> = class_copyIvarList(clz, &count)
+    
+    var ary:[String]=[]
+    for i in 0..<count {
+        let  pro:objc_property_t = propertiesInAClass[Int(i)]
+        if let str = NSString(CString: ivar_getName(pro), encoding: NSUTF8StringEncoding) as? String{
+            ary.append(str)
+        }
+    }
+    return ary;
+}
+func allprosWithClz(clz:AnyClass)->[String]{
+    var count:UInt32 = 0
+    let propertiesInAClass:UnsafeMutablePointer<objc_property_t> = class_copyPropertyList(clz, &count)
+    
+    var ary:[String]=[]
+    for i in 0..<count {
+        let  pro:objc_property_t = propertiesInAClass[Int(i)]
+        if let str = NSString(CString: property_getName(pro), encoding: NSUTF8StringEncoding) as? String{
+            ary.append(str)
+        }
+    }
+    return ary;
+
+}
 
 
-func iRes4Ary(_ path:String,bundle:Bundle=Bundle.main)->[AnyObject]{
+
+
+func iRes4Ary(path:String,bundle:NSBundle=NSBundle.mainBundle())->[AnyObject]{
     return   NSArray(contentsOfFile: iRes(path,bundle: bundle)!) as! [AnyObject]
 }
 
-func iRes4Dic(_ path:String,bundle:Bundle=Bundle.main)->[String:AnyObject]{
+func iRes4Dic(path:String,bundle:NSBundle=NSBundle.mainBundle())->[String:AnyObject]{
     return NSDictionary(contentsOfFile: iRes(path,bundle: bundle)!) as! Dictionary
 }
-func iVCFromStr(_ name:String)->UIViewController?{
-    if let type = NSClassFromString(namespace + "." + name) as? UIViewController.Type{
-        return type.init()
+func iVCFromStr(name:String?)->UIViewController?{
+    if let name = name{
+        if let type = NSClassFromString(namespace + "." + name) as? UIViewController.Type{
+            return type.init()
+        }
+    }
+    return nil
+}
+func iClassFromStr(name:String?)->NSObject?{
+    if let name = name{
+        return (NSClassFromString(name) as! NSObject.Type).init()
     }
     return nil
 }
 
-func iTimer(_ inteval:TimeInterval,tar:AnyObject,sel:Selector)->Timer{
-    let timer = Timer(timeInterval: inteval, target: tar, selector: sel, userInfo: nil, repeats: true)
-    iLoop.add(timer, forMode: RunLoopMode.commonModes)
+func iTimer(inteval:NSTimeInterval,tar:AnyObject,sel:Selector)->NSTimer{
+    let timer = NSTimer(timeInterval: inteval, target: tar, selector: sel, userInfo: nil, repeats: true)
+    iLoop.addTimer(timer, forMode: NSRunLoopCommonModes)
     return timer
 }
-func iDisLin(_ tar:AnyObject,sel:Selector)->CADisplayLink{
+func iDisLin(tar:AnyObject,sel:Selector)->CADisplayLink{
     let dislin = CADisplayLink(target: tar, selector: sel)
-    dislin.add(to: iLoop, forMode: RunLoopMode.commonModes)
+    dislin.addToRunLoop(iLoop, forMode: NSRunLoopCommonModes)
     return dislin
 }
-func isBlank(_ str:String?)->Bool{
+func isBlank(str:String?)->Bool{
     if let str = str {
         return isBlank(str)
     }
     return true
 }
-func isBlank(_ str:String)->Bool{
-    return str.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines) == ""
+func isBlank(str:String)->Bool{
+    return str.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()) == ""
 }
 
-func dispatchDelay(_ sec:CGFloat,cb:()->()){
-    DispatchQueue.main.asyncAfter(deadline: 0 + Double(Int64(sec * 1e9)) / Double(NSEC_PER_SEC),execute: cb)
+func dispatchDelay(sec:CGFloat,cb:()->()){
+    dispatch_after(dispatch_time(0, Int64(sec * 1e9)),dispatch_get_main_queue(),cb)
+}
+
+
+func empty(str:String?)->Bool{
+    if let s = str where s != ""{
+        return false
+    }
+    return true
 }
 
 extension UIView{
+    
+    func rmAllSubv(){
+        for v in self.subviews{
+            v.removeFromSuperview()
+        }
+    }
     
     var x:CGFloat{
         get{
@@ -541,35 +625,6 @@ extension CALayer{
 
 
 
-extension String{
-    var len:Int{
-        return characters.count
-    }
-    func strByAp2Cache()->String{
-        return iFileUtil.cachePath() + "/\(self)"
-    }
-    func strByAp2Doc()->String{
-        return iFileUtil.docPath() + "/\(self)"
-    }
-    func strByAp2Temp()->String{
-        return iFileUtil.tempPath() + "/\(self)"
-    }
-    func urlEncoded()->String{
-        return addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-    }
-    
-    func equalIgnoreCase(_ instr:String?)->Bool{
-        
-        guard let str = instr else{
-            return false
-        }
-        
-        return (str as NSString).lowercased == (self as NSString).lowercased
-        
-        
-    }
-}
-
 
 
 extension UIColor{
@@ -577,11 +632,12 @@ extension UIColor{
     class func randColor()->UIColor{
         return UIColor(red: randF(255.0), green: randF(255.0), blue: randF(255.0), alpha: 1)
     }
-    class  func randF(_ base:CGFloat )->CGFloat{
-        return CGFloat(random()%(Int(base)+1))/base
+    class  func randF(base:CGFloat )->CGFloat{
+        let i = UInt32(base) + 1
+        return CGFloat(arc4random()%i)/base
     }
-    class  func rand(_ base:Int)->Int{
-        return random()%(base+1)
+    class  func rand(base:Int)->Int{
+        return Int(arc4random()%UInt32(base+1))
     }
     
     
@@ -605,23 +661,23 @@ extension Array{
             assert(fir < self.count && sec < self.count, "idx out of range")
             self[fir] = newValue[0]
             self[sec] = newValue[1]
-            for (idx,i) in other.enumerated(){
+            for (idx,i) in other.enumerate(){
                 assert(i < self.count, "idx out of range")
                 self[i] = newValue[idx]
             }
         }
     }
     
-    mutating func removeAtIdxes(_ idxes:Set<Int>){
+    mutating func removeAtIdxes(idxes:Set<Int>){
         var ary = [Int]()
         for idx in idxes{
             ary.append(idx)
         }
-        ary.sort { (left, right) -> Bool in
+        ary.sortInPlace { (left, right) -> Bool in
             return left > right
         }
         for i in ary {
-            remove(at: i)
+            removeAtIndex(i)
         }
         
     }
@@ -649,7 +705,7 @@ extension Dictionary{
         set{
             self[fir]=newValue[0]
             self[sec]=newValue[1]
-            for (i,k) in other.enumerated(){
+            for (i,k) in other.enumerate(){
                 self[k]=newValue[i+2]
             }
         }
@@ -661,14 +717,14 @@ extension NSDictionary{
             var res = Array<AnyObject>()
             let keys = self.allKeys as! [String]
             if keys.contains(fir){
-                res.append(self[fir]! as AnyObject)
+                res.append(self[fir]!)
             }
             if keys.contains(sec){
-                res.append(self[sec]! as AnyObject)
+                res.append(self[sec]!)
             }
             for k in other{
                 if keys.contains(k){
-                    res.append(self[k]! as AnyObject)
+                    res.append(self[k]!)
                 }
             }
             return res
@@ -677,7 +733,7 @@ extension NSDictionary{
         set{
             self.setValue(newValue[0], forKey: fir)
             self.setValue(newValue[1], forKey: sec)
-            for (i,k) in other.enumerated(){
+            for (i,k) in other.enumerate(){
                 self.setValue(newValue[i+2], forKey: k)
             }
         }
@@ -694,24 +750,24 @@ extension NSArray{
         get{
             assert(fir < self.count && sec < self.count, "idx out of range")
             var res = Array<AnyObject>()
-            res.append(self[fir] as AnyObject)
-            res.append(self[sec] as AnyObject)
+            res.append(self[fir])
+            res.append(self[sec])
             for i in other {
                 assert(i < self.count,"idx out of range")
-                res.append(self[i] as AnyObject)
+                res.append(self[i])
             }
             
             return res
         }
         set{
             assert(fir < self.count && sec < self.count, "idx out of range")
-            assert(self.isKind(of: NSMutableArray.self), "idx out of range")
+            assert(self.isKindOfClass(NSMutableArray), "idx out of range")
             if let ma = self as? NSMutableArray{
-                ma.insert(newValue[0], at: 0)
-                ma.insert(newValue[1], at: 1)
-                for (idx,i) in other.enumerated(){
+                ma.insertObject(newValue[0], atIndex: 0)
+                ma.insertObject(newValue[1], atIndex: 1)
+                for (idx,i) in other.enumerate(){
                     assert(i < self.count, "idx out of range")
-                    ma.insert(newValue[idx], at: i)
+                    ma.insertObject(newValue[idx], atIndex: i)
                 }
                 
             }
@@ -724,16 +780,111 @@ extension NSObject{
     convenience init(dict:[String:AnyObject]?){
         self.init()
         if let dict = dict{
-            setValuesForKeys(dict)
+            setValuesForKeysWithDictionary(dict)
         }
+    }
+    
+    func convert2dict()->[String:AnyObject]{
+        return self.dictionaryWithValuesForKeys(prosWithClz(self.dynamicType))
     }
 }
 
 
 
 extension String{
-    func sizeWithFont(_ font:UIFont)->CGSize{
-        return (self as NSString).size(attributes: [NSFontAttributeName:font])
+    
+    var len:Int{
+        return characters.count
+    }
+    func strByAp2Cache()->String{
+        return iFileUtil.cachePath().stringByAppendingString("/\(self)")
+    }
+    func strByAp2Doc()->String{
+        return iFileUtil.docPath().stringByAppendingString("/\(self)")
+    }
+    func strByAp2Temp()->String{
+        return iFileUtil.tempPath().stringByAppendingString("/\(self)")
+    }
+    func urlEncoded()->String{
+        return stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+    }
+    
+    func equalIgnoreCase(instr:String?)->Bool{
+        
+        guard let str = instr else{
+            return false
+        }
+        
+        return (str as NSString).lowercaseString == (self as NSString).lowercaseString
+        
+        
+    }
+    
+    
+    
+    func sizeWithFont(font:UIFont)->CGSize{
+        return (self as NSString).sizeWithAttributes([NSFontAttributeName:font])
+    }
+    
+    static func isDecimal(deci:String?,scale:Int)->Bool {
+        if empty(deci){
+            return false
+        }
+        return deci =~ "^[0-9]*\\.?[0-9]{0,\(scale)}$"
+        
+    }
+    
+    static func  isNumber(number:String?) ->Bool {
+        if empty(number){
+            return false
+        }
+        return number =~ "^\\d+$"
+    }
+    static func isPhoneNum(phone:String?) -> Bool{
+        if empty(phone){
+            return false
+        }
+        return phone =~ "^[1]([3][0-9]{1}|59|56|58|88|89|86|85|87)[0-9]{8}$"
+    }
+    
+    
+    static func isPwd(pwd:String?)->Bool{
+        if empty(pwd){
+            return false
+        }
+        return pwd =~ "^\\w{6,20}$"
+    }
+    static func isEmail(email:String?)->Bool{
+        if empty(email){
+            return false
+        }
+        return email =~ "^(\\w)+(\\.\\w+)*@[-\\w]+((\\.\\w{2,3}){1,3})$"
+    }
+    
+    
+    func toPinyin()->String{
+        let mut = NSMutableString(string: self) as CFMutableString
+        
+        if CFStringTransform(mut, nil, kCFStringTransformMandarinLatin, false){
+            CFStringTransform(mut, nil, kCFStringTransformStripDiacritics, false)
+        }
+        return (mut as NSMutableString).description
+    }
+    func phonetic()->String{
+        if self.len>0{
+            let mut = NSMutableString(string: self) as CFMutableString
+            var ran:CFRange=CFRangeMake(0, 1)
+            CFStringTransform(mut, &ran, kCFStringTransformMandarinLatin, false)
+            CFStringTransform(mut, &ran, kCFStringTransformStripDiacritics, false)
+            var c=((mut as NSMutableString).description as NSString).characterAtIndex(0)
+            if (c>=65 && c<=90) || (c>=97&&c<=122){
+                return NSString(characters: &c, length: 1) as String
+            }
+        }
+        return "#"
+    }
+    func upPhonetic()->String{
+        return self.phonetic().uppercaseString
     }
 }
 

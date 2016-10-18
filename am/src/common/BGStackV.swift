@@ -15,10 +15,10 @@ class BGStackV: UIStackView {
         let v=UIView()
         self.addSubview(v)
         v.translatesAutoresizingMaskIntoConstraints=false
-        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute:NSLayoutAttribute.top , multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute:NSLayoutAttribute.left , multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self, attribute:NSLayoutAttribute.width , multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self, attribute:NSLayoutAttribute.height , multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute:NSLayoutAttribute.Top , multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute:NSLayoutAttribute.Left , multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute:NSLayoutAttribute.Width , multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute:NSLayoutAttribute.Height , multiplier: 1, constant: 0))
         return v
     }()
     
@@ -33,14 +33,13 @@ class BGStackV: UIStackView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        axis = .horizontal
-        distribution = .fillEqually
-        
-
+        axis = .Horizontal
+        distribution = .FillEqually
     }
-
-    required init?(coder aDecoder: NSCoder) {
+    
+    required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    
 }

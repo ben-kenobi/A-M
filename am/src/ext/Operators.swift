@@ -23,14 +23,14 @@ func =~ (str:String?,re:String)->Bool{
         guard let s=str else{
             return false
         }
-        return try NSRegularExpression(pattern: re, options:.caseInsensitive).firstMatch(in: s, options: [], range: NSMakeRange(0, s.characters.count)) != nil
+        return try NSRegularExpression(pattern: re, options:.CaseInsensitive).firstMatchInString(s, options: [], range: NSMakeRange(0, s.characters.count)) != nil
     }catch _{
         return false
     }
 }
 
 func  >>> (val:Int,num:Int)->Int{
-    let count = MemoryLayout<Int>.size*8
+    let count = sizeof(Int)*8
     if num>=count {
         return 0
     }
@@ -40,12 +40,12 @@ func  >>> (val:Int,num:Int)->Int{
 
 
 func ~=(pattern:NSRegularExpression,input:String)->Bool{
-    return pattern.firstMatch(in: input, options: [], range: NSMakeRange(0, input.characters.count)) != nil
+    return pattern.firstMatchInString(input, options: [], range: NSMakeRange(0, input.characters.count)) != nil
 }
 func ~=(pattern:NSRegularExpression,input:AnyObject?)->Bool{
     if let input = input{
         let inps = "\(input)"
-          return pattern.firstMatch(in: inps, options: [], range: NSMakeRange(0, inps.characters.count)) != nil
+          return pattern.firstMatchInString(inps, options: [], range: NSMakeRange(0, inps.characters.count)) != nil
     }else{
         return false
     }
@@ -54,7 +54,7 @@ func ~=(pattern:NSRegularExpression,input:AnyObject?)->Bool{
 
 
 
-prefix operator ~/
+prefix operator ~/{}
 prefix func ~/(pattern:String) -> NSRegularExpression  {
-    return try! NSRegularExpression(pattern: pattern, options: .caseInsensitive)
+    return try! NSRegularExpression(pattern: pattern, options: .CaseInsensitive)
 }

@@ -27,10 +27,10 @@ extension UIView{
             guard let c=layer.borderColor else {
                 return nil
             }
-            return UIColor(cgColor: c)
+            return UIColor(CGColor: c)
         }
         set{
-            layer.borderColor=newValue?.cgColor
+            layer.borderColor=newValue?.CGColor
         }
     }
     
@@ -54,10 +54,47 @@ extension UIView{
         layer.cornerRadius=corner
         layer.masksToBounds=corner>0
         if let borderColor=bordercolor {
-            layer.borderColor=borderColor.cgColor
             layer.borderWidth=borderW
+            layer.borderColor=borderColor.CGColor
+
         }
         
     }
+    
+    func addCurve(tl:(Bool,CGFloat),tr:(Bool,CGFloat),br:(Bool,CGFloat),bl:(Bool,CGFloat),bounds:CGRect){
+        let w=bounds.width
+        let h=bounds.height
+        let path:CGMutablePath=CGPathCreateMutable()
+        CGPathMoveToPoint(path, nil, 0, 1)
+        if tl.0{
+            CGPathAddArcToPoint(path, nil, 0, 0, 1, 0, tl.1)
+        }else{
+            CGPathAddLineToPoint(path, nil, 0, 0)
+        }
+        if tr.0{
+            CGPathAddArcToPoint(path, nil, w, 0, w, 1, tr.1)
+        }else{
+            CGPathAddLineToPoint(path, nil, w, 0)
+
+        }
+        if br.0{
+           CGPathAddArcToPoint(path, nil, w, h, w-1, h, br.1)
+        }else{
+            CGPathAddLineToPoint(path, nil, w, h)
+        }
+        if bl.0{
+            CGPathAddArcToPoint(path, nil, 0, h,0, h-1, br.1)
+        }else{
+            CGPathAddLineToPoint(path, nil, 0, h)
+        }
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = path
+        self.layer.mask = maskLayer
+        
+        
+    }
+    
 }
 

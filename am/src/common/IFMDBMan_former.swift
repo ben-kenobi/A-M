@@ -10,14 +10,14 @@ import UIKit
 
 class IFMDBMan_former {
     
-    fileprivate let path="fmtest.db"
-    fileprivate let sqlfile="tables.sql"
+    private let path="fmtest.db"
+    private let sqlfile="tables.sql"
     
     static let ins:IFMDBMan_former=IFMDBMan_former()
     
     let queue:FMDatabaseQueue
     
-    fileprivate init(){
+    private init(){
         queue=FMDatabaseQueue(path: path.strByAp2Doc())
         if !execSql4F(iRes(sqlfile)!){
             iCommonLog(" fail to init fmdb")
@@ -25,14 +25,14 @@ class IFMDBMan_former {
     }
     
     
-    func execSql4F(_ path:String)->Bool{
+    func execSql4F(path:String)->Bool{
         return execSql(try! String(contentsOfFile: path))
     }
-    func execSql(_ sql:String)->Bool{
+    func execSql(sql:String)->Bool{
         var b:Bool = false
         queue.inDatabase { (db) -> Void in
             
-            b = (db?.executeStatements(sql))!
+            b = db.executeStatements(sql)
         }
         return b
     }
@@ -42,19 +42,19 @@ class IFMDBMan_former {
     
     
     
-    func insert(_ sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->Int64{
+    func insert(sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->Int64{
         var b:Bool=false
         var id:Int64 = 0
         queue.inDatabase { (db) -> Void in
             if args != nil{
-                b=(db?.executeUpdate(sql, withArgumentsIn: args))!
+                b=db.executeUpdate(sql, withArgumentsInArray: args)
             }else if dict != nil{
-                b=(db?.executeUpdate(sql, withParameterDictionary: dict))!
+                b=db.executeUpdate(sql, withParameterDictionary: dict)
             }else{
                 b=db.executeUpdate(sql)
             }
             
-            id = (db?.lastInsertRowId())!
+            id = db.lastInsertRowId()
             
         }
         return b ? id: -1
@@ -65,34 +65,34 @@ class IFMDBMan_former {
     
     
     
-    func update(_ sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->Int{
+    func update(sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->Int{
         var b:Bool=false
         var count:Int = 0
         queue.inDatabase { (db) -> Void in
             if args != nil{
-                b=(db?.executeUpdate(sql, withArgumentsIn: args))!
+                b=db.executeUpdate(sql, withArgumentsInArray: args)
             }else if dict != nil{
-                b=(db?.executeUpdate(sql, withParameterDictionary: dict))!
+                b=db.executeUpdate(sql, withParameterDictionary: dict)
             }else{
                 b=db.executeUpdate(sql)
             }
             
-            count = Int((db?.changes())!)
+            count = Int(db.changes())
         }
         return b ? count : -1
     }
     
     
-    func query(_ sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->[[String:AnyObject]]{
+    func query(sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->[[String:AnyObject]]{
         var ary = [[String:AnyObject]]()
         queue.inDatabase { (db) -> Void in
             var rs:FMResultSet?
             if args != nil{
-                rs=db?.executeQuery(sql, withArgumentsIn: args)
+                rs=db.executeQuery(sql, withArgumentsInArray: args)
             }else if dict != nil {
-                rs=db?.executeQuery(sql, withParameterDictionary: dict)
+                rs=db.executeQuery(sql, withParameterDictionary: dict)
             }else{
-                rs=db?.executeQuery(sql)
+                rs=db.executeQuery(sql)
             }
             
             
@@ -107,12 +107,12 @@ class IFMDBMan_former {
     
     
     
-    func rowInfo(_ rs:FMResultSet)->[String:AnyObject]{
+    func rowInfo(rs:FMResultSet)->[String:AnyObject]{
         var row = [String:AnyObject]()
         
         let count = rs.columnCount()
         for i in 0..<count{
-            row[rs.columnName(for: i)]=rs.object(forColumnIndex: i) as AnyObject?
+            row[rs.columnNameForIndex(i)]=rs.objectForColumnIndex(i)
         }
         return row
     }
