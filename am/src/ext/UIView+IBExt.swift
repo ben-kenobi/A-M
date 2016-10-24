@@ -27,10 +27,10 @@ extension UIView{
             guard let c=layer.borderColor else {
                 return nil
             }
-            return UIColor(CGColor: c)
+            return UIColor(cgColor: c)
         }
         set{
-            layer.borderColor=newValue?.CGColor
+            layer.borderColor=newValue?.cgColor
         }
     }
     
@@ -55,7 +55,7 @@ extension UIView{
         layer.masksToBounds=corner>0
         if let borderColor=bordercolor {
             layer.borderWidth=borderW
-            layer.borderColor=borderColor.CGColor
+            layer.borderColor=borderColor.cgColor
 
         }
         
@@ -64,28 +64,28 @@ extension UIView{
     func addCurve(tl:(Bool,CGFloat),tr:(Bool,CGFloat),br:(Bool,CGFloat),bl:(Bool,CGFloat),bounds:CGRect){
         let w=bounds.width
         let h=bounds.height
-        let path:CGMutablePath=CGPathCreateMutable()
-        CGPathMoveToPoint(path, nil, 0, 1)
+        let path:CGMutablePath=CGMutablePath()
+        path.move(to: CGPoint(x:0,y:1))
+        
         if tl.0{
-            CGPathAddArcToPoint(path, nil, 0, 0, 1, 0, tl.1)
+            path.addArc(tangent1End: CGPoint(x:0,y:0), tangent2End: CGPoint(x:1,y:0), radius: tl.1)
         }else{
-            CGPathAddLineToPoint(path, nil, 0, 0)
+            path.addLine(to: CGPoint(x:0,y:0))
         }
         if tr.0{
-            CGPathAddArcToPoint(path, nil, w, 0, w, 1, tr.1)
+            path.addArc(tangent1End: CGPoint(x:w,y:0), tangent2End: CGPoint(x:w,y:1), radius: tr.1)
         }else{
-            CGPathAddLineToPoint(path, nil, w, 0)
-
+            path.addLine(to: CGPoint(x:w,y:0))
         }
         if br.0{
-           CGPathAddArcToPoint(path, nil, w, h, w-1, h, br.1)
+            path.addArc(tangent1End: CGPoint(x:w,y:h), tangent2End: CGPoint(x:w-1,y:h), radius: br.1)
         }else{
-            CGPathAddLineToPoint(path, nil, w, h)
+            path.addLine(to: CGPoint(x:w,y:h))
         }
         if bl.0{
-            CGPathAddArcToPoint(path, nil, 0, h,0, h-1, br.1)
+              path.addArc(tangent1End: CGPoint(x:0,y:h), tangent2End: CGPoint(x:0,y:h-1), radius: bl.1)
         }else{
-            CGPathAddLineToPoint(path, nil, 0, h)
+            path.addLine(to: CGPoint(x:0,y:h))
         }
         
         let maskLayer = CAShapeLayer()

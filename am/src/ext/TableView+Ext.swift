@@ -10,9 +10,9 @@ import UIKit
 
 extension UITableView  {
     func selectAll(){
-        for  sec in 0..<(self.dataSource?.numberOfSectionsInTableView?(self) ?? 0){
+        for  sec in 0..<(self.dataSource?.numberOfSections?(in: self) ?? 0){
             for  row in 0..<(self.dataSource?.tableView(self, numberOfRowsInSection: sec) ?? 0){
-                self.selectRowAtIndexPath(NSIndexPath.init(forRow: row, inSection: sec), animated: false, scrollPosition: UITableViewScrollPosition.None)
+                self.selectRow(at: IndexPath.init(row: row, section: sec), animated: false, scrollPosition: UITableViewScrollPosition.none)
             }
             
         }

@@ -22,69 +22,69 @@ class INet{
         return m
     }()
     
-    class func requestImg(get:Bool,url:String,para:AnyObject?,cb:((img:UIImage?)->())?,fail:((err:NSError,resp:NSURLResponse?)->())?=nil){
+    class func requestImg(_ get:Bool,url:String,para:Any?,cb:((_ img:UIImage?)->())?,fail:((_ err:Error,_ resp:URLResponse?)->())?=nil){
         request(get, url: url, para: para, cb: { (data, resp) -> () in
-            cb?(img: UIImage(data: data, scale: iScale))
-            },fail: fail)
+            cb?(UIImage(data: data, scale: iScale))
+            }, fail: fail)
     }
     
-    class func requestJson(get:Bool,url:String,para:AnyObject?,cb:((AnyObject)->())?,fail:((err:AnyObject,resp:NSURLResponse?)->())?=nil){
+    class func requestJson(_ get:Bool,url:String,para:Any?,cb:((Any)->())?,fail:((_ err:Any,_ resp:URLResponse?)->())?=nil){
         request(get, url: url, para: para, cb: { (data, resp) -> () in
             do{
-                cb?(try NSJSONSerialization.JSONObjectWithData(data, options: [NSJSONReadingOptions.AllowFragments]))
+                cb?(try JSONSerialization.jsonObject(with: data, options: [JSONSerialization.ReadingOptions.allowFragments]))
             }catch{
                 print(error)
-                fail?(err: "\(error)",resp: nil)
+                fail?( "\(error)", nil)
             }
             },fail: fail)
     }
     
-    class func requestStr(get:Bool,url:String,para:AnyObject?,cb:((str:String?)->())?,fail:((err:NSError,resp:NSURLResponse?)->())?=nil){
+    class func requestStr(_ get:Bool,url:String,para:Any?,cb:((_ str:String?)->())?,fail:((_ err:Error,_ resp:URLResponse?)->())?=nil){
         request(get, url: url, para: para, cb: { (data, resp) -> () in
-            cb?(str: String(data: data, encoding: 4))
-            },fail: fail)
+            cb?( String(data: data, encoding: String.Encoding.utf8))
+            }, fail: fail)
     }
     
     
-    class func request(get:Bool,url:String,para:AnyObject?,cb:((data:NSData,resp:NSURLResponse?)->())?,fail:((err:NSError,resp:NSURLResponse?)->())?=nil){
+    class func request(_ get:Bool,url:String,para:Any?,cb:((_ data:Data,_ resp:URLResponse?)->())?,fail:((_ err:Error,_ resp:URLResponse?)->())?=nil){
         let suc={
-            (task:NSURLSessionDataTask,data:AnyObject)->() in
-            cb?(data: data as! NSData,resp: task.response)
+            (task:URLSessionDataTask,data:Any)->() in
+            cb?(data as! Data, task.response)
         }
         let fail={
-            (task:NSURLSessionDataTask?,err:NSError)->() in
-            fail?(err: err, resp: task?.response)
+            (task:URLSessionDataTask?,err:Error)->() in
+            fail?( err,  task?.response)
         }
         
         if(get){
-            man.GET(fullUrl(url), parameters: para, success: suc, failure: fail)
+            man.get(fullUrl(url), parameters: para, success: suc, failure: fail)
         }else{
-            man.POST(fullUrl(url), parameters: para, success: suc, failure: fail)
+            man.post(fullUrl(url), parameters: para, success: suc, failure: fail)
            
         }
     }
     
-    class func upload(url:String,para:AnyObject?,datas:[String:NSData], cb:((data:NSData,resp:NSURLResponse?)->())?,fail:((err:NSError,resp:NSURLResponse?)->())?=nil){
+    class func upload(_ url:String,para:Any?,datas:[String:Data], cb:((_ data:Data,_ resp:URLResponse?)->())?,fail:((_ err:Error,_ resp:URLResponse?)->())?=nil){
         
         let suc={
-            (task:NSURLSessionDataTask,data:AnyObject)->() in
-            cb?(data: data as! NSData,resp: task.response)
+            (task:URLSessionDataTask,data:Any)->() in
+            cb?( data as! Data , task.response)
         }
         let fail={
-            (task:NSURLSessionDataTask?,err:NSError)->() in
-            fail?(err: err, resp: task?.response)
+            (task:URLSessionDataTask?,err:Error)->() in
+            fail?( err,  task?.response)
         }
         
-        man.POST(url, parameters: para, constructingBodyWithBlock: { (formdata) -> Void in
+        man.post(url, parameters: para, constructingBodyWith: { (formdata) -> Void in
             for (k,v) in datas{
-                formdata.appendPartWithFormData(v, name: k)
+                formdata.appendPart(withForm: v, name: k)
             }
             }, success: suc, failure: fail)
         
 
     }
     
-    class func fullUrl(url:String)->String{
+    class func fullUrl(_ url:String)->String{
         if (url.hasPrefix("http://")||url.hasPrefix("https://")) {
             return url;
         }
@@ -94,7 +94,7 @@ class INet{
     
     
     
-    class func dict2str(dict:[String:AnyObject]?)->String{
+    class func dict2str(_ dict:[String:Any]?)->String{
         if(nil==dict){
             return ""
         }
@@ -103,55 +103,57 @@ class INet{
             str+="\(k)=\(v)&"
         }
         
-        return str == "" ? "" : (str as NSString).substringToIndex(str.len-1)
+        return str == "" ? "" : (str as NSString).substring(to: str.len-1)
     }
     
-    class func get(url:NSURL?,cache:Bool,cb:((data:NSData?,resp:NSURLResponse?,err:NSError?)->())?){
+    class func get(_ url:URL?,cache:Bool,cb:((_ data:Data?,_ resp:URLResponse?,_ err:Error?)->())?){
         guard let ur=url else{
             return
         }
-        let cachepolicy = cache ? NSURLRequestCachePolicy.UseProtocolCachePolicy : NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        let cachepolicy = cache ? NSURLRequest.CachePolicy.useProtocolCachePolicy : NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData
         
-        NSURLSession.sharedSession().dataTaskWithRequest(NSURLRequest(URL: ur,cachePolicy:cachepolicy,timeoutInterval:15 ), completionHandler:{ (data, resp, err) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                cb?(data: data,resp:resp,err:err)
-            })
+        URLSession.shared.dataTask(with: URLRequest(url: ur,cachePolicy:cachepolicy,timeoutInterval:15 ), completionHandler:{ (data, resp, err) -> Void in
+            DispatchQueue.main.async {
+                cb?( data,resp,err)
+            }
             
         }).resume()
     }
     
-    class func post(url:NSURL?,body:String,cb:((data:NSData?,resp:NSURLResponse?,err:NSError?)->())?){
-        guard let ur=url else{
+    class func post(_ url:URL?,body:String,cb:((_ data:Data?,_ resp:URLResponse?,_ err:Error?)->())?){
+        guard let url=url else{
             return
         }
-        let req=NSMutableURLRequest(URL: ur,cachePolicy:NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData ,timeoutInterval: 15)
-        req.HTTPMethod="POST"
+        var req=URLRequest(url: url, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 15)
         
-        req.HTTPBody=body.stringByReplacingPercentEscapesUsingEncoding(4)?.dataUsingEncoding(4)
-        NSURLSession.sharedSession().dataTaskWithRequest(req, completionHandler:{ (data, resp, err) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                cb?(data: data,resp: resp,err: err)
-            })
+        req.httpMethod="POST"
+        
+        req.httpBody=body.replacingPercentEscapes(using:String.Encoding(rawValue: UInt(4)))?.data(using: String.Encoding(rawValue: UInt(4)))
+        URLSession.shared.dataTask(with: req, completionHandler:{ (data, resp, err) -> Void in
+            DispatchQueue.main.async {
+                cb?(data,resp,err)
+
+            }
         }).resume()
         
     }
     
-    class func synResponseByURL(url:NSURL)->NSURLResponse?{
-        var resp:NSURLResponse? = nil
-        let req=NSMutableURLRequest(URL: url)
-        req.HTTPMethod = "HEAD"
+    class func synResponse(by url:URL)->URLResponse?{
+        var resp:URLResponse? = nil
+        var req=URLRequest(url: url)
+        req.httpMethod = "HEAD"
         do{
-            try NSURLConnection.sendSynchronousRequest(req, returningResponse: &resp)
+            try NSURLConnection.sendSynchronousRequest(req, returning: &resp)
         }catch{
             resp = nil
         }
         return resp
     }
-    class func contentLenBy(url:String)->Int64{
-        return synResponseByURL(NSURL(string: url)!)?.expectedContentLength ?? 0
+    class func contentLenBy(_ url:String)->Int64{
+        return synResponse(by:URL(string: url)!)?.expectedContentLength ?? 0
     }
-    class func mimeTypeBy(url:String)->String?{
-        return synResponseByURL(NSURL(string: url)!)?.MIMEType
+    class func mimeTypeBy(_ url:String)->String?{
+        return synResponse(by:URL(string: url)!)?.mimeType
     }
     
 }
@@ -159,11 +161,11 @@ class INet{
 
 class iFileUtil{
     class func cachePath()->String{
-        return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).first!
+        return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
     }
     
     class func docPath()->String{
-        return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first!
+        return NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
     }
     
     class func tempPath()->String {
@@ -172,22 +174,22 @@ class iFileUtil{
 }
 
 class iPop{
-    class func showMsg(msg:String){
-        SVProgressHUD.showInfoWithStatus(msg)
+    class func showMsg(_ msg:String){
+        SVProgressHUD.showInfo(withStatus: msg)
     }
-    class func showSuc(msg:String){
-        SVProgressHUD.showSuccessWithStatus(msg)
+    class func showSuc(_ msg:String){
+        SVProgressHUD.showSuccess(withStatus: msg)
     }
-    class func showError(msg:String){
-        SVProgressHUD.showErrorWithStatus(msg)
+    class func showError(_ msg:String){
+        SVProgressHUD.showError(withStatus: msg)
     }
     class func showProg(){
-        SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
+        SVProgressHUD.show(with: SVProgressHUDMaskType.black)
     }
     class func dismProg(){
         SVProgressHUD.dismiss()
     }
-    class func toast(msg:String){
+    class func toast(_ msg:String){
 //        iApp.windows[iApp.windows.count-1].makeToast(msg)
         iApp.windows[iApp.windows.count-1].makeToast(msg, duration: 1.2, position: nil, style:CSToastManager.sharedStyle())
     }
@@ -195,34 +197,36 @@ class iPop{
   
 }
 class iDialog{
-    class func dialogWith(title:String?,msg:String?,actions:[UIAlertAction],vc:UIViewController){
-        let ac = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+    class func dialogWith(_ title:String?,msg:String?,actions:[UIAlertAction],vc:UIViewController){
+        let ac = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
         for action in actions{
             ac.addAction(action)
         }
-        vc.presentViewController(ac, animated: true, completion: nil)
+        vc.present(ac, animated: true, completion: nil)
     }
 }
 
 
 class ALUtil{
     
-    class func setImgFromALURL(alurl:NSURL,cb:((img:UIImage?)->())){
+    class func setImgFromALURL(_ alurl:URL,cb:@escaping((_ img:UIImage?)->())){
         let resultblock:ALAssetsLibraryAssetForURLResultBlock = {
             (myasset) in
-            let rep:ALAssetRepresentation = myasset.defaultRepresentation()
-            let iref:CGImageRef = rep.fullResolutionImage().takeUnretainedValue()
-            let image = UIImage(CGImage: iref)
-            dispatch_async(dispatch_get_main_queue(), {
-                cb(img: image)
-            })
+            let rep:ALAssetRepresentation = myasset!.defaultRepresentation()
+            let iref:CGImage = rep.fullResolutionImage().takeUnretainedValue()
+            let image = UIImage(cgImage: iref)
+            DispatchQueue.main.async {
+                cb( image)
+
+            }
+         
         }
         
         let failureblock:ALAssetsLibraryAccessFailureBlock  = {(err) in
             print("load ALAssets fail")
         }
         let assetslibrary:ALAssetsLibrary = ALAssetsLibrary()
-        assetslibrary.assetForURL(alurl, resultBlock: resultblock, failureBlock: failureblock)
+        assetslibrary.asset(for: alurl, resultBlock: resultblock, failureBlock: failureblock)
     }
 }
 
@@ -232,23 +236,24 @@ class UploadUtil{
     
     //----multi--
     
-    class func multiUpload(para:[String:String],contents:[String:String],toUrl:String,cb:((state:Int,obj:AnyObject?,err:NSError?,totalWritten:Int64?,totalExpectedToWritten:Int64?)->Void)?)->AFHTTPRequestOperation{
+    class func multiUpload(_ para:[String:String],contents:[String:String],toUrl:String,cb:((_ state:Int,_ obj:Any?,_ err:Error?,_ totalWritten:Int64?,_ totalExpectedToWritten:Int64?)->Void)?)->AFHTTPRequestOperation{
         let serializer = AFHTTPRequestSerializer()
-        let request = serializer.multipartFormRequestWithMethod("POST", URLString: toUrl, parameters: para) { (data) in
+        var err:NSError?=nil
+        let request = serializer.multipartFormRequest(withMethod: "POST", urlString: toUrl, parameters: para, constructingBodyWith: { (data) in
             for (k,v) in contents{
-                try! data.appendPartWithFileURL(NSURL(fileURLWithPath:v), name: k)
-                
+                try! data.appendPart(withFileURL: iFUrl(v)!, name: k)
             }
-        }
+            }, error: &err)
+        
         let manager = AFHTTPRequestOperationManager()
-        let operation:AFHTTPRequestOperation=manager.HTTPRequestOperationWithRequest(request, success: { (operation, resp) in
-            cb?(state: 0,obj:resp,err: nil,totalWritten: nil,totalExpectedToWritten: nil)
+        let operation:AFHTTPRequestOperation=manager.httpRequestOperation(with: request as URLRequest, success: { (operation, resp) in
+            cb?( 0,resp, nil, nil, nil)
         }) { (operation, err) in
-            cb?(state: -1,obj:nil,err: err,totalWritten: nil,totalExpectedToWritten: nil)
+            cb?( -1,nil, err, nil, nil)
 
         }
         operation.setUploadProgressBlock { (written, totalwritten, totalExpectedToWritten) in
-            cb?(state: 1,obj:nil,err: nil,totalWritten: totalwritten,totalExpectedToWritten: totalExpectedToWritten)
+            cb?( 1,nil, nil, totalwritten, totalExpectedToWritten)
 
         }
         operation.start()

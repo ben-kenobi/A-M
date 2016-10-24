@@ -40,7 +40,7 @@ class MainNavVC: UINavigationController,UIGestureRecognizerDelegate {
             viewController.hidesBottomBarWhenPushed=true
         }
         let btn = viewController.navigationItem.leftBarButtonItem?.customView as! UIButton
-        btn.imageEdgeInsets=EdgeInsetsMake(-5, left: -20, bottom: 5, right: 20)
+        btn.imageEdgeInsets=UIEdgeInsetsMake(0,  -20,  0,  20)
         super.pushViewController(viewController, animated: animated)
     }
     

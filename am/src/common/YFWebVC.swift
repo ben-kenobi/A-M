@@ -20,16 +20,16 @@ class YFWebVC: UIViewController ,UIWebViewDelegate{
     
     
     
-    func webViewDidStartLoad(webView: UIWebView){
-        iApp.networkActivityIndicatorVisible=true
+    func webViewDidStartLoad(_ webView: UIWebView){
+        iApp.isNetworkActivityIndicatorVisible=true
         iPop.showProg()
     }
-    func webViewDidFinishLoad(webView: UIWebView){
-        iApp.networkActivityIndicatorVisible=false
+    func webViewDidFinishLoad(_ webView: UIWebView){
+        iApp.isNetworkActivityIndicatorVisible=false
         iPop.dismProg()
     }
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError){
-        iApp.networkActivityIndicatorVisible=false
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
+        iApp.isNetworkActivityIndicatorVisible=false
         iPop.dismProg()
     }
     

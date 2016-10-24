@@ -10,7 +10,7 @@ import UIKit
 
 class ItemDetailVC: BaseVC {
     var editable:Bool = true
-    var info:[String:AnyObject]?
+    var info:[String:Any]?
 
     var datas:[NSMutableDictionary]?
     
@@ -19,15 +19,14 @@ class ItemDetailVC: BaseVC {
         contentTV.delegate=self
         contentTV.dataSource=self
         
-        let iv = UIImageView()
-        iv.image=iimg("background.9")
-        contentTV.backgroundView = iv
+//        let iv = UIImageView()
+//        iv.image=iimg("background.9")
+//        contentTV.backgroundView = iv
         contentTV.separatorStyle = .none
         contentTV.rowHeight = 50
-        contentTV.contentInset=UIEdgeInsetsMake(15, 15, 15, -15)
+//        contentTV.contentInset=UIEdgeInsetsMake(15, 15, 15, -15)
         contentTV.showsVerticalScrollIndicator=true
         contentTV.bounces=false
-        
         return contentTV
         
     }()
@@ -35,7 +34,7 @@ class ItemDetailVC: BaseVC {
     lazy var commit:UIButton = ComUI.comBtn1(self, sel: #selector(self.onClick(_:)), title: (self.info==nil ? "保存信息" : "更新信息"))
     
     
-    convenience init(datas:[NSMutableDictionary],info:[String:AnyObject]?){
+    convenience init(datas:[NSMutableDictionary],info:[String:Any]?){
         self.init()
         self.datas=datas
         self.info=info
@@ -45,6 +44,7 @@ class ItemDetailVC: BaseVC {
                 dict.setValue(inf[dict.value(forKey: "key") as! String], forKey: "val")
             }
         }
+        
     }
     
     
@@ -58,22 +58,31 @@ extension ItemDetailVC{
         let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action:#selector(self.onItemClick(_:)))
         item.tag=NavMenu.edit.rawValue
         navigationItem.rightBarButtonItem=item
-        view.addSubview(contentTV)
         view.addSubview(commit)
-        commit.snp_makeConstraints { (make) in
+        let container = UIButton()
+        container.isUserInteractionEnabled=true
+        container.setBackgroundImage(iimg("background.9")?.stretch(), for: .normal)
+        
+        view.addSubview(container)
+        container.addSubview(contentTV)
+        commit.snp.makeConstraints { (make) in
             make.bottom.equalTo(-12)
-            make.centerX.equalTo(0)
+            make.centerX.equalTo(commit.superview!)
             make.height.equalTo(38)
-            make.width.equalTo(self.view.snp_width).multipliedBy(0.7)
+            make.width.equalTo(self.view.snp.width).multipliedBy(0.7)
         }
-        contentTV.snp_makeConstraints { (make) in
+        container.snp.makeConstraints { (make) in
             make.left.right.top.equalTo(0)
-            make.bottom.equalTo(commit.snp_top).offset(-5)
+            make.bottom.equalTo(commit.snp.top).offset(-5)
         }
+        contentTV.snp.makeConstraints { (make) in
+            make.top.left.equalTo(15)
+            make.bottom.right.equalTo(-15)
+        }
+        
         updateUI()
-        
-        
     }
+    
     func onItemClick(_ sender:UIBarButtonItem){
         if(sender.tag==NavMenu.edit.rawValue){
             toggleEditable()
@@ -118,7 +127,7 @@ extension ItemDetailVC{
     
     func updateUI(){
         contentTV.reloadData()
-        commit.snp_updateConstraints { (make) in
+        commit.snp.updateConstraints { (make) in
             make.height.equalTo(self.editable ? 38 : 0)
         }
     }

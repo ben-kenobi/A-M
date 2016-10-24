@@ -13,6 +13,7 @@ class LoginVC: BaseVC {
     
     var name:String?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let bg = bgmap[name ?? ""] {
@@ -20,29 +21,26 @@ class LoginVC: BaseVC {
             
         }
         view.addSubview(pwd)
-        pwd.snp_makeConstraints { (make) in
-            make.top.equalTo(view.snp_bottom).multipliedBy(0.3)
-            make.left.equalTo(view.snp_right).multipliedBy(0.1)
+        pwd.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.bottom).multipliedBy(0.3)
+            make.left.equalTo(view.snp.right).multipliedBy(0.1)
             make.height.equalTo(44)
-            make.width.equalTo(view.snp_width).multipliedBy(0.65)
+            make.width.equalTo(view.snp.width).multipliedBy(0.65)
         }
         pwd.becomeFirstResponder()
         view.addSubview(btn)
-        btn.snp_makeConstraints { (make) in
+        btn.snp.makeConstraints { (make) in
             make.top.height.equalTo(pwd)
-            make.left.equalTo(pwd.snp_right)
-            make.width.equalTo(view.snp_width).multipliedBy(0.15)
-            
+            make.left.equalTo(pwd.snp.right)
+            make.width.equalTo(view.snp.width).multipliedBy(0.15)
         }
-        
-        
     }
     
     
     
     lazy var pwd:UITextField = {
         let pwd = UITextField(frame: nil, bg: iColor(255, 255, 255, 0.3), corner: 0, bordercolor: iColor(0, 0, 0, 0.3), borderW: 0.5)
-        pwd.leftView=View(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
+        pwd.leftView=UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
         pwd.leftViewMode = UITextFieldViewMode.always
         pwd.isSecureTextEntry=true
         pwd.returnKeyType=UIReturnKeyType.go
@@ -52,12 +50,13 @@ class LoginVC: BaseVC {
     }()
     lazy var btn:UIButton = {
         
-        let btn = UIButton(frame: nil, img: iimg("ic_launcher"),bgimg: iimg(iColor(255, 255, 255, 0.2)), hlbgimg: iimg(iColor(0,0,0,0.2)), tar: self, action:#selector(self.onClick(_:)))
+        let btn = UIButton(frame: nil, img: iimg("ic_launcher"),bgimg: iimg(iColor(255, 255, 255, 0.4)), hlbgimg: iimg(iColor(0,0,0,0.2)), tar: self, action:#selector(self.onClick(_:)))
+        btn.addCurve(tl: (false,0), tr: (true,8), br: (true,8), bl: (false,0), bounds: CGRect(x:0,y:0,width:self.view.w*0.15,height:44))
         return btn
     }()
     
     
-    func onClick(_ sender:View){
+    func onClick(_ sender:UIView){
         if (sender == btn) {
             let pwdtext = pwd.text ?? ""
             if (isBlank(pwdtext) || !CommonService.login(pwdtext)){

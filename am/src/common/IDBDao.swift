@@ -17,37 +17,37 @@ class IDBDao {
         
     }
     
-     func add(dict:[String:String])->Int64{
+     func add(_ dict:[String:String])->Int64{
         return  ISQLite.ins.insert(table!, dict: dict)
         
     }
-    func insert(dict:[String:AnyObject])->Int64{
+    func insert(_ dict:[String:Any])->Int64{
         return  ISQLite.ins.insert(table!, dict: dict)
         
     }
-    func delete(wher:String,args:[AnyObject])->Int{
+    func delete(_ wher:String,args:[Any])->Int{
         return ISQLite.ins.delete(table!, wher: wher, args: args)
     }
     
-     func update(dict:[String:AnyObject],wher:String?,args:[AnyObject])->Int{
+     func update(_ dict:[String:Any],wher:String?,args:[Any])->Int{
         return ISQLite.ins.update(table!, dict: dict, wher: wher, args: args)
         
     }
-    func updateById(dict:[String:AnyObject],id:Int)->Int{
+    func updateById(_ dict:[String:Any],id:Int)->Int{
         return update(dict, wher: "\(ID)=?", args: [id])
     }
     
     
   
-    func query(distinct:Bool,cols:[String],wher:String,args:[AnyObject])->[[String:AnyObject]]{
+    func query(_ distinct:Bool,cols:[String],wher:String,args:[Any])->[[String:Any]]{
         return ISQLite.ins.query(table!, distinct: distinct, cols: cols, wher: wher, args: args)
     }
-    func queryAry(distinct:Bool,cols:[String],wher:String,args:[AnyObject])->[[AnyObject]]{
+    func queryAry(_ distinct:Bool,cols:[String],wher:String,args:[Any])->[[Any]]{
         return ISQLite.ins.queryAry(table!, distinct: distinct, cols: cols, wher: wher, args: args)
     }
     
     
-    func batchAdd(dicts:[[String:String]])->(Int,Int) {
+    func batchAdd(_ dicts:[[String:String]])->(Int,Int) {
         var result:(Int,Int) = (0,0)
         for dict in dicts{
             if add(dict) > 0{
@@ -59,7 +59,7 @@ class IDBDao {
         return result
     }
     
-    func batchInsert(dicts:[[String:AnyObject]])->(Int,Int){
+    func batchInsert(_ dicts:[[String:Any]])->(Int,Int){
         var result:(Int,Int) = (0,0)
         ISQLite.ins.transaction { (db, rollback) in
             for dict in dicts{
@@ -73,14 +73,14 @@ class IDBDao {
         return result
     }
     
-    func addOrUpdate(dict:[String:String])->Bool{
+    func addOrUpdate(_ dict:[String:String])->Bool{
         if let id = dict[ID]{
             return update(dict, wher: "\(ID)=?", args: [id]) > 0
         }else{
             return add(dict) > 0
         }
     }
-    func insertOrUpdate(dict:[String:AnyObject])->Bool{
+    func insertOrUpdate(_ dict:[String:Any])->Bool{
         if let id = dict[ID]{
             return update(dict, wher: "\(ID)=?", args: [id]) > 0
         }else{
@@ -92,17 +92,17 @@ class IDBDao {
     
     
     
-    func query(id:String)->[[String:AnyObject]]{
+    func query(_ id:String)->[[String:Any]]{
         return query(false, cols: [], wher: "\(ID)=?", args: [id])
     }
     
     
-    func delete(id:String)->Bool{
+    func delete(_ id:String)->Bool{
         return delete("\(ID)=?", args: [id]) == 1
     }
-    func delete (ids:NSSet)->Int{
+    func delete (_ ids:Set<String>)->Int{
         var idstr = ""
-        for (i,id) in ids.enumerate(){
+        for (i,id) in ids.enumerated(){
             if i>0{
                 idstr += ","
             }

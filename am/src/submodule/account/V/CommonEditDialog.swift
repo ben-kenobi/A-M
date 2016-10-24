@@ -12,7 +12,7 @@ class CommonEditDialog: CommonDialog {
     var phs:[String]?{
         didSet{
             let top = (phs?.count ?? 0) > 1 ? 10:30
-            lv.snp_updateConstraints { (make) in
+            lv.snp.updateConstraints { (make) in
                 make.top.equalTo(top)
                 make.bottom.equalTo(-top)
             }
@@ -31,9 +31,10 @@ class CommonEditDialog: CommonDialog {
         tv.backgroundColor=UIColor.clear
         tv.rowHeight = 50
         self.midContent.addSubview(tv)
-        tv.snp_makeConstraints { (make) in
+        tv.snp.makeConstraints { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
+            make.top.bottom.width.height.equalTo(0)
         }
         return tv
     
@@ -116,7 +117,7 @@ extension CommonEditDialog{
         
         func initUI(){
             contentView.addSubview(tf)
-            tf.snp_makeConstraints { (make) in
+            tf.snp.makeConstraints { (make) in
                 make.left.equalTo(3)
                 make.right.equalTo(-3)
                 make.top.equalTo(5)

@@ -25,14 +25,14 @@ class IFMDBMan_former {
     }
     
     
-    func execSql4F(path:String)->Bool{
+    func execSql4F(_ path:String)->Bool{
         return execSql(try! String(contentsOfFile: path))
     }
-    func execSql(sql:String)->Bool{
+    func execSql(_ sql:String)->Bool{
         var b:Bool = false
         queue.inDatabase { (db) -> Void in
             
-            b = db.executeStatements(sql)
+            b = db?.executeStatements(sql) ?? false
         }
         return b
     }
@@ -42,19 +42,19 @@ class IFMDBMan_former {
     
     
     
-    func insert(sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->Int64{
+    func insert(_ sql:String,args:[Any]?=nil,dict:[String:Any]?=nil)->Int64{
         var b:Bool=false
         var id:Int64 = 0
         queue.inDatabase { (db) -> Void in
             if args != nil{
-                b=db.executeUpdate(sql, withArgumentsInArray: args)
+                b=db?.executeUpdate(sql, withArgumentsIn: args) ?? false
             }else if dict != nil{
-                b=db.executeUpdate(sql, withParameterDictionary: dict)
+                b=db?.executeUpdate(sql, withParameterDictionary: dict) ?? false
             }else{
-                b=db.executeUpdate(sql)
+                b=db?.executeUpdate(sql) ?? false
             }
             
-            id = db.lastInsertRowId()
+            id = db?.lastInsertRowId() ?? -1
             
         }
         return b ? id: -1
@@ -65,34 +65,34 @@ class IFMDBMan_former {
     
     
     
-    func update(sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->Int{
+    func update(_ sql:String,args:[Any]?=nil,dict:[String:Any]?=nil)->Int{
         var b:Bool=false
         var count:Int = 0
         queue.inDatabase { (db) -> Void in
             if args != nil{
-                b=db.executeUpdate(sql, withArgumentsInArray: args)
+                b=db?.executeUpdate(sql, withArgumentsIn: args) ?? false
             }else if dict != nil{
-                b=db.executeUpdate(sql, withParameterDictionary: dict)
+                b=db?.executeUpdate(sql, withParameterDictionary: dict) ?? false
             }else{
-                b=db.executeUpdate(sql)
+                b=db?.executeUpdate(sql) ?? false
             }
             
-            count = Int(db.changes())
+            count = Int(db?.changes() ?? 0)
         }
         return b ? count : -1
     }
     
     
-    func query(sql:String,args:[AnyObject]?=nil,dict:[String:AnyObject]?=nil)->[[String:AnyObject]]{
-        var ary = [[String:AnyObject]]()
+    func query(_ sql:String,args:[Any]?=nil,dict:[String:Any]?=nil)->[[String:Any]]{
+        var ary = [[String:Any]]()
         queue.inDatabase { (db) -> Void in
             var rs:FMResultSet?
             if args != nil{
-                rs=db.executeQuery(sql, withArgumentsInArray: args)
+                rs=db?.executeQuery(sql, withArgumentsIn: args)
             }else if dict != nil {
-                rs=db.executeQuery(sql, withParameterDictionary: dict)
+                rs=db?.executeQuery(sql, withParameterDictionary: dict)
             }else{
-                rs=db.executeQuery(sql)
+                rs=db?.executeQuery(sql)
             }
             
             
@@ -107,12 +107,12 @@ class IFMDBMan_former {
     
     
     
-    func rowInfo(rs:FMResultSet)->[String:AnyObject]{
-        var row = [String:AnyObject]()
+    func rowInfo(_ rs:FMResultSet)->[String:Any]{
+        var row = [String:Any]()
         
         let count = rs.columnCount()
         for i in 0..<count{
-            row[rs.columnNameForIndex(i)]=rs.objectForColumnIndex(i)
+            row[rs.columnName(for: i)]=rs.object(forColumnIndex: i)
         }
         return row
     }

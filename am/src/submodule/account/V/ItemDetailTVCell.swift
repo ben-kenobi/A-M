@@ -10,6 +10,8 @@ import UIKit
 
 class ItemDetailTVCell: UITableViewCell {
     static let celliden = "celliden"
+    let iconw:CGFloat=50
+    let iconh:CGFloat=42
     
     var editable: UnsafeMutablePointer<Bool>?
     var mod:NSMutableDictionary?{
@@ -19,7 +21,8 @@ class ItemDetailTVCell: UITableViewCell {
     }
     
     lazy var icon:UIButton={
-        let icon = UIButton(frame: nil, img: iimg("ic_menu_search"), bgimg:iimg("lightblue_noselect.9.9"), hlbgimg: iimg("grey_noselect.9"), corner: 6, bordercolor: iConst.khakiBg, borderW: 1, tar: self, action: #selector(self.onClick(_:)), tag: 0)
+        let icon = UIButton(frame: nil, img: iimg("ic_menu_search"), bgimg:iimg("lightblue_noselect.9.9"), hlbgimg: iimg("grey_noselect.9"),corner:0,  bordercolor: iConst.khakiBg, borderW: 1, tar: self, action: #selector(self.onClick(_:)), tag: 0)
+         icon.addCurve(tl: (false,0), tr: (true,8), br: (true,8), bl: (false,0), bounds: CGRect(x:0,y:0,width:self.iconw,height:self.iconh))
         icon.contentMode = .scaleAspectFit
         return icon
         
@@ -30,7 +33,7 @@ class ItemDetailTVCell: UITableViewCell {
     
     var distincColStrs:[String]{
         get{
-            let distincColValues:[[AnyObject]] = AccountService.ins.queryDistinctColumn(self.mod!["key"] as! String)
+            let distincColValues:[[Any]] = AccountService.ins.queryDistinctColumn(self.mod!["key"] as! String)
             var ary = [String]()
             for ao in distincColValues{
                 if !isBlank(ao[0] as! String){
@@ -64,7 +67,7 @@ class ItemDetailTVCell: UITableViewCell {
 extension ItemDetailTVCell{
     func onClick(_ sender:UIButton){
         if(sender == icon){
-             ListPop.listPopWith(distincColStrs,title:mod!["title"] as? String, w:0.7,cb: { (str, pos) in
+             _=ListPop.listPopWith(distincColStrs,title:mod!["title"] as? String, w:0.7,cb: { (str, pos) in
                 self.tf.text=str
             }).show()
         }
@@ -87,7 +90,7 @@ extension ItemDetailTVCell{
         let b = editable?.pointee ?? false
         tf.isEnabled = b
         
-        icon.snp_updateConstraints { (make) in
+        icon.snp.updateConstraints { (make) in
             make.width.equalTo(b ? 50 : 0)
             
         }
@@ -112,20 +115,20 @@ extension ItemDetailTVCell{
         contentView.addSubview(title)
         contentView.addSubview(tf)
         
-        title.snp_makeConstraints { (make) in
+        title.snp.makeConstraints { (make) in
             make.left.top.equalTo(0)
             make.width.equalTo(70)
             make.bottom.equalTo(-8)
         }
-        icon.snp_makeConstraints { (make) in
+        icon.snp.makeConstraints { (make) in
             make.top.equalTo(0)
             make.width.equalTo(0)
             make.bottom.equalTo(-8)
-            make.right.equalTo(-30)
+            make.right.equalTo(-6)
         }
-        tf.snp_makeConstraints { (make) in
-            make.left.equalTo(title.snp_right).offset(3)
-            make.right.equalTo(icon.snp_left).offset(-3)
+        tf.snp.makeConstraints { (make) in
+            make.left.equalTo(title.snp.right).offset(3)
+            make.right.equalTo(icon.snp.left).offset(-0)
             make.top.equalTo(0)
             make.bottom.equalTo(-8)
         }

@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         iApp.isStatusBarHidden=false
         window?.backgroundColor=UIColor.white
         
-        iNotiCenter.addObserver(self, selector: #selector(AppDelegate.setRootVC), name: updateRootVCNoti, object: nil)
+        iNotiCenter.addObserver(self, selector: #selector(AppDelegate.setRootVC), name: NSNotification.Name(rawValue: updateRootVCNoti), object: nil)
         
         return true
     }

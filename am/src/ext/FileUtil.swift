@@ -11,15 +11,15 @@ class FileUtil{
     
     class func fileSizeAtPath(path:String)->Int64{
         var b:ObjCBool=false
-        if(iFm.fileExistsAtPath(path,isDirectory:&b)){
+        if(iFm.fileExists(atPath: path,isDirectory:&b)){
             if(b.boolValue){
-                return try! iFm.attributesOfItemAtPath(path)[NSFileSize] as! Int64
+                return try! iFm.attributesOfItem(atPath: path)[FileAttributeKey.size] as! Int64
             }
             else{
                 var size:Int64=0
-                let subpaths:[String] = iFm.subpathsAtPath(path) ?? []
+                let subpaths:[String] = iFm.subpaths(atPath: path) ?? []
                 for file in subpaths{
-                    size += try! iFm.attributesOfItemAtPath((path as NSString).stringByAppendingPathComponent(file))[NSFileSize] as! Int64
+                    size += try! iFm.attributesOfItem(atPath: (path as NSString).appendingPathComponent(file))[FileAttributeKey.size] as! Int64
                     
                 }
                 return size;
@@ -76,32 +76,32 @@ class FileUtil{
     
     class func cachePath()->String{
         
-        return  NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
+        return  NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
     }
     class func docPath()->String{
-        return NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+        return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
     class func tempPath()->String{
         return NSTemporaryDirectory();
     }
     
     class func clearFileAtPath(path:String){
-        if iFm.fileExistsAtPath(path){
-            let files:[String] =  iFm.subpathsAtPath(path) ?? []
+        if iFm.fileExists(atPath:path){
+            let files:[String] =  iFm.subpaths(atPath: path) ?? []
             for file in files{
-                let apath = (path as NSString).stringByAppendingPathComponent(file)
-                try! iFm.removeItemAtPath(apath)
+                let apath = (path as NSString).appendingPathComponent(file)
+                try! iFm.removeItem(atPath:apath)
             }
         }
     }
     
     
     class func newImgFile() ->String{
-        return iConst.PNGDATESDF.stringFromDate(NSDate())
+        return iConst.PNGDATESDF.string(from: Date())
     
     }
     class func newVideoFile() ->String{
-        return iConst.MP4DATESDF.stringFromDate(NSDate())
+        return iConst.MP4DATESDF.string(from: Date())
     }
 
 }

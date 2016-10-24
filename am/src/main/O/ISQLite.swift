@@ -27,7 +27,7 @@ class ISQLite: IFMDBMan {
         super.init(name: name, version: version)
     }
     override func onCreate() {
-        execSql("create table "+ISQLite.TABLE_ACCOUNT+"(" +
+        _=execSql("create table "+ISQLite.TABLE_ACCOUNT+"(" +
             AccountColumns.ID+" integer primary key autoincrement," +
                 AccountColumns.MAILBOX+"  text," +
                 AccountColumns.PASSPORT+"  text," +
@@ -42,22 +42,22 @@ class ISQLite: IFMDBMan {
                 AccountColumns.GROUP+" text default '' " +
             ")");
         
-        execSql("create table "+ISQLite.TABLE_META_DATA+"(" +
+        _=execSql("create table "+ISQLite.TABLE_META_DATA+"(" +
             MetaDataColumns.LANGUAGE+"  text," +
             MetaDataColumns.ACCESSKEY+"  text"
             + ")");
-        execSql("create table  "+ISQLite.TABLE_ACCESS+"  (" +
+        _=execSql("create table  "+ISQLite.TABLE_ACCESS+"  (" +
             AccessColumns.ID+" integer primary key autoincrement," +
                 AccessColumns.NAME+"  text," +
             AccessColumns.ACCESSIBILITY+"   integer" +
             ")");
-        execSql("create table  "+ISQLite.TABLE_IPATH+"  (" +
+        _=execSql("create table  "+ISQLite.TABLE_IPATH+"  (" +
             IPathColumns.ID+" integer primary key autoincrement," +
                 IPathColumns.NAME+"  text," +
             IPathColumns.PATH+"   text" +
             ")");
         
-        execSql("create table  "+ISQLite.TABLE_CONTACTS+"  (" +
+        _=execSql("create table  "+ISQLite.TABLE_CONTACTS+"  (" +
             ContactColumns.ID+" integer primary key autoincrement," +
                 ContactColumns.NAME+"  text," +
             ContactColumns.GROUP+"   text," +
@@ -69,18 +69,18 @@ class ISQLite: IFMDBMan {
             ContactColumns.PS+"   text" +
             ")");
         
-        rawInsert("insert into  "+ISQLite.TABLE_META_DATA+" values('chinese','')"
+        _=rawInsert("insert into  "+ISQLite.TABLE_META_DATA+" values('chinese','')"
         );
-        rawInsert("insert into  "+ISQLite.TABLE_ACCESS+" values(1,?,1)"
+        _=rawInsert("insert into  "+ISQLite.TABLE_ACCESS+" values(1,?,1)"
             ,args: [iConst.ACCOUNT]);
-        rawInsert("insert into  "+ISQLite.TABLE_ACCESS+" values(2,?,1)"
+        _=rawInsert("insert into  "+ISQLite.TABLE_ACCESS+" values(2,?,1)"
             ,args: [iConst.FILESYSTEM]);
-        rawInsert("insert into  "+ISQLite.TABLE_ACCESS+" values(3,?,1)"
+        _=rawInsert("insert into  "+ISQLite.TABLE_ACCESS+" values(3,?,1)"
             ,args: [iConst.CONTACTS]);
         
-        rawInsert("insert into  "+ISQLite.TABLE_IPATH+"  values(1,?,?)",
+        _=rawInsert("insert into  "+ISQLite.TABLE_IPATH+"  values(1,?,?)",
                    args: ["root","/"]);
-        rawInsert("insert into  "+ISQLite.TABLE_IPATH+"  values(2,?,?)",
+        _=rawInsert("insert into  "+ISQLite.TABLE_IPATH+"  values(2,?,?)",
                    args: ["mnt","/mnt"]);
     }
 }

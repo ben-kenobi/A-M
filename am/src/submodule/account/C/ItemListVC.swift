@@ -12,7 +12,7 @@ import UIKit
 class ItemListVC: FileChooserVC {
    
     fileprivate var mulSelMod:Bool = false
-    var datas:[[String:AnyObject]]?
+    var datas:[[String:Any]]?
     
     
     
@@ -21,6 +21,7 @@ class ItemListVC: FileChooserVC {
         var rightBBIs = [UIBarButtonItem]()
         
         var item = ComUI.moreItem(self, sel: #selector(self.onItemClick(_:)))
+       
         rightBBIs.append(item)
         
         item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(self.onItemClick(_:)))
@@ -66,7 +67,7 @@ extension ItemListVC{
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(contentTV)
-        contentTV.snp_makeConstraints { (make) in
+        contentTV.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
         contentTV.contentInset=UIEdgeInsetsMake(5, 0, 15, 0)
@@ -98,7 +99,7 @@ extension ItemListVC{
             datas.append(CommonService.isAccessKeyEnable(platform) ?
                 iStrings["disableAccessKey"]! : iStrings["enableAccessKey"]!)
             
-            ListPop.listPopWith(datas,cb:{
+            _=ListPop.listPopWith(datas,cb:{
                 (str,pos)->()  in
                 if str == iStrings["exportEntries"]! {
                     
@@ -129,7 +130,7 @@ extension ItemListVC{
     
     
     
-    func toDetailVC(_ info:[String:AnyObject]?=nil){
+    func toDetailVC(_ info:[String:Any]?=nil){
         let vc = ItemDetailVC(datas: StaticMod.ACC_MUTABLE_DATAS,info: info)
         
         navigationController?.show(vc, sender: nil)
@@ -149,14 +150,14 @@ extension ItemListVC{
                         idxes.insert((idxp as NSIndexPath).row)
                     }
                     iPop.toast("删除\(AccountService.ins.delete(set))条数据")
-                    self.datas!.removeAtIdxes(idxes)
+                    self.datas!.removeAtIdxes(idxes: idxes)
                     self.contentTV.deleteRows(at: self.contentTV.indexPathsForSelectedRows!, with: UITableViewRowAnimation.fade)
                     self.toggleSelMod()
 
                 }
                 return true
             })
-            av.show()
+            _=av.show()
         }
         
     }
@@ -184,7 +185,7 @@ extension ItemListVC{
             }
             return true
         })
-        av.show()
+        _=av.show()
     }
     
     func showSearchDailog(){}
@@ -197,11 +198,11 @@ extension ItemListVC{
         let corner = 10,height=80
         if mulSelMod{
             view.addSubview(self.delBtn)
-            delBtn.snp_makeConstraints { (make) in
+            delBtn.snp.makeConstraints { (make) in
                 make.bottom.equalTo(corner)
                 make.width.equalTo(view).multipliedBy(0.5)
                 make.height.equalTo(height)
-                make.centerX.equalTo(0)
+                make.centerX.equalTo(view)
             }
             delBtn.transform=CGAffineTransform(translationX: 0,y: CGFloat( height - corner))
             UIView.animate(withDuration: 0.3, animations: {

@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class CommonListItemCell: UITableViewCell {
     static let celliden="contenttviden"
 
-    var mod:[String:AnyObject]?{
+    var mod:[String:Any]?{
         didSet{
             updateUI()
         }
@@ -45,7 +46,7 @@ class CommonListItemCell: UITableViewCell {
 }
 
 extension CommonListItemCell{
-   class func cellWith(_ tv:UITableView,mod:[String:AnyObject],idx:IndexPath)->CommonListItemCell{
+   class func cellWith(_ tv:UITableView,mod:[String:Any],idx:IndexPath)->CommonListItemCell{
        let cell =  tv.dequeueReusableCell(withIdentifier: celliden, for: idx) as! CommonListItemCell
         cell.mod=mod
         return cell
@@ -59,7 +60,8 @@ extension CommonListItemCell{
         let bg  = UIView()
         bg.backgroundColor=iConst.khakiBg
         contentView.addSubview(bg)
-        bg.snp_makeConstraints { (make) in
+        
+        bg.snp.makeConstraints { (make) in
             make.top.equalTo(4)
             make.bottom.equalTo(-1)
             make.left.equalTo(5)
@@ -73,7 +75,7 @@ extension CommonListItemCell{
         bg.addSubview(textLab)
         
         textLab.lineBreakMode = .byCharWrapping
-        textLab.snp_makeConstraints { (make) in
+        textLab.snp.makeConstraints { (make) in
             make.top.equalTo(5)
             make.left.equalTo(5)
             make.right.equalTo(-5)
@@ -85,7 +87,7 @@ extension CommonListItemCell{
         let selbg  = UIView()
         selbg.backgroundColor=iColor(130,205,248)
         selv.addSubview(selbg)
-        selbg.snp_makeConstraints { (make) in
+        selbg.snp.makeConstraints { (make) in
             make.top.equalTo(4)
             make.bottom.equalTo(-1)
             make.left.equalTo(5)

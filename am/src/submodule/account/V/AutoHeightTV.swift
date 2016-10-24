@@ -36,7 +36,8 @@ class AutoHeightTV: UITableView {
         }
     }
     func updateSize(){
-        snp_updateConstraints(closure: { (make) in
+       
+        snp.updateConstraints({ (make) in
             let verinset=contentInset.bottom+contentInset.top
             let height = min(contentSize.height+verinset , iScrH*0.9)
             make.height.equalTo(height)

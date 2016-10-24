@@ -46,7 +46,7 @@ class CommonService {
         let key = getAccessKey()
         if isBlank(key){
             b=true
-            ISQLite.ins.rawUpdate("update " + ISQLite.TABLE_META_DATA + " set "
+            _=ISQLite.ins.rawUpdate("update " + ISQLite.TABLE_META_DATA + " set "
                 + MetaDataColumns.ACCESSKEY + "=?;",args: [accessKey])
         }else {
             

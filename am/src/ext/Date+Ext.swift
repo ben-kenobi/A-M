@@ -12,32 +12,32 @@ import Foundation
 
 
 
-extension NSDate{
+extension Date{
     
     
-    class func dfm(fmstr:String)->NSDateFormatter{
-        let fm=NSDateFormatter()
-        fm.locale=NSLocale(localeIdentifier: "en")
+    static func dfm(_ fmstr:String)->DateFormatter{
+        let fm=DateFormatter()
+        fm.locale=Locale(identifier: "en")
         fm.dateFormat = fmstr
         return fm
     }
     
-    @nonobjc static var dateFm:NSDateFormatter = NSDate.dfm("yyyy-MM-dd")
+    @nonobjc static var dateFm:DateFormatter = Date.dfm("yyyy-MM-dd")
     
-    @nonobjc static var dateTimeFm:NSDateFormatter = NSDate.dfm("MM-dd HH:mm")
+    @nonobjc static var dateTimeFm:DateFormatter = Date.dfm("MM-dd HH:mm")
     
-    @nonobjc static var timeFm:NSDateFormatter = NSDate.dfm("yyyy-MM-dd HH:mm:ss")
-    
-    
-    @nonobjc static var timeFm2:NSDateFormatter = NSDate.dfm("yyyy-MM-dd HH:mm")
+    @nonobjc static var timeFm:DateFormatter = Date.dfm("yyyy-MM-dd HH:mm:ss")
     
     
-    @nonobjc static var timeFm3:NSDateFormatter = NSDate.dfm("HH:mm")
+    @nonobjc static var timeFm2:DateFormatter = Date.dfm("yyyy-MM-dd HH:mm")
     
     
-    @nonobjc static var timeFm4:NSDateFormatter = {
-        let fm = NSDate.dfm("EEE MMM dd HH:mm:ss z yyyy")
-        fm.locale=NSLocale(localeIdentifier:"en_US")
+    @nonobjc static var timeFm3:DateFormatter = Date.dfm("HH:mm")
+    
+    
+    @nonobjc static var timeFm4:DateFormatter = {
+        let fm = Date.dfm("EEE MMM dd HH:mm:ss z yyyy")
+        fm.locale=Locale(identifier:"en_US")
         return fm
     }()
     
@@ -46,22 +46,22 @@ extension NSDate{
     
     
     func dateFM()->String{
-        return NSDate.dateFm.stringFromDate(self)
+        return Date.dateFm.string(from:self)
     }
     func dateTimeFM()->String{
-        return NSDate.dateTimeFm.stringFromDate(self)
+        return Date.dateTimeFm.string(from:self)
     }
     func timeFM()->String{
-        return NSDate.timeFm.stringFromDate(self)
+        return Date.timeFm.string(from:self)
     }
     func timeFM2()->String{
-        return NSDate.timeFm2.stringFromDate(self)
+        return Date.timeFm2.string(from:self)
     }
     func timeFM3()->String{
-        return NSDate.timeFm3.stringFromDate(self)
+        return Date.timeFm3.string(from:self)
     }
     func timeFM4()->String{
-        return NSDate.timeFm4.stringFromDate(self)
+        return Date.timeFm4.string(from:self)
     }
     
     
@@ -69,49 +69,49 @@ extension NSDate{
     
     
     
-    class func dateFromStr(str:String?)->NSDate?{
+    static func dateFromStr(_ str:String?)->Date?{
         guard let str=str else{
             return nil
         }
-        return NSDate.dateFm.dateFromString(str)
+        return Date.dateFm.date(from: str)
     }
-    class func dateTimeFromStr(str:String?)->NSDate?{
+    static func dateTimeFromStr(_ str:String?)->Date?{
         guard let str=str else{
             return nil
         }
-        return NSDate.dateTimeFm.dateFromString(str)
+        return Date.dateTimeFm.date(from: str)
     }
-    class func timeFromStr(str:String?)->NSDate?{
+    static func timeFromStr(_ str:String?)->Date?{
         guard let str=str else{
             return nil
         }
-        return NSDate.timeFm.dateFromString(str)
+        return Date.timeFm.date(from: str)
     }
-    class func time2FromStr(str:String?)->NSDate?{
+    static func time2FromStr(_ str:String?)->Date?{
         guard let str=str else{
             return nil
         }
-        return NSDate.timeFm2.dateFromString(str)
+        return Date.timeFm2.date(from: str)
         
     }
-    class func time3FromStr(str:String?)->NSDate?{
+    static func time3FromStr(_ str:String?)->Date?{
         guard let str=str else{
             return nil
         }
-        return NSDate.timeFm3.dateFromString(str)
+        return Date.timeFm3.date(from: str)
         
     }
-    class func time4FromStr(str:String?)->NSDate?{
+    static func time4FromStr(_ str:String?)->Date?{
         guard let str=str else{
             return nil
         }
-        return NSDate.timeFm4.dateFromString(str)
+        return Date.timeFm4.date(from: str)
         
     }
     
     
-    class func timestamp() -> String{
-        return String(format: "%f", NSDate().timeIntervalSince1970)
+    static func timestamp() -> String{
+        return String(format: "%f", Date().timeIntervalSince1970)
         
     }
     
@@ -121,19 +121,18 @@ extension NSDate{
 
 
 //blog
-extension NSDate{
+extension Date{
     func formatBlogTime()->String{
         let secs = -Int(self.timeIntervalSinceNow)
         if secs < 60{
             return "刚刚"
         }else if secs < 60*60{
             return "\(secs/60)分钟前"
-       
-        }else if NSCalendar.currentCalendar().isDateInYesterday(self) {
+        }else if NSCalendar.current.isDateInYesterday(self) {
             return "昨天 \(self.timeFM3())"
         }else if secs < 24*60*60{
             return "\(secs/60/60)小时前"
-        }else if (self.dateFM() as NSString).substringToIndex(4)==(NSDate().dateFM() as NSString).substringToIndex(4){
+        }else if (self.dateFM() as NSString).substring(to: 4)==(Date().dateFM() as NSString).substring(to: 4){
             return self.dateTimeFM()
         }else{
             return self.timeFM2()

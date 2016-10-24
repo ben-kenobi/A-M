@@ -58,7 +58,7 @@ class NetUtil {
     }
     
     
-    class func commonRequestJson(_ get:Bool,path:String,para:AnyObject?,succode:[String],cb:((AnyObject,Int)->())?){
+    class func commonRequestJson(_ get:Bool,path:String,para:AnyObject?,succode:[String],cb:((Any,Int)->())?){
         if !commonCheck(){
             return
         }
@@ -70,13 +70,13 @@ class NetUtil {
                 return
             }
             
-            if let status = data["status"] as? String{
+            if let status = (data as! [String:Any])["status"] as? String{
                 if succode.contains(status){
 
                     cb?(data,succode.index(of: status)!)
                 }else{
                     
-                    iPop.toast(data["errmsg"]==nil ? "未知错误":data["errmsg"] as! String)
+                    iPop.toast((data as! [String:Any])["errmsg"]==nil ? "未知错误":(data as! [String:Any])["errmsg"] as! String)
                 }
             }
             
@@ -121,10 +121,10 @@ class NetUtil {
         iPop.showProg()
         INet.request(get, url: url, para: para,cb: { (data, resp) in
             iPop.dismProg()
-            cb?(suc: true)
+            cb?( true)
             },fail: {(err,resp) in
                 iPop.dismProg()
-                cb?(suc: true)
+                cb?( true)
         })
         
     }

@@ -22,15 +22,14 @@ class HomeVC: BaseVC {
         super.viewDidLoad()
         
         view.addSubview(cv)
-        menuInfo = iRes4Ary("menuConf.plist")
-        
-        iNotiCenter.addObserver(self, selector: #selector(self.showVC(_:)), name: updateHomeVCNoti, object: nil)
+        menuInfo = iRes4Ary("menuConf.plist")         
+        iNotiCenter.addObserver(self, selector: #selector(self.showVC(_:)), name: NSNotification.Name(rawValue: updateHomeVCNoti), object: nil)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.layer.contents=iimg(bgs[irand(bgs.count)])?.cgImage
+        view.layer.contents=iimg(bgs[irand(UInt32(bgs.count))])?.cgImage
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -41,7 +40,7 @@ class HomeVC: BaseVC {
     
     
     
-    var menuInfo:[AnyObject]?
+    var menuInfo:[Any]?
     
     
     
@@ -69,7 +68,6 @@ class HomeVC: BaseVC {
     
     deinit{
         iNotiCenter.removeObserver(self)
-        
     }
     override var shouldAutorotate : Bool {
         return false
@@ -100,8 +98,9 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
         
     }
     
-    func getByIdx(_ indexPath:IndexPath)->[String:AnyObject]?{
-        return menuInfo?[(indexPath as NSIndexPath).section]["items"]?[(indexPath as NSIndexPath).row] as? [String:AnyObject]
+    func getByIdx(_ indexPath:IndexPath)->[String:Any]?{
+        return ((menuInfo?[(indexPath as NSIndexPath).section] as! [String:Any])["items"] as? [Any])?[indexPath.row] as? [String:Any]
+        
     }
     
     
@@ -124,7 +123,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
-        return menuInfo?[section]["items"]?.count ?? 0
+        return ((menuInfo?[section] as![String:Any])["items"] as? [Any])?.count ?? 0
         
     }
     
@@ -135,7 +134,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
         if let mod = getByIdx(indexPath){
             cell.mod=mod as? [String : String]
         }
-        
+
         return cell
     }
     
@@ -194,7 +193,7 @@ extension HomeVC{
 
 
 
-class Aoo:View{
+class Aoo:UIView{
     required override init(frame:CGRect){
         super.init(frame:frame)
         

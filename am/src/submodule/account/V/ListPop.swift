@@ -60,8 +60,9 @@ class ListPop: BaseDialog {
         super.init(frame: frame)
         
         contentView.addSubview(tv)
-        tv.snp_makeConstraints { (make) in
+        tv.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
+            make.height.width.equalTo(0)
         }
         
     }
@@ -146,7 +147,7 @@ class ListPopCell:UITableViewCell{
     lazy var scrolLab:ScrolLab = {
         let scl = ScrolLab()
         self.contentView.addSubview(scl)
-        scl.snp_makeConstraints(closure: { (make) in
+        scl.snp.makeConstraints( { (make) in
             make.left.equalTo(10)
             make.right.equalTo(-10)
             make.top.bottom.equalTo(0)

@@ -55,15 +55,15 @@ class GridPop: BaseDialog {
     required init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubview(titleView)
-        titleView.snp_makeConstraints { (make) in
+        titleView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
             make.height.equalTo(46)
             make.width.equalTo(self).multipliedBy(0.8)
         }
         contentView.addSubview(cv)
-        cv.snp_makeConstraints { (make) in
+        cv.snp.makeConstraints { (make) in
             make.left.equalTo(8)
-            make.top.equalTo(titleView.snp_bottom).offset(5)
+            make.top.equalTo(titleView.snp.bottom).offset(5)
             make.right.equalTo(-8)
             make.bottom.equalTo(-8)
             make.height.equalTo(self).multipliedBy(0.6)
@@ -108,9 +108,9 @@ extension GridPop{
     
     func showDropDialog(){
         let v = titleView.viewWithTag(12) as! UIButton
-        ListPop.listPopWith(droplist,  w: v.w, cb: { (str, pos) in
+        _=ListPop.listPopWith(droplist,  w: v.w, cb: { (str, pos) in
             v.setTitle(str, for: UIControlState())
-            self.onDropSelCB?(pos: pos,dialog:self)
+            self.onDropSelCB?(pos,self)
         }).show(basev:self,anchor:v)
     }
     class func gridPopWith(_ droplist:[String],title:String,cb:@escaping (_ pos:Int,_ dialog:GridPop)->(),gridsel:@escaping (_ pos:Int,_ dialog:GridPop)->())->GridPop{
@@ -187,25 +187,25 @@ class GridCell: UICollectionViewCell {
         //        v.layer.borderWidth=0.7
         //        v.layer.borderColor=UIColor.grayColor().CGColor
         v.layer.backgroundColor=UIColor.clear.cgColor
-        v.snp_makeConstraints { (make) -> Void in
+        v.snp.makeConstraints { (make) -> Void in
             make.top.left.right.bottom.equalTo(0)
             
         }
         
         
-        icon.snp_makeConstraints { (make) -> Void in
+        icon.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(15)
             make.top.equalTo(5)
             make.right.equalTo(-15)
-            make.height.equalTo(icon.snp_width)
+            make.height.equalTo(icon.snp.width)
             
         }
-        title.snp_makeConstraints { (make) -> Void in
+        title.snp.makeConstraints { (make) -> Void in
             
             make.left.equalTo(3)
             make.right.equalTo(0)
             make.bottom.equalTo(-3)
-            make.top.equalTo(icon.snp_bottom)
+            make.top.equalTo(icon.snp.bottom)
             
         }
         title.numberOfLines=0

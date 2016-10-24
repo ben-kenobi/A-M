@@ -40,7 +40,7 @@ class BaseDialog: UIView {
         backgroundColor=UIColor.clear
         addSubview(view)
         view.addSubview(contentView)
-        contentView.snp_makeConstraints { (make) in
+        contentView.snp.makeConstraints { (make) in
             make.top.left.width.height.equalTo(view)
         }
         
@@ -67,8 +67,8 @@ class BaseDialog: UIView {
     }
     
     func showCenter(){
-        view.snp_makeConstraints { (make) in
-            make.center.equalTo(0)
+        view.snp.makeConstraints { (make) in
+            make.center.equalTo(view.superview!)
         }
         alpha=0
         view.transform=CGAffineTransform(scaleX: 0, y: 0)
@@ -79,13 +79,13 @@ class BaseDialog: UIView {
             
         }
     }
-    func drowDown(_ anchor:View){
+    func drowDown(_ anchor:UIView){
         //        let rect = anchor.convertRect(anchor.bounds, toView:self)
         view.layer.anchorPoint=CGPoint(x: 0.5, y: 0)
         
-        view.snp_makeConstraints { (make) in
-            make.centerY.equalTo(anchor.snp_bottom).offset(6)
-            make.right.equalTo(anchor.snp_right)
+        view.snp.makeConstraints { (make) in
+            make.centerY.equalTo(anchor.snp.bottom).offset(6)
+            make.right.equalTo(anchor.snp.right)
         }
         
         alpha=0
@@ -114,8 +114,8 @@ class BaseDialog: UIView {
         //(dialog as BaseDialog).backgroundColor=iColor(0x88000000)
         return dialog
     }
-    func show(_ vc:UIViewController?=nil,basev:UIView?=nil,anchor:View?=nil)->Self{
-        var view:View? = nil
+    func show(_ vc:UIViewController?=nil,basev:UIView?=nil,anchor:UIView?=nil)->Self{
+        var view:UIView? = nil
         if let nav = vc?.navigationController {
             view = nav.view
         }else if let vc = vc{
@@ -126,7 +126,7 @@ class BaseDialog: UIView {
             view = iApp.windows[iApp.windows.count-1]
         }
         view!.addSubview(self)
-        self.snp_makeConstraints { (make) in
+        self.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
         

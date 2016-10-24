@@ -20,7 +20,7 @@ import UIKit
     
     
    private lazy var phlab:UILabel={
-        let l=UILabel( color: UIColor.lightGrayColor(), font: self.font, align: NSTextAlignment.Left, line: 0)
+        let l=UILabel( color: UIColor.lightGray, font: self.font, align: NSTextAlignment.left, line: 0)
         return l
     }()
     @IBInspectable var placeholder:String?{
@@ -44,13 +44,13 @@ import UIKit
         super.init(frame: frame, textContainer: textContainer)
         self.addSubview(phlab)
         phlab.translatesAutoresizingMaskIntoConstraints=false
-       addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 6))
-        addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Left, multiplier: 1, constant: 6))
-         addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.LessThanOrEqual, toItem: self, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: -16))
+       addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 6))
+        addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 6))
+         addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.lessThanOrEqual, toItem: self, attribute: NSLayoutAttribute.width, multiplier: 1, constant: -16))
 //        phlab.preferredMaxLayoutWidth=self.w-16
         
         
-        iNotiCenter.addObserver(self, selector: #selector(CustTV.onChange), name: UITextViewTextDidChangeNotification, object: self)
+        iNotiCenter.addObserver(self, selector: #selector(CustTV.onChange), name: NSNotification.Name.UITextViewTextDidChange, object: self)
         
     }
 
@@ -60,7 +60,7 @@ import UIKit
     
     func onChange(){
 
-        phlab.hidden=hasText()
+        phlab.isHidden=hasText
     }
     
     

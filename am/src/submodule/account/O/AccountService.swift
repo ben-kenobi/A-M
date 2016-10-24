@@ -24,7 +24,7 @@ class AccountService :IDBDao {
      * @return
      */
     
-    func  queryByColumn(_ colName:String,colValue:String)->[[String:AnyObject]]{
+    func  queryByColumn(_ colName:String,colValue:String)->[[String:Any]]{
 
     if (iConst.MATCH_ALL == colValue) {
         return ISQLite.ins.query(table!, distinct: false, cols: ["*"], wher: "1=1 order by \(AccountColumns.SITENAME)", args: [])
@@ -43,13 +43,13 @@ class AccountService :IDBDao {
      * @param columnName
      * @return
      */
-    func  queryDistinctColumnWithId(_ columnName:String)->[[AnyObject]] {
+    func  queryDistinctColumnWithId(_ columnName:String)->[[Any]] {
         return ISQLite.ins.queryAry(table!, distinct: true, cols: [columnName,iConst.ID], wher: "1=1 order by \(columnName)", args: [])
   
     }
     
    
-    func queryDistinctColumn(_ columnName:String)->[[AnyObject]]{
+    func queryDistinctColumn(_ columnName:String)->[[Any]]{
         return ISQLite.ins.queryAry(table!, distinct: true, cols: [columnName], wher: "1=1 order by \(columnName)", args: [])
     }
     func queryDistinctColumn2(_ columnName:String)->[String]{

@@ -64,13 +64,13 @@ class ComUI{
         let divider = UIView()
         divider.backgroundColor=iColor(0xff33ff33)
         view.addSubview(divider)
-        divider.snp_makeConstraints { (make) in
+        divider.snp.makeConstraints { (make) in
             make.bottom.left.right.equalTo(0)
             make.height.equalTo(2)
         }
-        lab.snp_makeConstraints { (make) in
+        lab.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.bottom.equalTo(divider.snp_top)
+            make.bottom.equalTo(divider.snp.top)
         }
         return view
     }
@@ -87,21 +87,21 @@ class ComUI{
         view.addSubview(divider)
         let drop = dropBtn(dropTitle, tar: tar, sel: sel, tag: droptag)
         view.addSubview(drop)
-        divider.snp_makeConstraints { (make) in
+        divider.snp.makeConstraints { (make) in
             make.bottom.left.right.equalTo(0)
             make.height.equalTo(2)
         }
-        drop.snp_makeConstraints { (make) in
+        drop.snp.makeConstraints { (make) in
             make.right.equalTo(-5)
             make.top.equalTo(4)
             make.bottom.equalTo(-7)
             make.width.equalTo(150)
         }
-        lab.snp_makeConstraints { (make) in
+        lab.snp.makeConstraints { (make) in
             make.top.equalTo(0)
             make.left.equalTo(10)
-            make.right.equalTo(drop.snp_left).offset(-8)
-            make.bottom.equalTo(divider.snp_top)
+            make.right.equalTo(drop.snp.left).offset(-8)
+            make.bottom.equalTo(divider.snp.top)
         }
         return view
     }
@@ -156,7 +156,7 @@ class ClearableTF:UITextField{
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath! == "enabled"{
-            let ph = value(forKeyPath: "_placeholderLabel") as? View
+            let ph = value(forKeyPath: "_placeholderLabel") as? UIView
             ph?.isHidden = !isEnabled
         }else if keyPath! == "text"{
             onTextChanged(nil)

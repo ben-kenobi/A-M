@@ -55,19 +55,19 @@ class CommonDialog: BaseDialog {
         midContent.backgroundColor=iConst.khakiBg
         contentView.backgroundColor=iColor(0xffaaaaaa)
 
-        titleLab.snp_makeConstraints { (make) in
+        titleLab.snp.makeConstraints { (make) in
             make.height.equalTo(44)
             make.left.right.top.equalTo(0)
         }
         
-        grid.snp_makeConstraints { (make) in
+        grid.snp.makeConstraints { (make) in
             make.height.equalTo(44)
             make.left.right.bottom.equalTo(0)
         }
         
-        midContent.snp_makeConstraints { (make) in
-            make.top.equalTo(titleLab.snp_bottom).offset(1)
-            make.bottom.equalTo(grid.snp_top).offset(-1)
+        midContent.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLab.snp.bottom).offset(1)
+            make.bottom.equalTo(grid.snp.top).offset(-1)
             make.left.right.equalTo(0)
             make.width.equalTo(self).multipliedBy(0.8)
             make.height.greaterThanOrEqualTo(110)
@@ -142,7 +142,7 @@ class TextCell:UICollectionViewCell{
         selbg.backgroundColor=iColor(0xaaff8888)
         selectedBackgroundView=selbg
         contentView.addSubview(lab)
-        lab.snp_makeConstraints { (make) in
+        lab.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
         

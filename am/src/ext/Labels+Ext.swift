@@ -13,7 +13,7 @@ import UIKit
 
 
 extension UILabel{
-    convenience init(frame:CGRect?=nil,txt:String="",color:UIColor=dfTColor,font:UIFont?=dfTFont,align:NSTextAlignment=NSTextAlignment.Left,line:Int,bgColor:UIColor=UIColor.clearColor()){
+    convenience init(frame:CGRect?=nil,txt:String="",color:UIColor=dfTColor,font:UIFont?=dfTFont,align:NSTextAlignment=NSTextAlignment.left,line:Int,bgColor:UIColor=UIColor.clear){
         self.init()
         text=txt
         if let fra = frame{

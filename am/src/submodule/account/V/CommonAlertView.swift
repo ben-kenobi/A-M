@@ -12,7 +12,7 @@ class CommonAlertView: CommonDialog {
     lazy var textLab:UILabel={
         let title = UILabel(txt: "", color:iColor(0xff333333) , font: iFont(19), align: NSTextAlignment.center, line: 0)
         self.midContent.addSubview(title)
-        title.snp_makeConstraints { (make) in
+        title.snp.makeConstraints { (make) in
             make.top.equalTo(10)
             make.bottom.equalTo(-10)
             make.left.equalTo(10)

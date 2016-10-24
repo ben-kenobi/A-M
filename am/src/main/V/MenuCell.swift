@@ -41,19 +41,19 @@ class MenuCell: UICollectionViewCell {
         //        v.layer.borderWidth=0.7
         //        v.layer.borderColor=UIColor.grayColor().CGColor
         v.layer.backgroundColor=UIColor.clear.cgColor
-        v.snp_makeConstraints { (make) -> Void in
+        v.snp.makeConstraints { (make) -> Void in
             make.top.left.right.bottom.equalTo(0)
             
         }
         
         
-        icon.snp_makeConstraints { (make) -> Void in
+        icon.snp.makeConstraints { (make) -> Void in
             make.width.height.equalTo(v).offset(-25)
-            make.center.equalTo(0)
+            make.center.equalTo(icon.superview!)
             
         }
-        title.snp_makeConstraints { (make) -> Void in
-            make.centerY.equalTo(0)
+        title.snp.makeConstraints { (make) -> Void in
+            make.centerY.equalTo(title.superview!)
             make.bottom.equalTo(-7)
             
         }
