@@ -2,7 +2,6 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic_menu_sort_alphabetically.png",
       "scale" : "1x"
     },
     {
@@ -11,6 +10,7 @@
     },
     {
       "idiom" : "universal",
+      "filename" : "ic_menu_sort_alphabetically.png",
       "scale" : "3x"
     }
   ],

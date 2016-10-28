@@ -101,15 +101,19 @@ extension UIImage{
         return img
     }
     
-    func convertAndroidPointNine()->UIImage{
-        UIGraphicsBeginImageContextWithOptions(CGSize(width:self.size.width-6, height:self.size.height-6), false, 0)
+    func convertAndroidPointNine(_ pad:CGFloat=3)->UIImage{
+        UIGraphicsBeginImageContextWithOptions(CGSize(width:self.size.width-pad*2, height:self.size.height-pad*2), false, 0)
         let con:CGContext=UIGraphicsGetCurrentContext()!
-        con.draw(self.cgImage!, in: CGRect(x:-3,y: -3,width: self.size.width, height:self.size.height))
+        con.draw(self.cgImage!, in: CGRect(x:-pad,y: -pad,width: self.size.width, height:self.size.height))
         
         let img=UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return img!.stretch()
     }
+    func alwayOrigin()->UIImage{
+        return self.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+    }
+    
     class func generateVideoImage(_ url:URL,cb:@escaping ((_ img:UIImage)->()))
     {
         let asset=AVURLAsset(url: url)

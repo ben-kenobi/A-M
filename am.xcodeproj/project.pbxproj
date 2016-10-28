@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18114F001DC19E9A00B68723 /* IFileComparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18114EFF1DC19E9A00B68723 /* IFileComparator.swift */; };
+		18114F021DC19FCF00B68723 /* IFileFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18114F011DC19FCF00B68723 /* IFileFilter.swift */; };
+		181A15C41DC33289003D4B50 /* ListDropPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A15C31DC33289003D4B50 /* ListDropPop.swift */; };
 		18473F231CE065EB0064E819 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18473F221CE065EB0064E819 /* Assets.xcassets */; };
 		18473F261CE065EB0064E819 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18473F241CE065EB0064E819 /* LaunchScreen.storyboard */; };
 		18473F311CE065EB0064E819 /* amTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18473F301CE065EB0064E819 /* amTests.swift */; };
@@ -99,6 +102,13 @@
 		184F744E1DB5D49C005B93A8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74391DB5D49B005B93A8 /* Utils.swift */; };
 		184F74911DB9C887005B93A8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 184F74901DB9C887005B93A8 /* libsqlite3.dylib */; };
 		184F74931DB9C9EF005B93A8 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 184F74921DB9C9EF005B93A8 /* libsqlite3.0.tbd */; };
+		184F74951DBDEC90005B93A8 /* FileSystemVCUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74941DBDEC90005B93A8 /* FileSystemVCUI.swift */; };
+		184F74971DBDEC9B005B93A8 /* FilesystemVCEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74961DBDEC9B005B93A8 /* FilesystemVCEvent.swift */; };
+		184F74991DBDEFE0005B93A8 /* FileSystemCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74981DBDEFE0005B93A8 /* FileSystemCV.swift */; };
+		184F749B1DBF326C005B93A8 /* FileSystemCVEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F749A1DBF326C005B93A8 /* FileSystemCVEx.swift */; };
+		184F749D1DBF3ECF005B93A8 /* FileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F749C1DBF3ECF005B93A8 /* FileCell.swift */; };
+		184F749F1DC05C97005B93A8 /* FileSystemCV+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F749E1DC05C96005B93A8 /* FileSystemCV+Event.swift */; };
+		184F74A41DC0A1D4005B93A8 /* FileSystemUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74A31DC0A1D4005B93A8 /* FileSystemUtil.swift */; };
 		1876E9261CFBC8E900A4BEA9 /* GridPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876E9251CFBC8E900A4BEA9 /* GridPop.swift */; };
 		1895D9051CEE16D300D1F25E /* PlatformVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895D9041CEE16D300D1F25E /* PlatformVC.swift */; };
 		1895D9091CF1DAAC00D1F25E /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1895D9081CF1DAAC00D1F25E /* AccountService.swift */; };
@@ -147,6 +157,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18114EFF1DC19E9A00B68723 /* IFileComparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFileComparator.swift; sourceTree = "<group>"; };
+		18114F011DC19FCF00B68723 /* IFileFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IFileFilter.swift; sourceTree = "<group>"; };
+		181A15C31DC33289003D4B50 /* ListDropPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDropPop.swift; sourceTree = "<group>"; };
 		18473F181CE065EB0064E819 /* am.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = am.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18473F221CE065EB0064E819 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18473F251CE065EB0064E819 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -293,6 +306,13 @@
 		184F74391DB5D49B005B93A8 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		184F74901DB9C887005B93A8 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libsqlite3.dylib; sourceTree = "<group>"; };
 		184F74921DB9C9EF005B93A8 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		184F74941DBDEC90005B93A8 /* FileSystemVCUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemVCUI.swift; sourceTree = "<group>"; };
+		184F74961DBDEC9B005B93A8 /* FilesystemVCEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilesystemVCEvent.swift; sourceTree = "<group>"; };
+		184F74981DBDEFE0005B93A8 /* FileSystemCV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemCV.swift; sourceTree = "<group>"; };
+		184F749A1DBF326C005B93A8 /* FileSystemCVEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemCVEx.swift; sourceTree = "<group>"; };
+		184F749C1DBF3ECF005B93A8 /* FileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileCell.swift; sourceTree = "<group>"; };
+		184F749E1DC05C96005B93A8 /* FileSystemCV+Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileSystemCV+Event.swift"; sourceTree = "<group>"; };
+		184F74A31DC0A1D4005B93A8 /* FileSystemUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemUtil.swift; sourceTree = "<group>"; };
 		1876E9251CFBC8E900A4BEA9 /* GridPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPop.swift; sourceTree = "<group>"; };
 		1895D9041CEE16D300D1F25E /* PlatformVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformVC.swift; sourceTree = "<group>"; };
 		1895D9081CF1DAAC00D1F25E /* AccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
@@ -745,9 +765,9 @@
 		18473FF71CE082750064E819 /* submodule */ = {
 			isa = PBXGroup;
 			children = (
+				189AAEB41CEAF7B400234E17 /* contacts */,
 				189AAEB91CEAF7CE00234E17 /* filesystem */,
 				189AAEAF1CEAF7B400234E17 /* account */,
-				189AAEB41CEAF7B400234E17 /* contacts */,
 			);
 			path = submodule;
 			sourceTree = "<group>";
@@ -897,6 +917,8 @@
 			isa = PBXGroup;
 			children = (
 				189AAEBE1CEAF82900234E17 /* FilesystemVC.swift */,
+				184F74941DBDEC90005B93A8 /* FileSystemVCUI.swift */,
+				184F74961DBDEC9B005B93A8 /* FilesystemVCEvent.swift */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -911,6 +933,7 @@
 		189AAEBC1CEAF7CE00234E17 /* O */ = {
 			isa = PBXGroup;
 			children = (
+				184F74A31DC0A1D4005B93A8 /* FileSystemUtil.swift */,
 			);
 			path = O;
 			sourceTree = "<group>";
@@ -918,6 +941,13 @@
 		189AAEBD1CEAF7CE00234E17 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				184F74981DBDEFE0005B93A8 /* FileSystemCV.swift */,
+				184F749A1DBF326C005B93A8 /* FileSystemCVEx.swift */,
+				184F749C1DBF3ECF005B93A8 /* FileCell.swift */,
+				184F749E1DC05C96005B93A8 /* FileSystemCV+Event.swift */,
+				18114EFF1DC19E9A00B68723 /* IFileComparator.swift */,
+				18114F011DC19FCF00B68723 /* IFileFilter.swift */,
+				181A15C31DC33289003D4B50 /* ListDropPop.swift */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -1241,6 +1271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184F74A41DC0A1D4005B93A8 /* FileSystemUtil.swift in Sources */,
 				184F743E1DB5D49B005B93A8 /* IDBDao.swift in Sources */,
 				1895D9131CF4331100D1F25E /* CommonListItemCell.swift in Sources */,
 				184740301CE082750064E819 /* UIScrollView+MJExtension.m in Sources */,
@@ -1252,6 +1283,7 @@
 				1847404A1CE082750064E819 /* UIView+Toast.m in Sources */,
 				18A6FC7E1CF9C4DC00920F10 /* CommonEditDialog.swift in Sources */,
 				1847407D1CE462D40064E819 /* CommonService.swift in Sources */,
+				18114F021DC19FCF00B68723 /* IFileFilter.swift in Sources */,
 				184740241CE082750064E819 /* FMDatabase.m in Sources */,
 				184740251CE082750064E819 /* FMDatabaseAdditions.m in Sources */,
 				184F744B1DB5D49C005B93A8 /* Operators.swift in Sources */,
@@ -1267,6 +1299,7 @@
 				184740471CE082750064E819 /* SVProgressHUD.m in Sources */,
 				184740441CE082750064E819 /* README.md in Sources */,
 				184F74431DB5D49C005B93A8 /* UserInfo.swift in Sources */,
+				181A15C41DC33289003D4B50 /* ListDropPop.swift in Sources */,
 				1847402E1CE082750064E819 /* MJRefreshFooterView.m in Sources */,
 				189AAEC31CEAF8BF00234E17 /* AccountVC.swift in Sources */,
 				184740511CE082750064E819 /* BaseVC.swift in Sources */,
@@ -1277,13 +1310,17 @@
 				184740341CE082750064E819 /* Reachability.m in Sources */,
 				184740731CE2313B0064E819 /* HomeVC.swift in Sources */,
 				184F743F1DB5D49B005B93A8 /* IDBMan_former.swift in Sources */,
+				184F74991DBDEFE0005B93A8 /* FileSystemCV.swift in Sources */,
 				189AAECB1CEC4C2C00234E17 /* BaseDialog.swift in Sources */,
 				189AAEDD1CEDE6B700234E17 /* ItemDetailTVCell.swift in Sources */,
+				184F74971DBDEC9B005B93A8 /* FilesystemVCEvent.swift in Sources */,
 				184740201CE082750064E819 /* UIImageView+AFNetworking.m in Sources */,
+				184F749D1DBF3ECF005B93A8 /* FileCell.swift in Sources */,
 				184740281CE082750064E819 /* FMResultSet.m in Sources */,
 				184740141CE082750064E819 /* AFNetworkReachabilityManager.m in Sources */,
 				1895D9051CEE16D300D1F25E /* PlatformVC.swift in Sources */,
 				184740331CE082750064E819 /* NSString+Emoji.m in Sources */,
+				184F749F1DC05C97005B93A8 /* FileSystemCV+Event.swift in Sources */,
 				184740211CE082750064E819 /* UIProgressView+AFNetworking.m in Sources */,
 				184740191CE082750064E819 /* AFURLSessionManager.m in Sources */,
 				184F744E1DB5D49C005B93A8 /* Utils.swift in Sources */,
@@ -1311,6 +1348,7 @@
 				189AAED11CED9FB800234E17 /* ComUI.swift in Sources */,
 				189AAECF1CED8A2900234E17 /* CommonUtils.swift in Sources */,
 				184740321CE082750064E819 /* UIView+MJExtension.m in Sources */,
+				18114F001DC19E9A00B68723 /* IFileComparator.swift in Sources */,
 				1847401D1CE082750064E819 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				184F74411DB5D49C005B93A8 /* iFMDBMan_former.swift in Sources */,
 				18A6FC801CF9C4E600920F10 /* CommonDialog.swift in Sources */,
@@ -1329,6 +1367,7 @@
 				1847402A1CE082750064E819 /* FMDatabaseVariadic.swift in Sources */,
 				1895D90D1CF2A51800D1F25E /* ContactService.swift in Sources */,
 				184F74401DB5D49B005B93A8 /* IFMDBMan.swift in Sources */,
+				184F749B1DBF326C005B93A8 /* FileSystemCVEx.swift in Sources */,
 				184740311CE082750064E819 /* UIScrollView+MJRefresh.m in Sources */,
 				184740121CE082750064E819 /* AFHTTPRequestOperationManager.m in Sources */,
 				189AAEDB1CEDBD6500234E17 /* StaticMod.swift in Sources */,
@@ -1338,6 +1377,7 @@
 				184740151CE082750064E819 /* AFSecurityPolicy.m in Sources */,
 				184F743D1DB5D49B005B93A8 /* iConst.swift in Sources */,
 				184F74451DB5D49C005B93A8 /* Buttons+Ext.swift in Sources */,
+				184F74951DBDEC90005B93A8 /* FileSystemVCUI.swift in Sources */,
 				1847404E1CE082750064E819 /* WMMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1483,6 +1523,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6U96F6BXWV;
+				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = am/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1505,6 +1546,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6U96F6BXWV;
+				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = am/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

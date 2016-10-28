@@ -35,7 +35,11 @@ class ListPop: BaseDialog {
     var title:String?
     var onItemSelCB:((_ str:String,_ pos:Int)->Void)?
     
-    
+    var selIdx:Int = -1{
+        didSet{
+            self.tv.reloadData()
+        }
+    }
     
     lazy var header:UIView = {
         let header = ComUI.comTitleView("   "+self.title!)
@@ -108,6 +112,7 @@ extension ListPop:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: self.celliden,for: indexPath) as! ListPopCell
 //        cell.textLabel?.text=datas![indexPath.row]
         cell.scrolLab.text=datas![(indexPath as NSIndexPath).row]
+        cell.scrolLab.textColor = (indexPath.row == selIdx) ? iColor(0xffee7766) : iColor(0xff333333)
         return cell
     }
     

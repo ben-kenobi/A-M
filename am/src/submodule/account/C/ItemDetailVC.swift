@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ItemDetailVC: BaseVC {
     var editable:Bool = true
@@ -48,8 +49,18 @@ class ItemDetailVC: BaseVC {
     }
     
     
-    
+    deinit{
+        iNotiCenter.removeObserver(self)
+    }
 
+    
+    lazy var container:UIButton = {
+        let container = UIButton()
+        container.isUserInteractionEnabled=true
+        container.setBackgroundImage(iimg("background.9",pad:1)?.stretch(), for: .normal)
+//        container.layer.anchorPoint = CGPoint(x:0.5,y:0)
+        return container
+    }()
 }
 
 extension ItemDetailVC{
@@ -59,9 +70,7 @@ extension ItemDetailVC{
         item.tag=NavMenu.edit.rawValue
         navigationItem.rightBarButtonItem=item
         view.addSubview(commit)
-        let container = UIButton()
-        container.isUserInteractionEnabled=true
-        container.setBackgroundImage(iimg("background.9")?.stretch(), for: .normal)
+        
         
         view.addSubview(container)
         container.addSubview(contentTV)
@@ -71,17 +80,50 @@ extension ItemDetailVC{
             make.height.equalTo(38)
             make.width.equalTo(self.view.snp.width).multipliedBy(0.7)
         }
-        container.snp.makeConstraints { (make) in
-            make.left.right.top.equalTo(0)
-            make.bottom.equalTo(commit.snp.top).offset(-5)
-        }
+        
+       installContainerConstraint(0)
+        
         contentTV.snp.makeConstraints { (make) in
             make.top.left.equalTo(15)
             make.bottom.right.equalTo(-15)
         }
         
         updateUI()
+        iNotiCenter.addObserver(self, selector: #selector(self.onKeyboardChange(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
+    
+    
+    func onKeyboardChange(_ noti:NSNotification){
+        if let userinfo = noti.userInfo{
+            let dura=Double((userinfo[UIKeyboardAnimationDurationUserInfoKey] as? String) ??
+                "0")
+            
+            let endframe:CGRect = (userinfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            installContainerConstraint(endframe.minY >= self.view.h ?  0:endframe.height)
+            UIView.animate(withDuration: dura!, animations: {
+                self.container.layoutIfNeeded()
+//                self.contentTV.superview!.transform=CGAffineTransform(translationX: 0, y: endframe.origin.y-self.contentTV.superview!.h-self.view.y)
+            })
+        }
+    }
+
+    func installContainerConstraint(_ h:CGFloat){
+        if h > 0{
+            container.snp.remakeConstraints { (make) in
+                make.left.right.equalTo(0)
+                make.top.equalTo(container.superview!.snp.top)
+                make.bottom.equalTo(-h)
+            }
+        }else{
+            container.snp.remakeConstraints { (make) in
+                make.left.right.equalTo(0)
+                make.top.equalTo(container.superview!.snp.top)
+                make.bottom.equalTo(commit.snp.top).offset(-5)
+            }
+        }
+        
+    }
+    
     
     func onItemClick(_ sender:UIBarButtonItem){
         if(sender.tag==NavMenu.edit.rawValue){

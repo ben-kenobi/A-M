@@ -9,26 +9,95 @@
 import Foundation
 class FileUtil{
     
-    class func fileSizeAtPath(path:String)->Int64{
+    
+    class func fileSizeAtPath(path:String)->(Int64,Int){
         var b:ObjCBool=false
         if(iFm.fileExists(atPath: path,isDirectory:&b)){
-            if(b.boolValue){
-                return try! iFm.attributesOfItem(atPath: path)[FileAttributeKey.size] as! Int64
-            }
-            else{
+            if(!b.boolValue){
+                 let num  = (try? iFm.attributesOfItem(atPath: path)[FileAttributeKey.size] as! NSNumber)
+                if let num = num {
+                    return (num.int64Value,1)
+                }
+                return (0,1)
+            }else{
                 var size:Int64=0
+                var count=0
                 let subpaths:[String] = iFm.subpaths(atPath: path) ?? []
                 for file in subpaths{
-                    size += try! iFm.attributesOfItem(atPath: (path as NSString).appendingPathComponent(file))[FileAttributeKey.size] as! Int64
+                    let path = (path as NSString).appendingPathComponent(file)
+                    if iFm.fileExists(atPath: path, isDirectory: &b) && !b.boolValue{
+                        count += 1
+                        let num = try? iFm.attributesOfItem(atPath:path)[FileAttributeKey.size] as! NSNumber
+                        if let num = num{
+                            size += num.int64Value
+                        }
+                    }
                     
                 }
-                return size;
+                return (size,count)
             }
         }
-        return 0;
+        return (0,0);
+
     }
     
-    class func formatedFileSize2(size:Int64)->String{
+    static func fileDetailDescription(_ path:String,cb:@escaping ((_ str:String)->Void)){
+        cb( "位置:  \(path)\n大小:  ....\n修改时间:  \(modiTime(path).timeFM())")
+        DispatchQueue.global().async {
+            let str = "位置:  \(path)\n大小:  \(fileSizePattern(path))\n修改时间:  \(modiTime(path).timeFM())"
+            DispatchQueue.main.async {
+                cb(str)
+            }
+        }
+    }
+    
+    
+    static func fullPath(_ name:String,_ dir:String)->String{
+        let separator =  dir == "/" ? "" : "/"
+        return dir + separator + name
+    }
+    
+    static func fileDetailDescription(_ path:String)->String{
+        return "位置:  \(path)\n大小:  \(fileSizePattern(path))\n修改时间:  \(modiTime(path).timeFM())"
+    }
+    static func modiTime(_ path:String)->Date{
+        let date  = try? iFm.attributesOfItem(atPath:path)[FileAttributeKey.modificationDate] as! Date
+        if let date = date{
+            return date
+        }
+        return Date(timeIntervalSince1970: 0)
+        
+    }
+    static func fileSizePattern(_ path:String)->String{
+        return fileSizePattern(fileSizeAtPath(path: path), dir: isDir(path))
+    }
+    static func fileSizePattern(_ size:(Int64,Int),dir:Bool)->String{
+        var str = formatedFileSize(size.0)
+        
+        if size.0 > 1000{
+            str += "   ( \(formatNum(size.0)) B )  "
+        }
+        if dir{
+            str += " ( 共 \(formatNum(Int64(size.1))) 个文件 )"
+        }
+        return str
+    }
+    static func formatNum(_ size:Int64)->String{
+        var a = size, b:Int64 = 0
+        
+        b = a%1000
+        var str = "\(b)"
+        
+        while a>1000{
+            
+            a /= 1000
+            b = a%1000
+            str = "\(b),\(str)"
+        }
+        return str
+    }
+    
+    class func formatedFileSize2(_ size:Int64)->String{
         let strs = ["B","K","M","G","T"]
         var idx:Int=0
         var resul:Double = Double(size)
@@ -51,7 +120,7 @@ class FileUtil{
     }
     
     
-    class func formatedFileSize(size:Int64)->String{
+    class func formatedFileSize(_ size:Int64)->String{
         
         let strs = ["B","K","M","G","T"]
         var idx:Int=0

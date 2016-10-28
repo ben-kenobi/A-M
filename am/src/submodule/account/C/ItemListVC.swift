@@ -36,8 +36,6 @@ class ItemListVC: FileChooserVC {
         item.tag = NavMenu.search.rawValue
         rightBBIs.append(item)
         
-        
-        
         return rightBBIs
     }()
     
@@ -74,8 +72,13 @@ extension ItemListVC{
         navigationItem.rightBarButtonItems=rightBBIs
         let views = navigationController?.navigationBar.subviews
         
+        var idx = 0
         for (_,v) in views!.enumerated(){
             if v.isKind(of: (NSClassFromString("UINavigationButton")!)){
+                idx += 1
+                if idx == 1{
+                    continue
+                }
                 rightBtns.append(v as! UIButton)
             }
         }
@@ -102,9 +105,9 @@ extension ItemListVC{
             _=ListPop.listPopWith(datas,cb:{
                 (str,pos)->()  in
                 if str == iStrings["exportEntries"]! {
-                    
+                    self.selectDir()
                 }else if str == iStrings["importEntries"]! {
-                    
+                    self.selectFile()
                 }else if str == iStrings["enableAccessKey"]! || str ==  iStrings["disableAccessKey"]!{
                     if CommonService.toggleAccessibility(self.platform){
                         iPop.toast("操作成功")
@@ -112,7 +115,7 @@ extension ItemListVC{
                         iPop.toast("操作失败")
                     }
                 }else if str == iStrings["modifyAccessKey"]! {
-                    self.showModifyAccessDialog()
+                    ItemListVC.showModifyAccessDialog()
                 }
             }).show(self,anchor:rightBtns[0])
         }else if tag == NavMenu.trash.rawValue{
@@ -161,7 +164,7 @@ extension ItemListVC{
         }
         
     }
-    func showModifyAccessDialog(){
+    class func showModifyAccessDialog(){
         let av=CommonEditDialog.viewWith("修改密码", phs:["输入新密码"], btns: ["确定","取消"],cb: {
             (pos,dialog)->Bool in
             if pos == 0{
@@ -189,6 +192,18 @@ extension ItemListVC{
     }
     
     func showSearchDailog(){}
+    
+    func selectFile(){
+        let vc = FilesystemVC()
+        vc.filesystemCV.mode = .selFile
+        navigationController?.show(vc, sender: nil)
+        
+    }
+    func selectDir(){
+        let vc = FilesystemVC()
+        vc.filesystemCV.mode = .selDir
+        navigationController?.show(vc, sender: nil)
+    }
 
     
     func toggleSelMod(){

@@ -33,6 +33,8 @@ public enum NavMenu : Int {
     case redo
     case pageCurl
     case more
+    case sort
+    case view
 }
 class ComUI{
 
@@ -52,15 +54,16 @@ class ComUI{
         
     }
     static func dropBtn(_ title:String,tar:AnyObject?,sel:Selector,tag:Int)->UIButton{
-        let b = DropBtn( img: iimg("triangle_down_blue"), title: title, font: ibFont(18), titleColor: iColor(0xff5555aa), bgimg: iimg("lightblue_noselect.9"), hlbgimg: iimg("button_select.9"),  corner: 4, bordercolor: iColor(0xffdddddd), borderW: 1, tar: tar, action: sel, tag: tag)
-        b.setBackgroundImage(iimg("button_select.9"), for: UIControlState.selected)
+        let b = DropBtn( img: iimg("triangle_down_blue"), title: title, font: ibFont(18), titleColor: iColor(0xff5555aa), bgimg: iimg("lightblue_noselect.9",pad:0.5), hlbgimg: iimg("button_select.9",pad:0.5),  corner: 0, bordercolor: iColor(0xffdddddd), borderW: 0, tar: tar, action: sel, tag: tag)
+        b.setBackgroundImage(iimg("button_select.9",pad:0.5), for: UIControlState.selected)
         return b
         
     }
-    static func comTitleView(_ title:String)->UIView{
+    static func comTitleView(_ title:String,labtag:Int=0)->UIView{
         let view = UIView()
         let lab = comTitleLab(title)
         view.addSubview(lab)
+        lab.tag=labtag
         let divider = UIView()
         divider.backgroundColor=iColor(0xff33ff33)
         view.addSubview(divider)
@@ -95,12 +98,12 @@ class ComUI{
             make.right.equalTo(-5)
             make.top.equalTo(4)
             make.bottom.equalTo(-7)
-            make.width.equalTo(150)
+            make.width.equalTo(130)
         }
         lab.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.left.equalTo(10)
-            make.right.equalTo(drop.snp.left).offset(-8)
+            make.left.equalTo(8)
+            make.right.equalTo(drop.snp.left).offset(-4)
             make.bottom.equalTo(divider.snp.top)
         }
         return view
@@ -127,7 +130,7 @@ class DropBtn:UIButton{
     }
 }
 
-class ClearableTF:UITextField{
+class ClearableTF:UITextField,UITextFieldDelegate{
     
     var onTxtChangeCB:((_ tf:ClearableTF)->())?
     
@@ -151,7 +154,8 @@ class ClearableTF:UITextField{
         iNotiCenter.addObserver(self, selector: #selector(self.onTextChanged(_:)), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
         addObserver(self, forKeyPath: "enabled", options: NSKeyValueObservingOptions.old, context: nil)
         addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions.old, context: nil)
-        
+        self.delegate=self
+        self.returnKeyType = .done
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -172,6 +176,14 @@ class ClearableTF:UITextField{
         btn.isHidden = isBlank(text)
         onTxtChangeCB?(self)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
+        return false
+    }
+    
+    
+    
     
     deinit{
         iNotiCenter.removeObserver(self)

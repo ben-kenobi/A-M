@@ -61,7 +61,7 @@ extension UIView{
         
     }
     
-    func addCurve(tl:(Bool,CGFloat),tr:(Bool,CGFloat),br:(Bool,CGFloat),bl:(Bool,CGFloat),bounds:CGRect){
+    func addCurve(tl:(Bool,CGFloat)=(false,0),tr:(Bool,CGFloat)=(false,0),br:(Bool,CGFloat)=(false,0),bl:(Bool,CGFloat)=(false,0),bounds:CGRect){
         let w=bounds.width
         let h=bounds.height
         let path:CGMutablePath=CGMutablePath()

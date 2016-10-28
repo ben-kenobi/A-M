@@ -216,12 +216,12 @@ func imgFromF(_ name:String?)->UIImage?{
     }
     return UIImage(contentsOfFile: name)
 }
-func iimg(_ name:String?)->UIImage?{
+func iimg(_ name:String?,pad:CGFloat = 3)->UIImage?{
     guard let name=name else{
         return nil
     }
     if(name.hasSuffix(".9")){
-        return UIImage(named: name)?.convertAndroidPointNine()
+        return UIImage(named: name)?.convertAndroidPointNine(pad)
     }
     return UIImage(named: name)
 }

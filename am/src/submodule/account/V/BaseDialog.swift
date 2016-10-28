@@ -13,7 +13,7 @@ class BaseDialog: UIView {
         let view = UIView()
         
         view.layer.backgroundColor=UIColor.white.cgColor
-        view.layer.cornerRadius=8
+        view.layer.cornerRadius=6
         view.layer.borderColor=iColor(190,190,190).cgColor
         view.layer.borderWidth=1
         view.layer.shadowOpacity=1
@@ -25,6 +25,7 @@ class BaseDialog: UIView {
         
         return view
     }()
+    var dropoffset:CGFloat=5
     lazy var contentView:UIView={
         let contentView = UIView()
         contentView.layer.masksToBounds=true
@@ -55,12 +56,15 @@ class BaseDialog: UIView {
         }
     }
     
+    var onDismissCB:((_ dialog:BaseDialog)->Void)?
+    
     func dismiss(){
         
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions(), animations: {
             self.alpha=0.02
             //            self.transform=CGAffineTransformMakeScale(0.1,0.1)
         }) { (b) in
+            self.onDismissCB?(self)
             self.removeFromSuperview()
             self.anchor?.isSelected=false
         }
@@ -84,7 +88,7 @@ class BaseDialog: UIView {
         view.layer.anchorPoint=CGPoint(x: 0.5, y: 0)
         
         view.snp.makeConstraints { (make) in
-            make.centerY.equalTo(anchor.snp.bottom).offset(6)
+            make.centerY.equalTo(anchor.snp.bottom).offset(dropoffset)
             make.right.equalTo(anchor.snp.right)
         }
         

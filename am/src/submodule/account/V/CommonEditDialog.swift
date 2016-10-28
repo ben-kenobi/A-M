@@ -19,6 +19,7 @@ class CommonEditDialog: CommonDialog {
             lv.reloadData()
         }
     }
+    var defTexts:[String]?
     
     lazy var lv:AutoHeightTV={
         let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableViewStyle.plain)
@@ -48,6 +49,7 @@ class CommonEditDialog: CommonDialog {
         av.btns=btns
         av.cb=cb
         av.phs=phs
+        av.view.layer.anchorPoint=CGPoint(x:0.5,y:0.8)
         return av
     }
 
@@ -69,13 +71,16 @@ extension CommonEditDialog:UITableViewDelegate,UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        return ItemEditCell.cellWith(tableView, ph: phs![(indexPath as NSIndexPath).row])
+        let cell =  ItemEditCell.cellWith(tableView, ph: phs![(indexPath as NSIndexPath).row])
+        if let defTexts=defTexts, defTexts.count > indexPath.row{
+            cell.tf.text=defTexts[indexPath.row]
+        }
+        return cell
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int{
         return 1
-        
     }
  
 }

@@ -81,7 +81,7 @@ class GridPop: BaseDialog {
     
     override func afterShow() {
         if let droplist = droplist{
-            self.onDropSelCB?(idxof(droplist, tar:(titleView.viewWithTag(12) as! UIButton).title(for: UIControlState())),self)
+            self.onDropSelCB?(idxof(droplist, tar:(titleView.viewWithTag(12) as! UIButton).title(for: UIControlState.normal)),self)
 
         }
     }
@@ -108,10 +108,13 @@ extension GridPop{
     
     func showDropDialog(){
         let v = titleView.viewWithTag(12) as! UIButton
-        _=ListPop.listPopWith(droplist,  w: v.w, cb: { (str, pos) in
+        let lp = ListPop.listPopWith(droplist,  w: v.w, cb: { (str, pos) in
             v.setTitle(str, for: UIControlState())
             self.onDropSelCB?(pos,self)
-        }).show(basev:self,anchor:v)
+        })
+        lp.dropoffset=0
+        lp.view.layer.cornerRadius=3
+        _=lp.show(basev:self,anchor:v)
     }
     class func gridPopWith(_ droplist:[String],title:String,cb:@escaping (_ pos:Int,_ dialog:GridPop)->(),gridsel:@escaping (_ pos:Int,_ dialog:GridPop)->())->GridPop{
         let pop = dialogWith() as GridPop
@@ -172,7 +175,7 @@ class GridCell: UICollectionViewCell {
         let selbg=UIView()
         selbg.backgroundColor=iColor(0, 0, 0, 0.3)
         selectedBackgroundView=selbg
-        selbg.layer.cornerRadius=7
+        selbg.layer.cornerRadius=6
         selbg.layer.masksToBounds=true
         
         //        selectionStyle = .None
