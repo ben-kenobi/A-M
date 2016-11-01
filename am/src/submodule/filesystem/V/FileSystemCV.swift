@@ -31,6 +31,7 @@ class FileSystemCV: UICollectionView {
                 _multiSel=newValue
                 selectedList.removeAll()
                 reloadData()
+                self.cdCB?(self)
             }
         }
     }
@@ -121,23 +122,40 @@ class FileSystemCV: UICollectionView {
     
     func initNshowOptionDialog(_ ip:IndexPath){
         let name = fileList[ip.row]
-        let data =  [ "delete",
+        let path = FileUtil.fullPath(name, curDir)
+
+        var data =  [ "delete",
                         "rename", "copy", "move", "detail" ,"selectAll","multiselectorMode" ]
-        let listDropPop = ListDropPop.listDropPopWith(data,droplist: iStrary["openaslist1"]!, title:name ,dropTitle:"打开方式", cb: { (pos, dialog) in
+        data[6] = self.multiSel ? "退出多选模式" : "进入多选模式"
+        let listDropPop = ListDropPop.listDropPopWith(data,droplist: iStrary["openaslist1"]!, title:name ,dropTitle:"打开方式", dropcb: { (pos, dialog) in
             
-            }) { (pos, dialog) in
+            },itemsel: nil)
+        listDropPop.onItemSelCB = { (pos, dialog) in
+            if pos == -1{
+                dialog.dismiss()
+            }else if pos==0{
+                self.deleteFile(path,optDialog:listDropPop)
+            }else if pos == 1{
+                self.renameFile(path,optDialog:listDropPop)
+            }else if pos == 5{
+                self.selectAll()
+                dialog.dismiss()
+            }else if pos == 6{
+                self.multiSel = !self.multiSel
+                if self.multiSel{
+                    _ = self.selectFile(path)
+                }
                 dialog.dismiss()
             }
-        
+        }
         listDropPop.onDismissCB = {
             (dialog) in
             if let idxes = self.indexPathsForSelectedItems ,idxes.count>0{
                 self.deselectItem(at: idxes[0], animated: true)
             }
             self.longPressed=false
-
+            
         }
-        let path = FileUtil.fullPath(name, curDir)
         FileUtil.fileDetailDescription(path) { (str) in
             listDropPop.headerTitle=str
         }

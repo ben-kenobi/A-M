@@ -196,12 +196,23 @@ extension ItemListVC{
     func selectFile(){
         let vc = FilesystemVC()
         vc.filesystemCV.mode = .selFile
+        vc.selCB={
+            (file) in
+            if FileUtil.isReadableFile(file){
+                print(file)
+            }
+        }
         navigationController?.show(vc, sender: nil)
-        
     }
     func selectDir(){
         let vc = FilesystemVC()
         vc.filesystemCV.mode = .selDir
+        vc.selCB={
+            (path) in
+            if FileUtil.isWritableDir(path){
+                print(path)
+            }
+        }
         navigationController?.show(vc, sender: nil)
     }
 

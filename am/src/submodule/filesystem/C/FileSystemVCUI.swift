@@ -19,18 +19,18 @@ extension FilesystemVC{
         }
         filesystemCV.contentInset=UIEdgeInsetsMake(5, 0, 10, 0)
         navigationItem.rightBarButtonItems=rightBBIs
-        let views = navigationController?.navigationBar.subviews
-        
-        var idx = 0
-        for (_,v) in views!.enumerated(){
-            if v.isKind(of: (NSClassFromString("UINavigationButton")!)){
-                idx += 1
-                if idx == 1{
-                    continue
-                }
-                rightBtns.append(v as! UIButton)
-            }
-        }
+//        let views = navigationController?.navigationBar.subviews
+//        
+//        var idx = 0
+//        for (_,v) in views!.enumerated(){
+//            if v.isKind(of: (NSClassFromString("UINavigationButton")!)){
+//                idx += 1
+//                if idx == 1{
+//                    continue
+//                }
+//                rightBtns.append(v as! UIButton)
+//            }
+//        }
         
     }
     
@@ -82,10 +82,17 @@ extension FilesystemVC{
     
     func initBBIs()->[UIBarButtonItem]{
         var rightBBIs = [UIBarButtonItem]()
+        var item:UIBarButtonItem
         
-        var item = UIBarButtonItem(image: iimg("ic_menu_moreoverflow_normal_holo_light")?.alwayOrigin(), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.onItemClicked(_:)))
-        item.tag=NavMenu.more.rawValue
+        if self.filesystemCV.mode == .normal{
+            item = UIBarButtonItem(image: iimg("ic_menu_moreoverflow_normal_holo_light")?.alwayOrigin(), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.onItemClicked(_:)))
+            item.tag=NavMenu.more.rawValue
+        }else{
+            item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.onItemClicked(_:)))
+            item.tag=NavMenu.done.rawValue
+        }
         rightBBIs.append(item)
+        
         
         item = UIBarButtonItem(image: iimg("ic_menu_view")?.alwayOrigin(), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.onItemClicked(_:)))
         item.tag=NavMenu.view.rawValue

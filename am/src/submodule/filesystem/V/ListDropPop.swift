@@ -168,16 +168,16 @@ extension ListDropPop{
         lp.view.layer.cornerRadius=3
         _=lp.show(basev:self,anchor:v)
     }
-    class func listDropPopWith(_ data:[String], droplist:[String],title:String,dropTitle:String?,cb:@escaping (_ pos:Int,_ dialog:ListDropPop)->(),gridsel:@escaping (_ pos:Int,_ dialog:ListDropPop)->())->ListDropPop{
+    class func listDropPopWith(_ data:[String], droplist:[String],title:String,dropTitle:String?,dropcb:((_ pos:Int,_ dialog:ListDropPop)->())?,itemsel:((_ pos:Int,_ dialog:ListDropPop)->())?)->ListDropPop{
         let pop = dialogWith() as ListDropPop
         pop.title = title
         pop.dropTitle=dropTitle
         pop.datas=data
         pop.droplist=droplist
         
-        pop.onDropSelCB=cb
+        pop.onDropSelCB=dropcb
         
-        pop.onItemSelCB = gridsel
+        pop.onItemSelCB = itemsel
         
         return pop
     }
@@ -206,7 +206,7 @@ extension ListDropPop:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         onItemSelCB?((indexPath as NSIndexPath).row,self)
-        dismiss()
+//        dismiss()
         
     }
     

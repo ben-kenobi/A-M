@@ -19,12 +19,26 @@ class FileCell: UICollectionViewCell {
             updateUI()
         }
     }
+    
+    
+    
+    var isSel:Bool=false{
+        didSet{
+            if isSel{
+                self.backgroundColor = iColor(0xaa4499ff)
+            }else{
+                self.backgroundColor=UIColor.clear
+            }
+        }
+    }
+    
     func updateUI(){
         if let mod=mod{
             
         }
-
     }
+ 
+    
     func initUI(){
         let selbg=UIView()
         selbg.backgroundColor=iColor(0xaaffee88)
@@ -32,7 +46,7 @@ class FileCell: UICollectionViewCell {
         selbg.layer.cornerRadius=3
         selbg.layer.masksToBounds=true
         
- 
+        layer.cornerRadius=3
         backgroundColor=UIColor.clear
         contentView.addSubview(icon)
         contentView.addSubview(name)

@@ -28,7 +28,7 @@ extension FilesystemVC{
         let pop = ListPop.listPopWith(datas,cb:{
             [weak self](str,pos)->()  in
             self?.filesystemCV.sort(pos)
-        }).show(self,anchor:rightBtns[1])
+        }).show(self,anchor:rightBtns[2])
         pop.selIdx = self.filesystemCV.comparator.type
 
     }
@@ -61,7 +61,6 @@ extension FilesystemVC{
     }
     func toggleMoreOperation(_ sender:UIButton){
         
-        
         if sender.isSelected {
             sender.isEnabled=false
             let tran = CGAffineTransform.init(scaleX: 0.0001, y: 0.0001)
@@ -70,7 +69,6 @@ extension FilesystemVC{
             }) { (suc) in
                 sender.isSelected=false
                 sender.isEnabled=true
-
             }
         }else{
             sender.isSelected=true
@@ -86,11 +84,10 @@ extension FilesystemVC{
           }
     }
     
-    func toggleMulSelMode(_ sender:UIButton){
+    func updateMulSelMode(_ sender:UIButton){
         let mulsel = !self.filesystemCV.multiSel
-        self.filesystemCV.multiSel = mulsel
-        dmcBar.isHidden = !mulsel
-        sender.isSelected=mulsel
+        dmcBar.isHidden = mulsel
+        sender.isSelected = !mulsel
     }
     
     
@@ -146,6 +143,25 @@ extension FilesystemVC{
             })
         av.defTexts=["untitled"]
         _=av.show(self)
+        
+    }
+    
+    
+    //deleteFile
+    func deleteSelectList(){
+        if filesystemCV.selectedList.isEmpty{
+            iPop.toast("无选中文件")
+        }else if !iFm.isWritableFile(atPath:filesystemCV.curDir){
+            iPop.toast("当前位置文件无法删除");
+        } else {
+            _=CommonAlertView.viewWith("警告", mes: "确认删除 \(filesystemCV.selectedList.count) 个条目？ 将无法恢复", btns: ["确定","取消"], cb: { (idx, dialog) -> Bool in
+                if idx == 0{
+                    self.filesystemCV.deleteSelectedListAsynchronously()
+                }
+                return true
+            }).show()
+            
+        }
         
     }
 }

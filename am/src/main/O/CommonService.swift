@@ -196,14 +196,14 @@ class CommonService {
     //    return cursor;
     //    }
     //
-    //    class func queryAllByPlatform(String platform)->Cursor{
-    //    Cursor cursor=null;
-    //    if(IConstants.ACCOUNT.equals(platform))
-    //    cursor=AccountService.queryByColumn("",IConstants.MATCH_ALL);
-    //    else if(IConstants.CONTACTS.equals(platform))
-    //    cursor= ContactsService.queryByColumn("",IConstants.MATCH_ALL);
-    //    return cursor;
-    //    }
+    static func queryAllByPlatform(_ platform:String)->[[String:Any]]{
+        
+        if(iConst.ACCOUNT == platform){
+            return AccountService.ins.queryByColumn("", colValue: iConst.MATCH_ALL)
+        } else if(iConst.CONTACTS==platform){
+            return  ContactsService.queryByColumn("",colValue: iConst.MATCH_ALL)
+        }
+    }
     //
     //    class func queryByPlatformNColumn(String platform,String colName,String colValue)->Cursor{
     //    Cursor cursor=null;
@@ -214,12 +214,15 @@ class CommonService {
     //    return cursor;
     //    }
     //
-    //    class func batchInsertByPlatform(String platform,List<ContentValues> cvs)->void{
-    //    if(IConstants.ACCOUNT.equals(platform))
-    //    AccountService.batchAddAccount(cvs);
-    //    else if(IConstants.CONTACTS.equals(platform))
-    //    ContactsService.batchInsert(cvs);
-    //    }
+    static func batchInsertByPlatform(_ platform:String,datas:[[String:Any]])->(Int,Int){
+        
+        if(iConst.ACCOUNT == platform){
+            return AccountService.ins.batchInsert(datas)
+        } else if(iConst.CONTACTS==platform){
+            return ContactsService.ins.batchInsert(datas)
+
+        }
+    }
     //
     //
     //    /**

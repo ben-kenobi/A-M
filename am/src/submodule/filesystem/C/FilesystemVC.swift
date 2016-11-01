@@ -12,7 +12,7 @@ import UIKit
 class FilesystemVC: PlatformVC {
     
     
-   
+    var selCB:((_ path:String)->Void)?
     
     var rightBtns:[UIButton]=[UIButton]()
     lazy var rightBBIs:[UIBarButtonItem]={
@@ -23,6 +23,13 @@ class FilesystemVC: PlatformVC {
         
         self?.up.isEnabled = (cv.curDir != "/") &&  FileUtil.isReadableDir(cv.outerDir)
         self?.star.setTitle((cv.curDir as NSString).lastPathComponent, for: UIControlState.normal)
+        self?.updateMulSelMode(self!.moreOperationBtns[4])
+        self?.moreOperationBtns[5].isSelected = !self!.filesystemCV.rootOrHome
+        if cv.mode == .selDir{
+            self?.rightBBIs[0].isEnabled = iFm.isWritableFile(atPath:cv.curDir)
+        }else if cv.mode == .selFile{
+            self?.rightBBIs[0].isEnabled = !cv.multiSel && cv.selectedList.count > 0 && FileUtil.isReadableFile(cv.selectedList[0])
+        }
     }
     
     
@@ -83,7 +90,30 @@ class FilesystemVC: PlatformVC {
         platform=iConst.FILESYSTEM
         super.viewDidLoad()
         initUI()
-        filesystemCV.rootOrHome=true
+        filesystemCV.rootOrHome=false
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if rightBtns.count>0{
+            return 
+        }
+        let views = navigationController?.navigationBar.subviews
+        
+        var idx = 0
+        for (_,v) in views!.enumerated(){
+            if v.isKind(of: (NSClassFromString("UINavigationButton")!)){
+                idx += 1
+                if idx == 1{
+                    continue
+                }
+                rightBtns.append(v as! UIButton)
+            }
+        }
+        rightBtns.sort { (left, right) -> Bool in
+            return left.x>right.x
+        }
     }
     
     func onItemClicked(_ sender:UIBarButtonItem){
@@ -97,6 +127,9 @@ class FilesystemVC: PlatformVC {
             showSortDialog(sender)
         }else if tag == NavMenu.search.rawValue{
             
+        }else if tag == NavMenu.done.rawValue{
+            selCB?(self.filesystemCV.getChoosedFile())
+            (self.navigationController as! MainNavVC).back()
         }
         
     }
@@ -104,21 +137,24 @@ class FilesystemVC: PlatformVC {
         if sender == moreOperation{
             toggleMoreOperation(sender)
         }else if sender == moreOperationBtns[4]{
-            toggleMulSelMode(sender)
+            self.filesystemCV.multiSel = !self.filesystemCV.multiSel
         }else if sender == up{
             self.filesystemCV.up()
         }else if sender == moreOperationBtns[5]{
             self.filesystemCV.rootOrHome = !self.filesystemCV.rootOrHome
-            sender.isSelected = !self.filesystemCV.rootOrHome
         }else if sender == moreOperationBtns[3]{
             self.filesystemCV.refresh(false)
         }else if sender == moreOperationBtns[1]{
             mkDir()
         }else if sender == moreOperationBtns[2]{
             createFile()
+        }else if sender == dmcBtns[0]{
+            self.deleteSelectList()
         }
     
     }
+    
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         

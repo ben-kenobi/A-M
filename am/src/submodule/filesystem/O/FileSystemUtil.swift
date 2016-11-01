@@ -21,7 +21,7 @@ extension FileUtil{
         if !isReadableDir(parent) || empty(dirname){
             return 0
         }
-        let path = parent+"/"+dirname
+        let path = fullPath(dirname, parent)
         if iFm.fileExists(atPath: path){
             return -1
         }
@@ -39,7 +39,7 @@ extension FileUtil{
         if !isReadableDir(parent) || empty(filename){
             return 0
         }
-        let path = parent+"/"+filename
+        let path = fullPath(filename, parent)
 
         if iFm.fileExists(atPath: path){
             return -1
@@ -49,6 +49,44 @@ extension FileUtil{
     
     }
 
+    
+    //renameFile--  -2:notchanged , 1:success , 0:fail , -1:conflict
+    static func renameFile(_ file:String,toname:String)->Int{
+        if (file as NSString).lastPathComponent.equalIgnoreCase(toname){
+            return -2
+        }
+        let parent =  (file as NSString).deletingLastPathComponent
+        if !iFm.isWritableFile(atPath:parent) || !iFm.isWritableFile(atPath: file){
+            return 0
+        }
+        
+        let newfile = FileUtil.fullPath(toname, parent)
+        
+        if iFm.fileExists(atPath: newfile){
+            return -1
+        }
+        let newparent = (newfile as NSString).deletingLastPathComponent
+        var result = 1
+        if !iFm.fileExists(atPath: newparent){
+            do{
+                try iFm.createDirectory(atPath: newparent, withIntermediateDirectories: true, attributes: nil)
+            }catch{
+                result=0
+            }
+        }
+        if result == 1{
+            do{
+                try iFm.moveItem(atPath: file, toPath: newfile)
+                try!iFm.setAttributes([FileAttributeKey.modificationDate:Date()], ofItemAtPath: newfile)
+            }catch{
+                result = 0
+            }
+        }
+        return result
+        
+        
+    }
+    
     
     
     
@@ -79,11 +117,28 @@ extension FileUtil{
     static func isInvalid(_ path:String)->Bool{
         return !iFm.fileExists(atPath: path)
     }
-     
+    
+    static func isReadableFile(_ path:String)->Bool{
+        var b = ObjCBool.init(false)
+        if iFm.fileExists(atPath: path, isDirectory: &b) && !b.boolValue && iFm.isReadableFile(atPath: path){
+            return true
+        }
+        return false
+    }
+
+    
     static func isReadableDir(_ path:String)->Bool{
         
         var b = ObjCBool.init(false)
         if iFm.fileExists(atPath: path, isDirectory: &b) && b.boolValue && iFm.isReadableFile(atPath: path){
+            return true
+        }
+        return false
+    }
+    static func isWritableDir(_ path:String)->Bool{
+        
+        var b = ObjCBool.init(false)
+        if iFm.fileExists(atPath: path, isDirectory: &b) && b.boolValue && iFm.isWritableFile(atPath: path){
             return true
         }
         return false

@@ -183,8 +183,11 @@ class iPop{
     class func showError(_ msg:String){
         SVProgressHUD.showError(withStatus: msg)
     }
-    class func showProg(){
-        SVProgressHUD.show(with: SVProgressHUDMaskType.black)
+    class func showProg(_ msg:String?=nil){
+//        SVProgressHUD.show(with: SVProgressHUDMaskType.black)
+//        SVProgressHUD.setStatus(msg)
+
+        SVProgressHUD.showProgress(-1, status: msg, maskType: SVProgressHUDMaskType.black)
     }
     class func dismProg(){
         SVProgressHUD.dismiss()
