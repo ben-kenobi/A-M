@@ -35,7 +35,7 @@ class LoginVC: BaseVC {
             make.width.equalTo(view.snp.width).multipliedBy(0.15)
         }
         
-        if CommonService.isBioAuthEnable(name!){
+        if TouchIDMan.isBioAuthEnable(name!){
             TouchIDMan.bioAuth({ 
                 self.pwd.text=CommonService.getAccessKey()
                 self.onClick(self.btn)

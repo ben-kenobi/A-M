@@ -108,14 +108,7 @@ class CommonService {
         return 1
     }
     
-    class func isBioAuthEnable(_ name:String)->Bool{
-        return iPref()?.bool(forKey: "bioAuth_\(name)") ?? false
-    }
-    class func toggleBioAuthAceess(_ name:String)->Bool{
-        iPref()?.set(!isBioAuthEnable(name), forKey: "bioAuth_\(name)")
-        return true
-    }
-
+  
     
     
     class func modifyAccessibility(_ name:String, accessibility:Int)->Bool{

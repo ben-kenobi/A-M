@@ -67,7 +67,21 @@ class TouchIDMan {
     }
     
     
-    
+    class func isBioAuthEnable(_ name:String)->Bool{
+        if !TouchIDMan.isTouchIdAvailableOnDevice().0{
+            return false
+        }
+        return iPref()?.bool(forKey: "bioAuth_\(name)") ?? false
+    }
+    class func toggleBioAuthAceess(_ name:String)->(Bool,String){
+        let tup = TouchIDMan.isTouchIdAvailableOnDevice()
+        if !tup.0{
+            return tup
+        }
+        iPref()?.set(!isBioAuthEnable(name), forKey: "bioAuth_\(name)")
+        return (true,"")
+    }
+
     
     
     

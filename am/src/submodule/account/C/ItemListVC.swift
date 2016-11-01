@@ -98,7 +98,7 @@ extension ItemListVC{
             var datas=[iStrings["exportEntries"]!,iStrings["importEntries"]!]
             if CommonUtils.isLogin(){
                 datas += [iStrings["modifyAccessKey"]!]
-                datas.append(CommonService.isBioAuthEnable(platform) ?
+                datas.append(TouchIDMan.isBioAuthEnable(platform) ?
                     iStrings["disableBioAuth"]! : iStrings["enableBioAuth"]!)
             }
             datas.append(CommonService.isAccessKeyEnable(platform) ?
@@ -111,12 +111,13 @@ extension ItemListVC{
                 }else if str == iStrings["importEntries"]! {
                     self.selectFile()
                 }else if str == iStrings["disableBioAuth"]! || str == iStrings["enableBioAuth"]! {
-                    if CommonService.toggleBioAuthAceess(self.platform){
+                    let tup = TouchIDMan.toggleBioAuthAceess(self.platform)
+                    if tup.0{
                         iPop.toast("操作成功")
                     }else{
-                        iPop.toast("操作失败")
+                        iPop.toast("操作失败\n\(tup.1)")
                     }
-                } else if str == iStrings["enableAccessKey"]! || str ==  iStrings["disableAccessKey"]!{
+                }  else if str == iStrings["enableAccessKey"]! || str ==  iStrings["disableAccessKey"]!{
                     if CommonService.toggleAccessibility(self.platform){
                         iPop.toast("操作成功")
                     }else{

@@ -36,7 +36,7 @@ extension FilesystemVC{
         var datas=[iStrings["mark"]!,iStrings["settings"]!,iStrings["usage"]!]
         if CommonUtils.isLogin(){
             datas += [iStrings["modifyAccessKey"]!]
-            datas.append(CommonService.isBioAuthEnable(platform) ?
+            datas.append(TouchIDMan.isBioAuthEnable(platform) ?
                 iStrings["disableBioAuth"]! : iStrings["enableBioAuth"]!)
         }
         datas.append(CommonService.isAccessKeyEnable(platform) ?
@@ -51,10 +51,11 @@ extension FilesystemVC{
             }else if str == iStrings["usage"]! {
                 
             }else if str == iStrings["disableBioAuth"]! || str == iStrings["enableBioAuth"]! {
-                if CommonService.toggleBioAuthAceess(self.platform){
+                let tup = TouchIDMan.toggleBioAuthAceess(self.platform)
+                if tup.0{
                     iPop.toast("操作成功")
                 }else{
-                    iPop.toast("操作失败")
+                    iPop.toast("操作失败\n\(tup.1)")
                 }
             } else if str == iStrings["enableAccessKey"]! || str ==  iStrings["disableAccessKey"]!{
                 if CommonService.toggleAccessibility(self.platform){
