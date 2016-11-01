@@ -36,7 +36,7 @@
 	<key>pickerOptions</key>
 	<array>
 		<string>查看组别</string>
-		<string>站点名称</string>
+		<string>查看名称</string>
 		<string>查看邮箱</string>
 		<string>查看手机</string>
 		<string>通行证号</string>

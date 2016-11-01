@@ -30,7 +30,6 @@ class AccountService :IDBDao {
         return ISQLite.ins.query(table!, distinct: false, cols: ["*"], wher: "1=1 order by \(AccountColumns.SITENAME)", args: [])
         } else {
         return ISQLite.ins.query(table!, distinct: false, cols: ["*"], wher: "\(colName)=? order by \(AccountColumns.SITENAME)", args: [colValue])
-    
     }
     
     }

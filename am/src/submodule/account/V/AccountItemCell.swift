@@ -20,7 +20,7 @@ class AccountItemCell: CommonListItemCell {
         AccountColumns.PASSPORT,
         AccountColumns.PHONENUM
     ]
-    let localColNameMap:[String:String]=[AccountColumns.SITENAME:"站点名称",AccountColumns.MAILBOX:"邮箱",AccountColumns.USERNAME:"用户名",AccountColumns.PASSWORD:"密码",AccountColumns.GROUP:"组别",AccountColumns.PASSPORT:"通行证",AccountColumns.PHONENUM:"电话号码"]
+    let localColNameMap:[String:String]=[AccountColumns.SITENAME:"名称",AccountColumns.MAILBOX:"邮箱",AccountColumns.USERNAME:"用户名",AccountColumns.PASSWORD:"密码",AccountColumns.GROUP:"组别",AccountColumns.PASSPORT:"通行证",AccountColumns.PHONENUM:"电话"]
   
     var showContent:NSMutableAttributedString?{
         get{
