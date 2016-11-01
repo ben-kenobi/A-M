@@ -46,7 +46,7 @@ class ItemListVC: FileChooserVC {
         contentTV.backgroundColor=UIColor(patternImage: iimg("common_bg")!)
         contentTV.separatorStyle = .none
         contentTV.rowHeight = UITableViewAutomaticDimension
-        contentTV.estimatedRowHeight = 80
+        contentTV.estimatedRowHeight = 120
         contentTV.showsVerticalScrollIndicator=true
         contentTV.bounces=false
         return contentTV
@@ -199,7 +199,9 @@ extension ItemListVC{
         vc.selCB={
             (file) in
             if FileUtil.isReadableFile(file){
-                print(file)
+                ExportImportTask.execute(file, platform: self.platform,afterExe: {
+                    self.updateData()
+                })
             }
         }
         navigationController?.show(vc, sender: nil)
@@ -210,7 +212,7 @@ extension ItemListVC{
         vc.selCB={
             (path) in
             if FileUtil.isWritableDir(path){
-                print(path)
+                ExportImportTask.execute(path, platform: self.platform)
             }
         }
         navigationController?.show(vc, sender: nil)
@@ -277,7 +279,6 @@ extension ItemListVC:UITableViewDelegate,UITableViewDataSource,UIAlertViewDelega
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if AccountService.ins.delete("\(datas![(indexPath as NSIndexPath).row][iConst.ID]!)"){
             datas!.remove(at: (indexPath as NSIndexPath).row)
-            
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
     }

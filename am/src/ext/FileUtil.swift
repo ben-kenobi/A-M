@@ -172,5 +172,49 @@ class FileUtil{
     class func newVideoFile() ->String{
         return iConst.MP4DATESDF.string(from: Date())
     }
+    
+    
+    
+    // getBackupDir
+    static func  getBackupDir() -> String{
+        let backupDir = fullPath(iConst.BACKUPDIR_SUF,docPath())
+        _=mkDir(docPath(), iConst.BACKUPDIR_SUF)
+        return backupDir
+    }
+    
+    // get_backupFile
+    static func  getBackupFile(_ platform:String)->String {
+        let backup = fullPath(platform+iConst.BACKUPFILE_SUF+Date().timeFM5(), getBackupDir())
+        return backup;
+    }
+    
+    // get_backupFile
+    static func  getBackupFile(_ parent:String,_ platform:String)->String {
+        let backup = fullPath(platform+iConst.BACKUPFILE_SUF+"_"+Date().timeFM5(),parent)
+        return backup;
+    }
+    
+    static func getNonexistBackupFile(_ parent:String, _ platform:String)->String{
+        var idx:Int = 0
+        let dest = getBackupFile(parent,platform)
+        var file = dest
+        while iFm.fileExists(atPath: file){
+            file = dest+"(dup_\(idx))"
+            idx += 1
+        }
+        return file
+    }
+    
+    // getUnexistFile
+    static func getUnexistFile(_ dest:String) ->String{
+        var file = dest
+        var idx:Int = 0
+        while iFm.fileExists(atPath: file){
+            file = dest+"(dup_\(idx))"
+            idx += 1
+        }
+        return file
+    }
+
 
 }

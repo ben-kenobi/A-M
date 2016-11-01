@@ -40,7 +40,12 @@ extension Date{
         fm.locale=Locale(identifier:"en_US")
         return fm
     }()
+    @nonobjc static var timeFm5:DateFormatter = {
+        let fm = Date.dfm("yyyyMMddHHmmss")
+        return fm
+    }()
     
+
 
     
     
@@ -63,6 +68,10 @@ extension Date{
     func timeFM4()->String{
         return Date.timeFm4.string(from:self)
     }
+    func timeFM5()->String{
+        return Date.timeFm5.string(from:self)
+    }
+
     
     
     

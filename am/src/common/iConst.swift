@@ -71,8 +71,8 @@ class iConst{
     static let CONTACTS="contacts";
     static let FILESYSTEM="filesystem";
     static let MATCH_ALL="*";
-    static let BACKUP="backup";
-    static let ACCOUNT_BACKUP="_backup";
+    static let BACKUPDIR_SUF="backup";
+    static let BACKUPFILE_SUF="_backup";
     
     static let FILE_ALREADY_EXISTS="文件已存在";
     static let MKDIR_SUCCESS="创建成功";

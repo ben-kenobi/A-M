@@ -19,12 +19,13 @@ class AccountItemCell: CommonListItemCell {
         AccountColumns.GROUP,
         AccountColumns.PASSPORT,
         AccountColumns.PHONENUM
-]
+    ]
+    let localColNameMap:[String:String]=[AccountColumns.SITENAME:"站点名称",AccountColumns.MAILBOX:"邮箱",AccountColumns.USERNAME:"用户名",AccountColumns.PASSWORD:"密码",AccountColumns.GROUP:"组别",AccountColumns.PASSPORT:"通行证",AccountColumns.PHONENUM:"电话号码"]
   
     var showContent:NSMutableAttributedString?{
         get{
             if let mod = mod{
-                let show = NSMutableAttributedString(string:showCols[0] + ": ")
+                let show = NSMutableAttributedString(string:localColNameMap[showCols[0]]! + ": ")
                  show.addAttributes(titleAtt, range: NSMakeRange(0, show.length))
                 var sub = NSAttributedString(string: "\(mod[showCols[0]]!)\n",attributes:siteAtt)
                 
@@ -33,7 +34,7 @@ class AccountItemCell: CommonListItemCell {
                     if i != 0{
                         let val = "\(mod[colname]!)"
                         if !isBlank(val){
-                             sub = NSAttributedString(string: colname+": ",attributes:titleAtt)
+                             sub = NSAttributedString(string: localColNameMap[colname]! + ": ",attributes:titleAtt)
                             show.append(sub)
 
                             sub = NSAttributedString(string: "\(mod[colname]!)\n",attributes:otherAtt)

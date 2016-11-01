@@ -26,8 +26,6 @@ class CommonService {
         if list.count>0{
             accessKey = (list[0][MetaDataColumns.ACCESSKEY] as? String) ?? ""
         }
-        
-        
         return accessKey;
     }
     
@@ -201,8 +199,9 @@ class CommonService {
         if(iConst.ACCOUNT == platform){
             return AccountService.ins.queryByColumn("", colValue: iConst.MATCH_ALL)
         } else if(iConst.CONTACTS==platform){
-            return  ContactsService.queryByColumn("",colValue: iConst.MATCH_ALL)
+            return  ContactsService.ins.queryByColumn("",colValue: iConst.MATCH_ALL)
         }
+        return [[String:Any]]()
     }
     //
     //    class func queryByPlatformNColumn(String platform,String colName,String colValue)->Cursor{
@@ -220,8 +219,8 @@ class CommonService {
             return AccountService.ins.batchInsert(datas)
         } else if(iConst.CONTACTS==platform){
             return ContactsService.ins.batchInsert(datas)
-
         }
+        return (0,0)
     }
     //
     //
