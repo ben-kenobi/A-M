@@ -12,6 +12,7 @@
 		181430931DC7A2BF0038DC88 /* ExportImportTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181430921DC7A2BF0038DC88 /* ExportImportTask.swift */; };
 		181A15C41DC33289003D4B50 /* ListDropPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181A15C31DC33289003D4B50 /* ListDropPop.swift */; };
 		18456F981DC83A6B0067B77F /* ContactsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18456F971DC83A6B0067B77F /* ContactsService.swift */; };
+		1846D4841DC8974C0015A198 /* TouchIDMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1846D4831DC8974C0015A198 /* TouchIDMan.swift */; };
 		18473F231CE065EB0064E819 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18473F221CE065EB0064E819 /* Assets.xcassets */; };
 		18473F261CE065EB0064E819 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18473F241CE065EB0064E819 /* LaunchScreen.storyboard */; };
 		18473F311CE065EB0064E819 /* amTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18473F301CE065EB0064E819 /* amTests.swift */; };
@@ -163,6 +164,7 @@
 		181430921DC7A2BF0038DC88 /* ExportImportTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportImportTask.swift; sourceTree = "<group>"; };
 		181A15C31DC33289003D4B50 /* ListDropPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDropPop.swift; sourceTree = "<group>"; };
 		18456F971DC83A6B0067B77F /* ContactsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsService.swift; sourceTree = "<group>"; };
+		1846D4831DC8974C0015A198 /* TouchIDMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIDMan.swift; sourceTree = "<group>"; };
 		18473F181CE065EB0064E819 /* am.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = am.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18473F221CE065EB0064E819 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18473F251CE065EB0064E819 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -738,6 +740,7 @@
 			children = (
 				18473FEF1CE082750064E819 /* NetUtil.swift */,
 				189AAEDA1CEDBD6500234E17 /* StaticMod.swift */,
+				1846D4831DC8974C0015A198 /* TouchIDMan.swift */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -1367,6 +1370,7 @@
 				184740521CE082750064E819 /* MainNavVC.swift in Sources */,
 				184F74491DB5D49C005B93A8 /* img+ext.swift in Sources */,
 				184F74441DB5D49C005B93A8 /* YFWebVC.swift in Sources */,
+				1846D4841DC8974C0015A198 /* TouchIDMan.swift in Sources */,
 				184F74461DB5D49C005B93A8 /* Date+Ext.swift in Sources */,
 				1895D9111CF33A8D00D1F25E /* ScrolLab.swift in Sources */,
 				1847402A1CE082750064E819 /* FMDatabaseVariadic.swift in Sources */,

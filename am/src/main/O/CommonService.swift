@@ -90,20 +90,32 @@ class CommonService {
      */
     
     class func isAccessKeyEnable(_ name:String)->Bool {
-        
+        return getAccessibility(name) != 0
+    }
+    class func getAccessibility(_ name:String)->Int?{
         if (isBlank(name)){
-            return true;
+            return 1
         }
         let list = ISQLite.ins.rawQueryAry("select  " + AccessColumns.ACCESSIBILITY
             + "  from  " + ISQLite.TABLE_ACCESS + "  where "
             + AccessColumns.NAME + " =?;",args: [ name ])
         if list.count > 0 {
-            if let i = list[0][0] as? Int , i==0{
-                return false
+            return list[0][0] as? Int
+            if let i = list[0][0] as? Int{
+                return i
             }
         }
-        return true;
+        return 1
     }
+    
+    class func isBioAuthEnable(_ name:String)->Bool{
+        return iPref()?.bool(forKey: "bioAuth_\(name)") ?? false
+    }
+    class func toggleBioAuthAceess(_ name:String)->Bool{
+        iPref()?.set(!isBioAuthEnable(name), forKey: "bioAuth_\(name)")
+        return true
+    }
+
     
     
     class func modifyAccessibility(_ name:String, accessibility:Int)->Bool{

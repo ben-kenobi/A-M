@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LocalAuthentication
 
 class LoginVC: BaseVC {
     let bgmap = [iConst.ACCOUNT:"login0",iConst.FILESYSTEM:"login1",iConst.CONTACTS:"login2"]
@@ -27,13 +28,22 @@ class LoginVC: BaseVC {
             make.height.equalTo(44)
             make.width.equalTo(view.snp.width).multipliedBy(0.65)
         }
-        pwd.becomeFirstResponder()
         view.addSubview(btn)
         btn.snp.makeConstraints { (make) in
             make.top.height.equalTo(pwd)
             make.left.equalTo(pwd.snp.right)
             make.width.equalTo(view.snp.width).multipliedBy(0.15)
         }
+        
+        if CommonService.isBioAuthEnable(name!){
+            TouchIDMan.bioAuth({ 
+                self.pwd.text=CommonService.getAccessKey()
+                self.onClick(self.btn)
+            })
+        }else{
+            pwd.becomeFirstResponder()
+        }
+        
     }
     
     
@@ -82,5 +92,7 @@ extension LoginVC:UITextFieldDelegate{
         onClick(btn)
         return true
     }
+    
+   
     
 }

@@ -196,6 +196,12 @@ class iPop{
 //        iApp.windows[iApp.windows.count-1].makeToast(msg)
         iApp.windows[iApp.windows.count-1].makeToast(msg, duration: 1.2, position: nil, style:CSToastManager.sharedStyle())
     }
+    class func toastOnMain(_ msg:String){
+        DispatchQueue.main.async {
+               iApp.windows[iApp.windows.count-1].makeToast(msg, duration: 1.2, position: nil, style:CSToastManager.sharedStyle())
+        }
+    }
+
     
   
 }

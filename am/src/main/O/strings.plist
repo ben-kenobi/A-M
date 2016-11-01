@@ -138,6 +138,10 @@
 	<string>启用访问验证</string>
 	<key>disableAccessKey</key>
 	<string>取消访问验证</string>
+	<key>enableBioAuth</key>
+	<string>启用指纹解锁</string>
+	<key>disableBioAuth</key>
+	<string>关闭指纹解锁</string>
 	<key>paste</key>
 	<string>粘贴</string>
 	<key>remove</key>

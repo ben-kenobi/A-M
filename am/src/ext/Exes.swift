@@ -32,7 +32,7 @@ let iFm = FileManager.default
 let iScale=UIScreen.main.scale
 let iNotiCenter = NotificationCenter.default
 
-let iVersion = Float(UIDevice.current.systemVersion)
+let iVersion = UIDevice.current.systemVersion
 
 let iStBH:CGFloat = 20
 let iNavH:CGFloat = 44
@@ -902,6 +902,9 @@ extension String{
     }
     func upPhonetic()->String{
         return self.phonetic().uppercased()
+    }
+    func numericCompare(_ num:String)->Int{
+        return (self as NSString).compare(num, options: NSString.CompareOptions.numeric).rawValue
     }
 }
 
