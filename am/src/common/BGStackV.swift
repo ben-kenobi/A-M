@@ -9,6 +9,7 @@
 
 import UIKit
 
+@available(iOS 9.0, *)
 class BGStackV: UIStackView {
 
     lazy var bg:UIView={

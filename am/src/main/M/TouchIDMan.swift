@@ -30,15 +30,23 @@ class TouchIDMan {
                             return
                         }
                         let err = err as! LAError
-                        if err.code == LAError.authenticationFailed{
-                            self.bioAuth(sucCB)
-                        }else if err.code == LAError.touchIDLockout{
-                            self.ownerAuth(sucCB)
+                        if #available(iOS 9.0, *) {
+                            if err.code == LAError.authenticationFailed{
+                                self.bioAuth(sucCB)
+                            }else if err.code == LAError.touchIDLockout{
+                                self.ownerAuth(sucCB)
+                            }
+                        } else {
+                            // Fallback on earlier versions
                         }
                     })
                 }else{
-                    if err!.code == LAError.Code.touchIDLockout.rawValue{
-                        self.ownerAuth(sucCB)
+                    if #available(iOS 9.0, *) {
+                        if err!.code == LAError.Code.touchIDLockout.rawValue{
+                            self.ownerAuth(sucCB)
+                        }
+                    } else {
+                        // Fallback on earlier versions
                     }
                 }
             }else{
@@ -51,16 +59,20 @@ class TouchIDMan {
         DispatchQueue.main.async {
             let con = LAContext()
             var err:NSError? = nil
-            if con.canEvaluatePolicy(LAPolicy.deviceOwnerAuthentication, error: &err){
-                con.evaluatePolicy(LAPolicy.deviceOwnerAuthentication, localizedReason: "输入密码来解锁指纹验证", reply: { (suc, err) in
-                    if let err = err{
-                        iPop.toastOnMain(err.localizedDescription)
-                    }else if suc{
-                        self.bioAuth(sucCB)
-                    }
-                })
-            }else{
-                iPop.toast(err!.localizedDescription)
+            if #available(iOS 9.0, *) {
+                if con.canEvaluatePolicy(LAPolicy.deviceOwnerAuthentication, error: &err){
+                    con.evaluatePolicy(LAPolicy.deviceOwnerAuthentication, localizedReason: "输入密码来解锁指纹验证", reply: { (suc, err) in
+                        if let err = err{
+                            iPop.toastOnMain(err.localizedDescription)
+                        }else if suc{
+                            self.bioAuth(sucCB)
+                        }
+                    })
+                }else{
+                    iPop.toast(err!.localizedDescription)
+                }
+            } else {
+                // Fallback on earlier versions
             }
             
         }
@@ -87,29 +99,51 @@ class TouchIDMan {
     
     static func code2msg(_ code:Int)->String{
         
-        switch code {
-        case LAError.Code.authenticationFailed.rawValue:
-            return "验证失败"
-        case LAError.Code.userCancel.rawValue:
-            return "取消验证"
-        case LAError.Code.userFallback.rawValue:
-            return "使用密码方式验证"
-        case LAError.Code.systemCancel.rawValue:
-            return "验证被中断"
-        case LAError.Code.passcodeNotSet.rawValue:
-            return "TouchID未设置"
-        case LAError.Code.touchIDNotAvailable.rawValue:
-            return "不支持TouchID"
-        case LAError.Code.touchIDNotEnrolled.rawValue:
-            return "不存在有效的指纹"
-        case LAError.Code.touchIDLockout.rawValue:
-            return "验证失败5次,指纹验证被锁定"
-        case LAError.Code.appCancel.rawValue:
-            return "取消验证"
-        case LAError.Code.invalidContext.rawValue:
-            return "无效的上下文"
-        default:return "验证失败"
-            
+        if #available(iOS 9.0, *) {
+            switch code {
+            case LAError.Code.authenticationFailed.rawValue:
+                return "验证失败"
+            case LAError.Code.userCancel.rawValue:
+                return "取消验证"
+            case LAError.Code.userFallback.rawValue:
+                return "使用密码方式验证"
+            case LAError.Code.systemCancel.rawValue:
+                return "验证被中断"
+            case LAError.Code.passcodeNotSet.rawValue:
+                return "TouchID未设置"
+            case LAError.Code.touchIDNotAvailable.rawValue:
+                return "不支持TouchID"
+            case LAError.Code.touchIDNotEnrolled.rawValue:
+                return "不存在有效的指纹"
+                
+            case LAError.Code.touchIDLockout.rawValue:
+                return "验证失败5次,指纹验证被锁定"
+            case LAError.Code.appCancel.rawValue:
+                return "取消验证"
+            case LAError.Code.invalidContext.rawValue:
+                return "无效的上下文"
+            default:return "验证失败"
+                
+            }
+        } else {
+            switch code {
+            case LAError.Code.authenticationFailed.rawValue:
+                return "验证失败"
+            case LAError.Code.userCancel.rawValue:
+                return "取消验证"
+            case LAError.Code.userFallback.rawValue:
+                return "使用密码方式验证"
+            case LAError.Code.systemCancel.rawValue:
+                return "验证被中断"
+            case LAError.Code.passcodeNotSet.rawValue:
+                return "TouchID未设置"
+            case LAError.Code.touchIDNotAvailable.rawValue:
+                return "不支持TouchID"
+            case LAError.Code.touchIDNotEnrolled.rawValue:
+                return "不存在有效的指纹"
+            default:return "验证失败"
+            // Fallback on earlier versions
+        }
         }
     }
     static func touchIdUnavailableCode(_ code:Int)->Bool{
