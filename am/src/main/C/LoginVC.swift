@@ -32,13 +32,18 @@ class LoginVC: BaseVC {
         btn.snp.makeConstraints { (make) in
             make.top.height.equalTo(pwd)
             make.left.equalTo(pwd.snp.right)
-            make.width.equalTo(view.snp.width).multipliedBy(0.15)
+            make.width.equalTo(52)
         }
         
         if TouchIDMan.isBioAuthEnable(name!){
             TouchIDMan.bioAuth({ 
                 self.pwd.text=CommonService.getAccessKey()
                 self.onClick(self.btn)
+            })
+            
+            btn.isEnabled=false
+            idelay(2, asy: false, cb: { 
+                self.btn.isEnabled=true
             })
         }else{
             pwd.becomeFirstResponder()
@@ -61,7 +66,9 @@ class LoginVC: BaseVC {
     lazy var btn:UIButton = {
         
         let btn = UIButton(frame: nil, img: iimg("ic_launcher"),bgimg: iimg(iColor(255, 255, 255, 0.4)), hlbgimg: iimg(iColor(0,0,0,0.2)), tar: self, action:#selector(self.onClick(_:)))
-        btn.addCurve(tl: (false,0), tr: (true,8), br: (true,8), bl: (false,0), bounds: CGRect(x:0,y:0,width:self.view.w*0.15,height:44))
+        btn.addCurve(tl: (false,0), tr: (true,8), br: (true,8), bl: (false,0), bounds: CGRect(x:0,y:0,width:52,height:44))
+        btn.imageView?.contentMode = .scaleAspectFit
+        btn.adjustsImageWhenDisabled=false
         return btn
     }()
     
@@ -73,7 +80,6 @@ class LoginVC: BaseVC {
                 dismiss(animated: true, completion: nil)
                 return;
             }
-            
             iNotiCenter.post(name: Notification.Name(rawValue: updateHomeVCNoti), object: name)
             CommonUtils.setAccessKey(pwdtext)
         }
