@@ -1,40 +1,30 @@
 //
-//  ListPop.swift
+//  AutoDimListPop.swift
 //  am
 //
-//  Created by apple on 16/5/18.
+//  Created by apple on 16/11/3.
 //  Copyright © 2016年 apple. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ListPop: BaseDialog {
+
+class AutoDimListPop: BaseDialog {
     var headerH:CGFloat = 46{
         didSet{
             updateUI()
         }
     }
-    var defH:CGFloat = 44{
+  
+    var datas:[Any]?{
         didSet{
             updateUI()
         }
     }
-    
-    let celliden = "listPopcelliden"
-    var datas:[String]?{
-        didSet{
-            updateUI()
-        }
-    }
-    
-    var key:String?{
-        didSet{
-            datas=iStrary[key ?? ""]
-        }
-    }
+   
     var title:String?
-    var onItemSelCB:((_ str:String,_ pos:Int)->Void)?
-    
+    var onItemSelCB:((_ item:Any,_ pos:Int)->Void)?
+    var getCell:((_ tv:UITableView,_ item:Any,_ idx:Int)->UITableViewCell)?
     var selIdx:Int = -1{
         didSet{
             self.tv.reloadData()
@@ -43,7 +33,7 @@ class ListPop: BaseDialog {
     
     lazy var header:UIButton = {
         let header = ComUI.comBtnTitle("   "+self.title!)
-          header.addTarget(self, action: #selector(self.onClick(_:)), for: UIControlEvents.touchUpInside)
+        header.addTarget(self, action: #selector(self.onClick(_:)), for: UIControlEvents.touchUpInside)
         return header
     }()
     
@@ -52,12 +42,13 @@ class ListPop: BaseDialog {
         let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableViewStyle.plain)
         tv.delegate=self
         tv.dataSource=self
-        tv.register(ListPopCell.self, forCellReuseIdentifier: self.celliden)
-        
-        tv.separatorStyle = .none
-        tv.showsVerticalScrollIndicator=true
+        tv.estimatedRowHeight=60
+        tv.separatorStyle = .singleLine
+        tv.separatorInset = UIEdgeInsetsMake(0, 22, 0, 22)
+        tv.showsVerticalScrollIndicator=false
         tv.bounces=false
-        
+        tv.rowHeight = UITableViewAutomaticDimension
+
         return tv    }()
     
     
@@ -69,7 +60,7 @@ class ListPop: BaseDialog {
             make.edges.equalTo(0)
             make.height.width.equalTo(0)
         }
-        
+        self.backgroundColor=iColor(0x88000000)
     }
     
     
@@ -77,7 +68,7 @@ class ListPop: BaseDialog {
         fatalError("init(coder:) has not been implemented")
     }
 }
-extension ListPop{
+extension AutoDimListPop{
     
     func onClick(_ sender:UIButton){
         if sender == self.header{
@@ -89,38 +80,33 @@ extension ListPop{
         tv.reloadData()
     }
     
-    class func listPopWith(_ datas:[String]?=nil,title:String?=nil,key:String?=nil,w:CGFloat?=nil,cb:@escaping (_ str:String,_ pos:Int)->())->Self{
+    class func autoDimListPopWith(_ datas:[Any]?=nil,title:String?=nil,w:CGFloat?=nil,cb:((_ item:Any,_ pos:Int)->())?,getCell:((_ tv:UITableView,_ item:Any,_ idx:Int)->UITableViewCell)?)->Self{
         let pop = dialogWith()
         pop.title = title
         if let datas = datas{
             pop.datas=datas
         }
-        if let key = key {
-            pop.key = key
-        }
+    
         if let w = w{
             pop.tv.wid = w
         }else{
-            pop.tv.wid=170
+            pop.tv.wid=300
         }
         pop.onItemSelCB = cb
+        pop.getCell = getCell
         return pop
     }
     
 }
 
-extension ListPop:UITableViewDelegate,UITableViewDataSource{
+extension AutoDimListPop:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return datas?.count ?? 0
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.celliden,for: indexPath) as! ListPopCell
-//        cell.textLabel?.text=datas![indexPath.row]
-        cell.scrolLab.text=datas![(indexPath as NSIndexPath).row]
-        cell.scrolLab.textColor = (indexPath.row == selIdx) ? iColor(0xffee7766) : iColor(0xff333333)
-        return cell
+        return self.getCell!(tableView,datas![indexPath.row],indexPath.row)
     }
     
     
@@ -132,8 +118,6 @@ extension ListPop:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         onItemSelCB?(datas![(indexPath as NSIndexPath).row],(indexPath as NSIndexPath).row)
-        dismiss()
-        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -149,24 +133,9 @@ extension ListPop:UITableViewDelegate,UITableViewDataSource{
         }
         return 0
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return defH
-    }
+    
     
 }
 
-class ListPopCell:UITableViewCell{
-    lazy var scrolLab:ScrolLab = {
-        let scl = ScrolLab()
-        self.contentView.addSubview(scl)
-        scl.snp.makeConstraints( { (make) in
-            make.left.equalTo(10)
-            make.right.equalTo(-10)
-            make.top.bottom.equalTo(0)
-        })
-        return scl
-    
-    }()
-    
-    
-}
+
+

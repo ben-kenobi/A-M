@@ -9,6 +9,29 @@
 import Foundation
 class FileUtil{
     
+    class func systemFreeSize()->Int64{
+        return (try! iFm.attributesOfFileSystem(forPath: NSHomeDirectory())[FileAttributeKey.systemFreeSize] as! NSNumber).int64Value
+    }
+    class func systemUsageSize()->Int64{
+        return systemSize()-systemFreeSize()
+    }
+    class func systemSize()->Int64{
+        return (try! iFm.attributesOfFileSystem(forPath: NSHomeDirectory())[FileAttributeKey.systemSize] as! NSNumber).int64Value
+    }
+    class func sysUsageDescription()->(String,Float){
+        let usedsize = systemUsageSize()
+        let totalsize = systemSize()
+        let used = formatedFileSize2(usedsize)
+        let total = formatedFileSize2(totalsize)
+        let percent = Float(usedsize)/Float(totalsize)
+        let percentstr = String(format: "%.2f %%", percent*100)
+        return ("已使用： \(percentstr)\n\(used) / \(total)",percent)
+        
+    }
+    
+    class func copy2ClipBoard(_ str:String){
+        UIPasteboard.general.string=str
+    }
     
     class func fileSizeAtPath(path:String)->(Int64,Int){
         var b:ObjCBool=false

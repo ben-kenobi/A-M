@@ -33,7 +33,7 @@ extension UIButton{
           self.setTitleColor(iColor(50, 50, 50), for: .selected)
     }
     
-    convenience init(frame:CGRect?=nil ,img:UIImage? = nil,hlimg:UIImage? = nil,title:String? = nil,font:UIFont = dfTFont,titleColor:UIColor=dfTColor,titleHlColor:UIColor=dfTHLColor,bgimg:UIImage?=nil,hlbgimg:UIImage?=nil,bgcolor:UIColor?=nil,corner:CGFloat=0,bordercolor:UIColor?=nil,borderW:CGFloat=0, tar:AnyObject? = nil,action:Selector,tag:Int=0) {
+    convenience init(frame:CGRect?=nil ,img:UIImage? = nil,hlimg:UIImage? = nil,title:String? = nil,font:UIFont = dfTFont,titleColor:UIColor=dfTColor,titleHlColor:UIColor=dfTHLColor,bgimg:UIImage?=nil,hlbgimg:UIImage?=nil,bgcolor:UIColor?=nil,corner:CGFloat=0,bordercolor:UIColor?=nil,borderW:CGFloat=0, tar:AnyObject? = nil,action:Selector?,tag:Int=0) {
         self.init()
         let b=self
         if let _=img {
@@ -61,7 +61,7 @@ extension UIButton{
         b.tag=tag
         
         if let _=tar{
-            b.addTarget(tar, action: action, for: UIControlEvents.touchUpInside)
+            b.addTarget(tar, action: action!, for: UIControlEvents.touchUpInside)
         }
         b.setTitleColor(titleColor, for: UIControlState.normal)
         b.setTitleColor(titleHlColor, for: UIControlState.highlighted)

@@ -34,6 +34,14 @@ class ListDropPop: BaseDialog {
         }
     }
     
+    var showDrop:Bool=true{
+        didSet{
+            let w:CGFloat = showDrop ? 130 : 0
+            self.titleView.viewWithTag(12)!.snp.updateConstraints { (make) in
+                make.width.equalTo(w)
+            }
+        }
+    }
 
     var selIdx:Int = -1
     

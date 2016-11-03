@@ -92,7 +92,7 @@ class CommonService {
     class func isAccessKeyEnable(_ name:String)->Bool {
         return getAccessibility(name) != 0
     }
-    class func getAccessibility(_ name:String)->Int?{
+    class func getAccessibility(_ name:String)->Int{
         if (isBlank(name)){
             return 1
         }
@@ -100,7 +100,7 @@ class CommonService {
             + "  from  " + ISQLite.TABLE_ACCESS + "  where "
             + AccessColumns.NAME + " =?;",args: [ name ])
         if list.count > 0 {
-            return list[0][0] as? Int
+//            return list[0][0] as? Int
             if let i = list[0][0] as? Int{
                 return i
             }

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SnapKit
 enum FileSystemMode {
     case normal
     case selFile
@@ -159,6 +159,7 @@ class FileSystemCV: UICollectionView {
         FileUtil.fileDetailDescription(path) { (str) in
             listDropPop.headerTitle=str
         }
+        listDropPop.showDrop = FileUtil.isFile(path)
         _=listDropPop.show()
     }
     

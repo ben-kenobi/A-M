@@ -59,6 +59,30 @@ class ComUI{
         return b
         
     }
+    
+    static func comBtnTitle(_ title:String,labtag:Int=0)->UIButton{
+        let view = UIButton()
+        view.setBackgroundImage(iimg(iColor(0xffffffff)), for: UIControlState())
+        view.setBackgroundImage(iimg(iConst.khakiBg), for: UIControlState.highlighted)
+        let lab = comTitleLab(title)
+        lab.backgroundColor=UIColor.clear
+        view.addSubview(lab)
+        lab.tag=labtag
+        let divider = UIView()
+        divider.backgroundColor=iColor(0xff33ff33)
+        view.addSubview(divider)
+        divider.snp.makeConstraints { (make) in
+            make.bottom.left.right.equalTo(0)
+            make.height.equalTo(2)
+        }
+        lab.snp.makeConstraints { (make) in
+            make.top.left.right.equalTo(0)
+            make.bottom.equalTo(divider.snp.top)
+        }
+        return view
+    }
+
+    
     static func comTitleView(_ title:String,labtag:Int=0)->UIView{
         let view = UIView()
         let lab = comTitleLab(title)

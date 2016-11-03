@@ -33,6 +33,7 @@ let iScale=UIScreen.main.scale
 let iNotiCenter = NotificationCenter.default
 
 let iVersion = UIDevice.current.systemVersion
+let UUID = UIDevice.current.identifierForVendor?.uuidString
 
 let iStBH:CGFloat = 20
 let iNavH:CGFloat = 44

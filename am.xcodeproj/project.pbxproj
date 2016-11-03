@@ -136,6 +136,9 @@
 		18A6FC7A1CF7EAAF00920F10 /* CommonAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6FC791CF7EAAF00920F10 /* CommonAlertView.swift */; };
 		18A6FC7E1CF9C4DC00920F10 /* CommonEditDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6FC7D1CF9C4DC00920F10 /* CommonEditDialog.swift */; };
 		18A6FC801CF9C4E600920F10 /* CommonDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6FC7F1CF9C4E600920F10 /* CommonDialog.swift */; };
+		18BE889E1DCAD61A000C4AC4 /* AutoDimListPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE889D1DCAD61A000C4AC4 /* AutoDimListPop.swift */; };
+		18BE88A01DCAE8C5000C4AC4 /* InEditableTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE889F1DCAE8C5000C4AC4 /* InEditableTF.swift */; };
+		18BE88A21DCB2CE8000C4AC4 /* CBBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE88A11DCB2CE8000C4AC4 /* CBBtn.swift */; };
 		36948D8F6C562745B60D723B /* Pods_am.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915D84150076C2B8C944F61B /* Pods_am.framework */; };
 		7B945D9816B5183FA678F344 /* Pods_amUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1A4843420B0727EE78F8581 /* Pods_amUITests.framework */; };
 		8DA46D564B90C3F7CB4D47C6 /* Pods_amTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89A2A0FBFE90320F77531F47 /* Pods_amTests.framework */; };
@@ -342,6 +345,9 @@
 		18A6FC791CF7EAAF00920F10 /* CommonAlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAlertView.swift; sourceTree = "<group>"; };
 		18A6FC7D1CF9C4DC00920F10 /* CommonEditDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonEditDialog.swift; sourceTree = "<group>"; };
 		18A6FC7F1CF9C4E600920F10 /* CommonDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDialog.swift; sourceTree = "<group>"; };
+		18BE889D1DCAD61A000C4AC4 /* AutoDimListPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoDimListPop.swift; sourceTree = "<group>"; };
+		18BE889F1DCAE8C5000C4AC4 /* InEditableTF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InEditableTF.swift; sourceTree = "<group>"; };
+		18BE88A11DCB2CE8000C4AC4 /* CBBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBBtn.swift; sourceTree = "<group>"; };
 		1B76A7579FE9F31FA66228CD /* Pods-amTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amTests/Pods-amTests.release.xcconfig"; sourceTree = "<group>"; };
 		26443E82C83B87E42BEAC2DA /* Pods-amUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amUITests/Pods-amUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		26B059EE63DDD61B25FADC00 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -863,6 +869,7 @@
 				18A6FC7D1CF9C4DC00920F10 /* CommonEditDialog.swift */,
 				18A6FC7F1CF9C4E600920F10 /* CommonDialog.swift */,
 				1876E9251CFBC8E900A4BEA9 /* GridPop.swift */,
+				18BE889D1DCAD61A000C4AC4 /* AutoDimListPop.swift */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -954,6 +961,8 @@
 				18114EFF1DC19E9A00B68723 /* IFileComparator.swift */,
 				18114F011DC19FCF00B68723 /* IFileFilter.swift */,
 				181A15C31DC33289003D4B50 /* ListDropPop.swift */,
+				18BE889F1DCAE8C5000C4AC4 /* InEditableTF.swift */,
+				18BE88A11DCB2CE8000C4AC4 /* CBBtn.swift */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -1285,6 +1294,7 @@
 				184740111CE082750064E819 /* AFHTTPRequestOperation.m in Sources */,
 				184740571CE082750064E819 /* NetUtil.swift in Sources */,
 				1895D9151CF4452800D1F25E /* AccountItemCell.swift in Sources */,
+				18BE88A01DCAE8C5000C4AC4 /* InEditableTF.swift in Sources */,
 				184F743C1DB5D49B005B93A8 /* CustTV.swift in Sources */,
 				1847404A1CE082750064E819 /* UIView+Toast.m in Sources */,
 				18A6FC7E1CF9C4DC00920F10 /* CommonEditDialog.swift in Sources */,
@@ -1336,10 +1346,12 @@
 				1847401C1CE082750064E819 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				1847404C1CE082750064E819 /* WMFooldView.m in Sources */,
 				184740771CE319310064E819 /* ISQLite.swift in Sources */,
+				18BE889E1DCAD61A000C4AC4 /* AutoDimListPop.swift in Sources */,
 				184F744A1DB5D49C005B93A8 /* Labels+Ext.swift in Sources */,
 				184740231CE082750064E819 /* UIWebView+AFNetworking.m in Sources */,
 				189AAEBF1CEAF82900234E17 /* FilesystemVC.swift in Sources */,
 				184740261CE082750064E819 /* FMDatabasePool.m in Sources */,
+				18BE88A21DCB2CE8000C4AC4 /* CBBtn.swift in Sources */,
 				184F744C1DB5D49C005B93A8 /* TableView+Ext.swift in Sources */,
 				184F74471DB5D49C005B93A8 /* Exes.swift in Sources */,
 				189AAED71CEDAEF600234E17 /* ItemDetailVC.swift in Sources */,
