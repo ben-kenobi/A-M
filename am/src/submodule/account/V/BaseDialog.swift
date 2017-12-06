@@ -127,7 +127,7 @@ class BaseDialog: UIView {
         }else if let basev = basev{
             view=basev
         }else{
-            view = iApp.windows[iApp.windows.count-1]
+            view = frontestWindow()
         }
         view!.addSubview(self)
         self.snp.makeConstraints { (make) in

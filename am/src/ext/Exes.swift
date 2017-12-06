@@ -62,6 +62,14 @@ func iPrint(_ items: Any...){
     //    #endif
 }
 
+func frontestWindow()->UIWindow{
+    if((iVersion as NSString).floatValue >= 11.0){
+        return iApp.windows[0];
+    }else{
+        return iApp.windows[iApp.windows.count-1];
+    }
+}
+
 func idelay(_ sec:TimeInterval,asy:Bool,cb:@escaping (()->())){
     let queue:DispatchQueue = asy ? DispatchQueue.global():DispatchQueue.main
     queue.asyncAfter(deadline: DispatchTime.now()+sec, execute: cb)

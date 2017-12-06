@@ -14,7 +14,7 @@ class FilesystemVC: PlatformVC {
     
     var selCB:((_ path:String)->Void)?
     
-    var rightBtns:[UIButton]=[UIButton]()
+    var rightBtns:[UIView]=[UIView]()
     lazy var rightBBIs:[UIBarButtonItem]={
         return self.initBBIs()
     }()
@@ -102,6 +102,8 @@ class FilesystemVC: PlatformVC {
         let views = navigationController?.navigationBar.subviews
         
         var idx = 0
+        
+        //before IOS 11
         for (_,v) in views!.enumerated(){
             if v.isKind(of: (NSClassFromString("UINavigationButton")!)){
                 idx += 1
@@ -114,6 +116,31 @@ class FilesystemVC: PlatformVC {
         rightBtns.sort { (left, right) -> Bool in
             return left.x>right.x
         }
+        
+        
+        //after IOS 11
+        //*********begin*************
+        func recblo(vs:[UIView]?)->(){
+            for (_,v) in vs!.enumerated(){
+                if v.isKind(of: (NSClassFromString("_UIButtonBarButton")!)){
+                    idx += 1
+                    if idx == 1{
+                        continue
+                    }
+                    rightBtns.append(v)
+                }else if(v.h==44){
+                    print("+++\(v.frame)")
+                    recblo(vs: v.subviews)
+                }
+            }
+        }
+        if rightBtns.count==0{
+            recblo(vs: views)
+        }
+        rightBtns.sort { (left, right) -> Bool in
+            return left.x>right.x
+        }
+        //**********end************
     }
     
     func onItemClicked(_ sender:UIBarButtonItem){
