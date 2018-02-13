@@ -10,7 +10,7 @@ import UIKit
 
 class ItemDetailTVCell: UITableViewCell {
     static let celliden = "celliden"
-    let iconw:CGFloat=50
+    let iconw:CGFloat=46
     let iconh:CGFloat=42
     
     var editable: UnsafeMutablePointer<Bool>?
@@ -27,6 +27,7 @@ class ItemDetailTVCell: UITableViewCell {
         return icon
         
     }()
+  
     lazy var title:UILabel=UILabel(frame: nil, color: iColor(0xff666666), font: iFont(16), align: NSTextAlignment.left, line: 1, bgColor: iColor(0x00000000))
     lazy var tf:ClearableTF=ComUI.comTF1("")
     
@@ -67,9 +68,16 @@ class ItemDetailTVCell: UITableViewCell {
 extension ItemDetailTVCell{
     func onClick(_ sender:UIButton){
         if(sender == icon){
-             _=ListPop.listPopWith(distincColStrs,title:mod!["title"] as? String, w:0.7,cb: { (str, pos) in
-                self.tf.text=str
-            }).show()
+            let b = editable?.pointee ?? false
+            if(b){
+                 _=ListPop.listPopWith(distincColStrs,title:mod!["title"] as? String, w:0.7,cb: { (str, pos) in
+                    self.tf.text=str
+                }).show()
+            }else{
+                let pb = UIPasteboard.general
+                pb.string=tf.text
+                iPop.toast("copy")
+            }
         }
         
     }
@@ -90,12 +98,11 @@ extension ItemDetailTVCell{
         let b = editable?.pointee ?? false
         tf.isEnabled = b
         
-        icon.snp.updateConstraints { (make) in
-            make.width.equalTo(b ? 50 : 0)
-            
-        }
-        
-        
+        icon.setImage((b ? iimg("ic_menu_search"):iimg("copy-icon")?.scale2w(26)), for: .normal)
+        icon.setBackgroundImage(b ? iimg("lightblue_noselect.9.9") : nil, for: .normal)
+        icon.layer.borderWidth = b ? 1 : 0
+
+        icon.isHidden=b ? false : empty(mod!["val"] as? String) ? true : false
     }
     
     
@@ -117,14 +124,14 @@ extension ItemDetailTVCell{
         
         title.snp.makeConstraints { (make) in
             make.left.top.equalTo(0)
-            make.width.equalTo(70)
+            make.width.equalTo(55)
             make.bottom.equalTo(-8)
         }
         icon.snp.makeConstraints { (make) in
             make.top.equalTo(0)
-            make.width.equalTo(0)
+            make.width.equalTo(iconw)
             make.bottom.equalTo(-8)
-            make.right.equalTo(-6)
+            make.right.equalTo(-0)
         }
         tf.snp.makeConstraints { (make) in
             make.left.equalTo(title.snp.right).offset(3)

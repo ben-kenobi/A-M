@@ -35,6 +35,7 @@ extension AccountVC{
     }
     override func updateData(){
         datas=AccountService.ins.queryByColumn(colName, colValue: colVal)
+        AccountSearchableService().reindexingAccounts(data: datas ?? [[String:Any]]());
         contentTV.reloadData()
     }
     

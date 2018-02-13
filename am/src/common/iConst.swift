@@ -105,7 +105,9 @@ class iConst{
     static let TextRed = iColor(193,40,117)
     static let TextGreen = iColor(63,130,139)
     
-    
+    static let ACCOUNT_USER_ACTIVITY_DOMAIN="com.yf.am.account"
+
+    static let SearchIndexingPrefKey="SearchIndexingPrefKey"
 
 
 }

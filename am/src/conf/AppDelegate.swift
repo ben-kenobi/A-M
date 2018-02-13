@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreSpotlight
 
 let updateRootVCNoti="updateRootVCNoti"
 let versionKey="CFBundleShortVersionString"
@@ -29,6 +29,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    ///  spotlight搜索结果被点击后的回调
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if #available(iOS 9.0, *) {
+            guard
+                let iden = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
+                    return false
+            }
+            
+            //TODO
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        return true
+    }
+
+    
+    
     
     func setRootVC(){
         
@@ -54,7 +73,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if newVersion(){
             win.rootViewController=iVCFromStr( dict["introVC"]!)
             saveVersion(curVersion())
-            
         }else if !UserInfo.isLogin(){
             win.rootViewController=iVCFromStr( dict["loginVC"]!)
         }else if !UserInfo.hasWelcomed(){

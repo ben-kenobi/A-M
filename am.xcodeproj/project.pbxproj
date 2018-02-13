@@ -141,6 +141,9 @@
 		18BE88A01DCAE8C5000C4AC4 /* InEditableTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE889F1DCAE8C5000C4AC4 /* InEditableTF.swift */; };
 		18BE88A21DCB2CE8000C4AC4 /* CBBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BE88A11DCB2CE8000C4AC4 /* CBBtn.swift */; };
 		901CE2D4BA2FFB57D4780FA9 /* Pods_amUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7209C231602C7FF0C2DA049 /* Pods_amUITests.framework */; };
+		B8E70CDF2032E0F900B709C9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B8E70CDE2032E0F800B709C9 /* Settings.bundle */; };
+		B8E70CE12032E15C00B709C9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E70CE02032E15C00B709C9 /* Settings.swift */; };
+		B8E70CE32032E50500B709C9 /* AccountSearchableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E70CE22032E50500B709C9 /* AccountSearchableService.swift */; };
 		E9C92F19E9D362CA5D898EB7 /* Pods_amTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13448B00360BE72DD3EB088 /* Pods_amTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -355,6 +358,9 @@
 		5954ACAB07E1FAAABB126C3D /* Pods_am.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_am.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		780DCB926937081645F24A92 /* Pods-amTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-amTests/Pods-amTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A05C49584E95D873D5DFBA06 /* Pods-am.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-am.release.xcconfig"; path = "Pods/Target Support Files/Pods-am/Pods-am.release.xcconfig"; sourceTree = "<group>"; };
+		B8E70CDE2032E0F800B709C9 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		B8E70CE02032E15C00B709C9 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		B8E70CE22032E50500B709C9 /* AccountSearchableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSearchableService.swift; sourceTree = "<group>"; };
 		D13448B00360BE72DD3EB088 /* Pods_amTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7209C231602C7FF0C2DA049 /* Pods_amUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_amUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE9E5A91D824EB6DB595C42 /* Pods-amTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-amTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-amTests/Pods-amTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -417,6 +423,7 @@
 		18473F1A1CE065EB0064E819 /* am */ = {
 			isa = PBXGroup;
 			children = (
+				B8E70CDE2032E0F800B709C9 /* Settings.bundle */,
 				184F74901DB9C887005B93A8 /* libsqlite3.dylib */,
 				18473F491CE082740064E819 /* src */,
 				18473F221CE065EB0064E819 /* Assets.xcassets */,
@@ -747,6 +754,7 @@
 				18473FEF1CE082750064E819 /* NetUtil.swift */,
 				189AAEDA1CEDBD6500234E17 /* StaticMod.swift */,
 				1846D4831DC8974C0015A198 /* TouchIDMan.swift */,
+				B8E70CE02032E15C00B709C9 /* Settings.swift */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -842,6 +850,7 @@
 		189AAEB11CEAF7B400234E17 /* M */ = {
 			isa = PBXGroup;
 			children = (
+				B8E70CE22032E50500B709C9 /* AccountSearchableService.swift */,
 			);
 			path = M;
 			sourceTree = "<group>";
@@ -1117,6 +1126,7 @@
 				184740081CE082750064E819 /* Localizable.strings in Resources */,
 				184740431CE082750064E819 /* LICENSE.txt in Resources */,
 				1847402B1CE082750064E819 /* MJRefresh.bundle in Resources */,
+				B8E70CDF2032E0F900B709C9 /* Settings.bundle in Resources */,
 				184740461CE082750064E819 /* SVProgressHUD.bundle in Resources */,
 				18473F261CE065EB0064E819 /* LaunchScreen.storyboard in Resources */,
 				184740071CE082750064E819 /* InfoPlist.strings in Resources */,
@@ -1304,6 +1314,7 @@
 				184740251CE082750064E819 /* FMDatabaseAdditions.m in Sources */,
 				184F744B1DB5D49C005B93A8 /* Operators.swift in Sources */,
 				1847405A1CE082750064E819 /* MenuCell.swift in Sources */,
+				B8E70CE12032E15C00B709C9 /* Settings.swift in Sources */,
 				1895D90F1CF2DAC200D1F25E /* AutoHeightTV.swift in Sources */,
 				1847402D1CE082750064E819 /* MJRefreshConst.m in Sources */,
 				184740051CE082750064E819 /* AppDelegate.swift in Sources */,
@@ -1340,6 +1351,7 @@
 				184F749F1DC05C97005B93A8 /* FileSystemCV+Event.swift in Sources */,
 				184740211CE082750064E819 /* UIProgressView+AFNetworking.m in Sources */,
 				184740191CE082750064E819 /* AFURLSessionManager.m in Sources */,
+				B8E70CE32032E50500B709C9 /* AccountSearchableService.swift in Sources */,
 				184F744E1DB5D49C005B93A8 /* Utils.swift in Sources */,
 				184740271CE082750064E819 /* FMDatabaseQueue.m in Sources */,
 				189AAEC11CEAF88A00234E17 /* ContactsVC.swift in Sources */,
@@ -1546,7 +1558,7 @@
 				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = am/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1571,7 +1583,7 @@
 				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = am/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
