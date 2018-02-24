@@ -11,6 +11,9 @@ import UIKit
 
 
 class AccountVC: ItemListVC {
+    
+    public static var SEARCH_ID:String?
+    
     var colName:String = ""
     var colVal:String = "*"
     
@@ -20,22 +23,30 @@ class AccountVC: ItemListVC {
                        AccountColumns.MAILBOX,AccountColumns.PHONENUM,
                        AccountColumns.PASSPORT]
     var gridPop:GridPop?
-
-    
-   
 }
 extension AccountVC{
     override func viewDidLoad() {
         platform=iConst.ACCOUNT
         super.viewDidLoad()
         contentTV.register(AccountItemCell.self, forCellReuseIdentifier: CommonListItemCell.celliden)
-        
-        
-        
+        iNotiCenter.addObserver(self, selector: #selector(AccountVC.onActive), name: .UIApplicationDidBecomeActive, object: nil)
     }
+    
+    func onActive(){
+        if let idstr = AccountVC.SEARCH_ID{
+            AccountVC.SEARCH_ID=nil
+            datas=AccountService.ins.query(idstr)
+            contentTV.reloadData()
+        }
+    }
+    
     override func updateData(){
-        datas=AccountService.ins.queryByColumn(colName, colValue: colVal)
-        AccountSearchableService().reindexingAccounts(data: datas ?? [[String:Any]]());
+        if let idstr = AccountVC.SEARCH_ID{
+            AccountVC.SEARCH_ID=nil
+            datas=AccountService.ins.query(idstr)
+        }else{
+            datas=AccountService.ins.queryByColumn(colName, colValue: colVal)
+        }
         contentTV.reloadData()
     }
     

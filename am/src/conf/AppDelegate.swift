@@ -27,19 +27,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         iNotiCenter.addObserver(self, selector: #selector(AppDelegate.setRootVC), name: NSNotification.Name(rawValue: updateRootVCNoti), object: nil)
         
+        // 启动时为所有账号信息添加索引到spotlight
+        AccountSearchableService.indexingAllAccount()
+        
         return true
     }
     
     ///  spotlight搜索结果被点击后的回调
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if #available(iOS 9.0, *) {
-            guard
-                let iden = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String else {
-                    return false
+            let fuliden = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String
+            if let idstr = AccountSearchableService.getAccountIdenFrom(fuliden){
+                AccountVC.SEARCH_ID=idstr
+                HomeVC.instance?.checkForward()
             }
-            
             //TODO
-            
         } else {
             // Fallback on earlier versions
         }

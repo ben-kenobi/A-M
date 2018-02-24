@@ -13,7 +13,10 @@ import MobileCoreServices
 public struct AccountSearchableService{
     public init(){}
 
-    
+    static public func indexingAllAccount(){
+        let datas=AccountService.ins.queryByColumn("", colValue: "*")
+        AccountSearchableService().reindexingAccounts(data: datas)
+    }
     public func reindexingAccounts(data:[[String:Any]]){
         if #available(iOS 9.0, *) {
             CSSearchableIndex.default().deleteSearchableItems(withDomainIdentifiers: [iConst.ACCOUNT_USER_ACTIVITY_DOMAIN]) { (err) in
@@ -46,11 +49,19 @@ public struct AccountSearchableService{
 
 extension AccountSearchableService{
     public func accountIden(account:[String: Any])->String{
-        return "account_\(String(describing: account[AccountColumns.ID]))"
+        return "account_\(account[AccountColumns.ID]!)"
+    }
+    public static  func getAccountIdenFrom(_ fullIden:String?)->String?{
+        if let fuliden = fullIden as NSString?{
+            return fuliden.substring(from: fuliden.range(of: "_").location+1)
+        }
+        return nil;
     }
     public func userActivityUserInfoBy(account:[String: Any])->[String:Any] {
         return ["id" : accountIden(account:account)]
     }
+    
+    // none business with this project
     public func userActivityBy(account:[String: Any]) -> NSUserActivity {
         let activity = NSUserActivity(activityType: iConst.ACCOUNT_USER_ACTIVITY_DOMAIN)
         let name = account[AccountColumns.SITENAME] as! String
@@ -63,19 +74,21 @@ extension AccountSearchableService{
     
     public func attributeSetBy(account:[String: Any]) -> CSSearchableItemAttributeSet {
         let attributeSet = CSSearchableItemAttributeSet(
-            itemContentType: kUTTypeContact as String)
+            itemContentType: kUTTypeContent as String)
         let name = account[AccountColumns.SITENAME] as! String
         let group = account[AccountColumns.GROUP] as! String
 
         attributeSet.title = name
-        attributeSet.contentDescription = "\(name)  group:\(group)"
+        attributeSet.contentDescription = "group:\(group)"
+
 //        attributeSet.thumbnailData = UIImageJPEGRepresentation(
 //            loadPicture(), 0.9)
-        attributeSet.supportsPhoneCall = false
         
-        attributeSet.phoneNumbers = [""]
-        attributeSet.emailAddresses = [""]
-        attributeSet.keywords = [name]
+        
+//        attributeSet.supportsPhoneCall = false
+//        attributeSet.phoneNumbers = [""]
+//        attributeSet.emailAddresses = [""]
+        attributeSet.keywords = [name,group]
         
         return attributeSet
     }

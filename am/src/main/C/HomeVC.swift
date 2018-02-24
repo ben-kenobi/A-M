@@ -12,6 +12,7 @@ let iStrings:[String:String] = iRes4Dic("strings.plist") as! [String:String]
 let iStrary:[String:[String]] = iRes4Dic("stringary.plist") as! [String:[String]]
 
 class HomeVC: BaseVC {
+    public static var instance:HomeVC?
     let bgs=["home","home2","access"]
     let map = ["at":iConst.ACCOUNT,"filesystem":iConst.FILESYSTEM,"contacts":iConst.CONTACTS]
     
@@ -24,17 +25,16 @@ class HomeVC: BaseVC {
         view.addSubview(cv)
         menuInfo = iRes4Ary("menuConf.plist")         
         iNotiCenter.addObserver(self, selector: #selector(self.showVC(_:)), name: NSNotification.Name(rawValue: updateHomeVCNoti), object: nil)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.layer.contents=iimg(bgs[irand(UInt32(bgs.count))])?.cgImage
-        
+        HomeVC.instance=self
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        HomeVC.instance=nil
     }
     
     
@@ -96,6 +96,11 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
 
         }
         
+    }
+    func checkForward(){
+        if let _ = AccountVC.SEARCH_ID {
+            forwardTo(map["at"])
+        }
     }
     
     func getByIdx(_ indexPath:IndexPath)->[String:Any]?{
