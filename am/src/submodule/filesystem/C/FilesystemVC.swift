@@ -22,7 +22,7 @@ class FilesystemVC: PlatformVC {
     lazy var filesystemCV:FileSystemCV=FileSystemCV { [weak self](cv) in
         
         self?.up.isEnabled = (cv.curDir != "/") &&  FileUtil.isReadableDir(cv.outerDir)
-        self?.star.setTitle((cv.curDir as NSString).lastPathComponent, for: UIControlState.normal)
+        self?.star.setTitle((cv.curDir as NSString).lastPathComponent, for: UIControl.State.normal)
         self?.updateMulSelMode(self!.moreOperationBtns[4])
         self?.moreOperationBtns[5].isSelected = !self!.filesystemCV.rootOrHome
         if cv.mode == .selDir{
@@ -40,14 +40,14 @@ class FilesystemVC: PlatformVC {
     
     lazy var star:StarBtn={
         let star = StarBtn(frame: nil, img: iimg("discard"),  title: "ROOT", font: ibFont(15), titleColor: iColor(0xffee7600), titleHlColor: iColor(0xff0067ee),  tar: self, action: #selector(self.onClicked(_:)), tag: 0)
-        star.setImage(iimg("favorite"), for: UIControlState.selected)
+        star.setImage(iimg("favorite"), for: UIControl.State.selected)
         return star
         
     }()
     
     lazy var moreOperation:UIButton={
         let moreOperation = UIButton(frame: nil, img: iimg("more"), tar: self, action: #selector(self.onClicked(_:)), tag: 0)
-        moreOperation.setImage(iimg("more")?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: UIControlState.selected)
+        moreOperation.setImage(iimg("more")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate), for: UIControl.State.selected)
         return moreOperation
     }()
     
@@ -57,11 +57,11 @@ class FilesystemVC: PlatformVC {
         for str in imgs{
             let b = UIButton(frame: nil, img: iimg(str), bgcolor: UIColor.clear, corner: 0, bordercolor: iColor(0x33888888), borderW: 1, tar: self, action: #selector(self.onClicked(_:)), tag: 0)
             moreOperationBtns.append(b)
-            b.imageEdgeInsets=UIEdgeInsetsMake(10, 8, 10, 8)
+            b.imageEdgeInsets=UIEdgeInsets(top: 10, left: 8, bottom: 10, right: 8)
             b.imageView?.contentMode = .scaleAspectFit
         }
-        moreOperationBtns[4].setImage(iimg("file_explorer"),for:UIControlState.selected)
-        moreOperationBtns[5].setImage(iimg("rootslash"),for:UIControlState.selected)
+        moreOperationBtns[4].setImage(iimg("file_explorer"),for:UIControl.State.selected)
+        moreOperationBtns[5].setImage(iimg("rootslash"),for:UIControl.State.selected)
         
         return moreOperationBtns
         
@@ -75,7 +75,7 @@ class FilesystemVC: PlatformVC {
         for str in imgs{
             let b = UIButton(frame: nil, img: iimg(str), bgcolor: UIColor.clear, corner: 0, bordercolor: iColor(0x33888888), borderW: 1, tar: self, action: #selector(self.onClicked(_:)), tag: 0)
             dmcBtns.append(b)
-            b.imageEdgeInsets=UIEdgeInsetsMake(12, 0, 12, 0)
+            b.imageEdgeInsets=UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
             b.imageView?.contentMode = .scaleAspectFit
         }
         return dmcBtns
@@ -143,7 +143,7 @@ class FilesystemVC: PlatformVC {
         //**********end************
     }
     
-    func onItemClicked(_ sender:UIBarButtonItem){
+    @objc func onItemClicked(_ sender:UIBarButtonItem){
         let tag = sender.tag
         
         if(tag==NavMenu.more.rawValue){
@@ -160,7 +160,7 @@ class FilesystemVC: PlatformVC {
         }
         
     }
-    func onClicked(_ sender:UIButton){
+    @objc func onClicked(_ sender:UIButton){
         if sender == moreOperation{
             toggleMoreOperation(sender)
         }else if sender == moreOperationBtns[4]{

@@ -22,7 +22,7 @@ class GridPop: BaseDialog {
     var droplist:[String]?{
         didSet{
             if let droplist=droplist , droplist.count>0{
-                (titleView.viewWithTag(12) as! UIButton).setTitle(droplist[0], for: UIControlState())
+                (titleView.viewWithTag(12) as! UIButton).setTitle(droplist[0], for: UIControl.State())
             }
         }
         
@@ -48,7 +48,7 @@ class GridPop: BaseDialog {
     lazy var titleView:UIButton={
         let titleview=ComUI.comDropTitleView("", dropTitle: "", tar: self, sel: #selector(self.showDropDialog),labtag:11, droptag: 12)
         
-        titleview.addTarget(self, action: #selector(self.onClick(_:)), for: UIControlEvents.touchUpInside)
+        titleview.addTarget(self, action: #selector(self.onClick(_:)), for: UIControl.Event.touchUpInside)
         return titleview
     }()
     
@@ -81,7 +81,7 @@ class GridPop: BaseDialog {
     
     override func afterShow() {
         if let droplist = droplist{
-            self.onDropSelCB?(idxof(droplist, tar:(titleView.viewWithTag(12) as! UIButton).title(for: UIControlState.normal)),self)
+            self.onDropSelCB?(idxof(droplist, tar:(titleView.viewWithTag(12) as! UIButton).title(for: UIControl.State.normal)),self)
 
         }
     }
@@ -92,7 +92,7 @@ class GridPop: BaseDialog {
 
 
 extension GridPop{
-    func onClick(_ sender:UIButton){
+    @objc func onClick(_ sender:UIButton){
         if sender == self.titleView{
             self.onItemSelCB?(-1,self)
         }
@@ -106,10 +106,10 @@ extension GridPop{
         cv.reloadData()
     }
     
-    func showDropDialog(){
+    @objc func showDropDialog(){
         let v = titleView.viewWithTag(12) as! UIButton
         let lp = ListPop.listPopWith(droplist,  w: v.w, cb: { (str, pos) in
-            v.setTitle(str, for: UIControlState())
+            v.setTitle(str, for: UIControl.State())
             self.onDropSelCB?(pos,self)
         })
         lp.dropoffset=0

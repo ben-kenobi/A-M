@@ -43,13 +43,13 @@ class ListPop: BaseDialog {
     
     lazy var header:UIButton = {
         let header = ComUI.comBtnTitle("   "+self.title!)
-          header.addTarget(self, action: #selector(self.onClick(_:)), for: UIControlEvents.touchUpInside)
+        header.addTarget(self, action: #selector(self.onClick(_:)), for: UIControl.Event.touchUpInside)
         return header
     }()
     
     
     lazy var tv:AutoHeightTV = {
-        let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableViewStyle.plain)
+        let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableView.Style.plain)
         tv.delegate=self
         tv.dataSource=self
         tv.register(ListPopCell.self, forCellReuseIdentifier: self.celliden)
@@ -79,7 +79,7 @@ class ListPop: BaseDialog {
 }
 extension ListPop{
     
-    func onClick(_ sender:UIButton){
+    @objc func onClick(_ sender:UIButton){
         if sender == self.header{
             self.dismiss();
         }

@@ -33,21 +33,21 @@ class AutoDimListPop: BaseDialog {
     
     lazy var header:UIButton = {
         let header = ComUI.comBtnTitle("   "+self.title!)
-        header.addTarget(self, action: #selector(self.onClick(_:)), for: UIControlEvents.touchUpInside)
+        header.addTarget(self, action: #selector(self.onClick(_:)), for: UIControl.Event.touchUpInside)
         return header
     }()
     
     
     lazy var tv:AutoHeightTV = {
-        let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableViewStyle.plain)
+        let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableView.Style.plain)
         tv.delegate=self
         tv.dataSource=self
         tv.estimatedRowHeight=60
         tv.separatorStyle = .singleLine
-        tv.separatorInset = UIEdgeInsetsMake(0, 22, 0, 22)
+        tv.separatorInset = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
         tv.showsVerticalScrollIndicator=false
         tv.bounces=false
-        tv.rowHeight = UITableViewAutomaticDimension
+        tv.rowHeight = UITableView.automaticDimension
 
         return tv    }()
     
@@ -70,7 +70,7 @@ class AutoDimListPop: BaseDialog {
 }
 extension AutoDimListPop{
     
-    func onClick(_ sender:UIButton){
+    @objc func onClick(_ sender:UIButton){
         if sender == self.header{
             self.dismiss();
         }

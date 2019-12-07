@@ -16,7 +16,7 @@ class ItemDetailVC: BaseVC {
     var datas:[NSMutableDictionary]?
     
     lazy var contentTV:UITableView={
-        let contentTV = UITableView(frame: self.view.bounds, style: UITableViewStyle.plain)
+        let contentTV = UITableView(frame: self.view.bounds, style: UITableView.Style.plain)
         contentTV.delegate=self
         contentTV.dataSource=self
         
@@ -66,7 +66,7 @@ class ItemDetailVC: BaseVC {
 extension ItemDetailVC{
     override func viewDidLoad() {
         super.viewDidLoad()
-        let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.edit, target: self, action:#selector(self.onItemClick(_:)))
+        let item = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.edit, target: self, action:#selector(self.onItemClick(_:)))
         item.tag=NavMenu.edit.rawValue
         navigationItem.rightBarButtonItem=item
         view.addSubview(commit)
@@ -89,16 +89,16 @@ extension ItemDetailVC{
         }
         
         updateUI()
-        iNotiCenter.addObserver(self, selector: #selector(self.onKeyboardChange(_:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+        iNotiCenter.addObserver(self, selector: #selector(self.onKeyboardChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     
-    func onKeyboardChange(_ noti:NSNotification){
+    @objc func onKeyboardChange(_ noti:NSNotification){
         if let userinfo = noti.userInfo{
-            let dura=Double((userinfo[UIKeyboardAnimationDurationUserInfoKey] as? String) ??
+            let dura=Double((userinfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? String) ??
                 "0")
             
-            let endframe:CGRect = (userinfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            let endframe:CGRect = (userinfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
             installContainerConstraint(endframe.minY >= self.view.h ?  0:endframe.height)
             UIView.animate(withDuration: dura!, animations: {
                 self.container.layoutIfNeeded()
@@ -125,14 +125,14 @@ extension ItemDetailVC{
     }
     
     
-    func onItemClick(_ sender:UIBarButtonItem){
+    @objc func onItemClick(_ sender:UIBarButtonItem){
         if(sender.tag==NavMenu.edit.rawValue){
             toggleEditable()
         }
     }
     
     
-    func onClick(_ sender:UIButton){
+    @objc func onClick(_ sender:UIButton){
         if(sender == commit){
             if isBlank(datas![0]["val"] as? String){
                 iPop.toast("\(datas![0]["title"]!) 不能为空!")

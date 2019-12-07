@@ -22,7 +22,7 @@ class CommonEditDialog: CommonDialog {
     var defTexts:[String]?
     
     lazy var lv:AutoHeightTV={
-        let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableViewStyle.plain)
+        let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableView.Style.plain)
         tv.autoWid=false
         tv.delegate=self
         tv.dataSource=self
@@ -98,7 +98,7 @@ extension CommonEditDialog{
         
         
         lazy var tf:ClearableTF=ComUI.comTF1("")
-        override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             self.selectionStyle = .none
             backgroundColor=UIColor.clear
@@ -113,7 +113,7 @@ extension CommonEditDialog{
         class func cellWith(_ tv:UITableView,ph:String)->ItemEditCell{
             var cell:ItemEditCell? = tv.dequeueReusableCell(withIdentifier: celliden) as? ItemEditCell
             if cell == nil{
-                cell = ItemEditCell(style: UITableViewCellStyle.value1, reuseIdentifier: celliden)
+                cell = ItemEditCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: celliden)
                 
             }
             cell!.ph=ph

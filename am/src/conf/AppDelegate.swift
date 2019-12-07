@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var accessKey:String?
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window=UIWindow(frame: UIScreen.main.bounds)
         setRootVC()
         window!.makeKeyAndVisible()
@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     ///  spotlight搜索结果被点击后的回调
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+    private func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
         if #available(iOS 9.0, *) {
             let fuliden = userActivity.userInfo?[CSSearchableItemActivityIdentifier] as? String
             if let idstr = AccountSearchableService.getAccountIdenFrom(fuliden){
@@ -51,11 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-    func setRootVC(){
+    @objc func setRootVC(){
         
         UITabBar.appearance().isTranslucent=false
         UINavigationBar.appearance().isTranslucent=false
-        UINavigationBar.appearance().titleTextAttributes=[NSFontAttributeName:ibFont(19),NSForegroundColorAttributeName:UIColor.orange]
+        UINavigationBar.appearance().titleTextAttributes=[NSAttributedString.Key.font:ibFont(19),NSAttributedString.Key.foregroundColor:UIColor.orange]
         //        UINavigationBar.appearance().tintColor=iGlobalGreen
         //        UINavigationBar.appearance().setBackgroundImage(iimg("login_bg"), forBarMetrics: UIBarMetrics.Default)
         

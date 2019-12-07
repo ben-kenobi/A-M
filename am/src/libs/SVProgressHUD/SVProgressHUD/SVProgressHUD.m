@@ -271,9 +271,9 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
         UIImage* errorImage = [UIImage imageWithContentsOfFile:[imageBundle pathForResource:@"error" ofType:@"png"]];
 
         if ([[UIImage class] instancesRespondToSelector:@selector(imageWithRenderingMode:)]) {
-            SVProgressHUDInfoImage = [infoImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            SVProgressHUDSuccessImage = [successImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-            SVProgressHUDErrorImage = [errorImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+            SVProgressHUDInfoImage = [infoImage imageWithRenderingMode:UIImage.RenderingModeAlwaysTemplate];
+            SVProgressHUDSuccessImage = [successImage imageWithRenderingMode:UIImage.RenderingModeAlwaysTemplate];
+            SVProgressHUDErrorImage = [errorImage imageWithRenderingMode:UIImage.RenderingModeAlwaysTemplate];
         } else {
             SVProgressHUDInfoImage = infoImage;
             SVProgressHUDSuccessImage = successImage;
@@ -344,13 +344,13 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
         if ([string respondsToSelector:@selector(boundingRectWithSize:options:attributes:context:)]) {
           stringRect = [string boundingRectWithSize:constraintSize
                                             options:(NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin)
-                                         attributes:@{NSFontAttributeName: self.stringLabel.font}
+                                         attributes:@{NSAttributedString.Key.fon: self.stringLabel.font}
                                             context:NULL];
         } else {
             CGSize stringSize;
             
             if ([string respondsToSelector:@selector(sizeWithAttributes:)])
-                stringSize = [string sizeWithAttributes:@{NSFontAttributeName:[UIFont fontWithName:self.stringLabel.font.fontName size:self.stringLabel.font.pointSize]}];
+                stringSize = [string sizeWithAttributes:@{NSAttributedString.Key.fon:[UIFont fontWithName:self.stringLabel.font.fontName size:self.stringLabel.font.pointSize]}];
             else
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated"

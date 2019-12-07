@@ -9,9 +9,9 @@
 import UIKit
 
 class AccountItemCell: CommonListItemCell {
-    let siteAtt  = [NSForegroundColorAttributeName:iColor(38,146,42),NSFontAttributeName:ibFont(19)]
-    let titleAtt  = [NSForegroundColorAttributeName:iConst.orgTitCol,NSFontAttributeName:ibFont(18)]
-    let otherAtt  = [NSForegroundColorAttributeName:iColor(0xff444444),NSFontAttributeName:ibFont(17)]
+    let siteAtt  = [NSAttributedString.Key.foregroundColor:iColor(38,146,42),NSAttributedString.Key.font:ibFont(19)]
+    let titleAtt  = [NSAttributedString.Key.foregroundColor:iConst.orgTitCol,NSAttributedString.Key.font:ibFont(18)]
+    let otherAtt  = [NSAttributedString.Key.foregroundColor:iColor(0xff444444),NSAttributedString.Key.font:ibFont(17)]
     let showCols:[String] = [AccountColumns.SITENAME,
                              AccountColumns.MAILBOX,
         AccountColumns.USERNAME,

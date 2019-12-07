@@ -160,7 +160,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
 extension HomeVC{
     
     
-    func showVC(_ noti:Notification){
+    @objc func showVC(_ noti:Notification){
         
         guard let win = iAppDele.window else{
             return

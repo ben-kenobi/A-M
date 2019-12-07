@@ -12,7 +12,7 @@ extension UITableView  {
     func selectAll(){
         for  sec in 0..<(self.dataSource?.numberOfSections?(in: self) ?? 0){
             for  row in 0..<(self.dataSource?.tableView(self, numberOfRowsInSection: sec) ?? 0){
-                self.selectRow(at: IndexPath.init(row: row, section: sec), animated: false, scrollPosition: UITableViewScrollPosition.none)
+                self.selectRow(at: IndexPath.init(row: row, section: sec), animated: false, scrollPosition: UITableView.ScrollPosition.none)
             }
             
         }

@@ -17,7 +17,7 @@ extension FilesystemVC{
             make.top.right.left.equalTo(0)
             make.bottom.equalTo(bot.snp.top)
         }
-        filesystemCV.contentInset=UIEdgeInsetsMake(5, 0, 10, 0)
+        filesystemCV.contentInset=UIEdgeInsets(top: 5, left: 0, bottom: 10, right: 0)
         navigationItem.rightBarButtonItems=rightBBIs
 //        let views = navigationController?.navigationBar.subviews
 //        
@@ -36,7 +36,7 @@ extension FilesystemVC{
     
     func initBottomBar()->UIView{
         let bot = UIButton()
-        bot.setBackgroundImage(iimg("background.9",pad:1), for: UIControlState.normal)
+        bot.setBackgroundImage(iimg("background.9",pad:1), for: UIControl.State.normal)
         bot.adjustsImageWhenHighlighted=false
         view.addSubview(bot)
         bot.snp.makeConstraints { (make) in
@@ -85,24 +85,24 @@ extension FilesystemVC{
         var item:UIBarButtonItem
         
         if self.filesystemCV.mode == .normal{
-            item = UIBarButtonItem(image: iimg("ic_menu_moreoverflow_normal_holo_light")?.alwayOrigin(), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.onItemClicked(_:)))
+            item = UIBarButtonItem(image: iimg("ic_menu_moreoverflow_normal_holo_light")?.alwayOrigin(), style: UIBarButtonItem.Style.plain, target: self, action:#selector(self.onItemClicked(_:)))
             item.tag=NavMenu.more.rawValue
         }else{
-            item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.onItemClicked(_:)))
+            item = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(self.onItemClicked(_:)))
             item.tag=NavMenu.done.rawValue
         }
         rightBBIs.append(item)
         
         
-        item = UIBarButtonItem(image: iimg("ic_menu_view")?.alwayOrigin(), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.onItemClicked(_:)))
+        item = UIBarButtonItem(image: iimg("ic_menu_view")?.alwayOrigin(), style: UIBarButtonItem.Style.plain, target: self, action:#selector(self.onItemClicked(_:)))
         item.tag=NavMenu.view.rawValue
         rightBBIs.append(item)
         
-        item = UIBarButtonItem(image: iimg("ic_menu_sort_by_size")?.alwayOrigin(), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.onItemClicked(_:)))
+        item = UIBarButtonItem(image: iimg("ic_menu_sort_by_size")?.alwayOrigin(), style: UIBarButtonItem.Style.plain, target: self, action:#selector(self.onItemClicked(_:)))
         item.tag=NavMenu.sort.rawValue
         rightBBIs.append(item)
         
-        item = UIBarButtonItem(image: iimg("ic_menu_search")?.alwayOrigin(), style: UIBarButtonItemStyle.plain, target: self, action:#selector(self.onItemClicked(_:)))
+        item = UIBarButtonItem(image: iimg("ic_menu_search")?.alwayOrigin(), style: UIBarButtonItem.Style.plain, target: self, action:#selector(self.onItemClicked(_:)))
         item.tag = NavMenu.search.rawValue
         rightBBIs.append(item)
         
@@ -203,8 +203,8 @@ class StarBtn:UIButton{
         self.titleLabel?.textAlignment = .center
         self.imageView?.contentMode = .scaleAspectFit
         
-        self.titleEdgeInsets = UIEdgeInsetsMake(2, -10, -2, 10)
-        self.imageEdgeInsets = UIEdgeInsetsMake(16, -12, 16, 12)
+        self.titleEdgeInsets = UIEdgeInsets(top: 2, left: -10, bottom: -2, right: 10)
+        self.imageEdgeInsets = UIEdgeInsets(top: 16, left: -12, bottom: 16, right: 12)
         
     }
     

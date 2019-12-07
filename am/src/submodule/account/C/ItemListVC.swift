@@ -24,15 +24,15 @@ class ItemListVC: FileChooserVC {
        
         rightBBIs.append(item)
         
-        item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash, target: self, action: #selector(self.onItemClick(_:)))
+        item = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.trash, target: self, action: #selector(self.onItemClick(_:)))
         item.tag=NavMenu.trash.rawValue
         rightBBIs.append(item)
         
-        item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(self.onItemClick(_:)))
+        item = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.onItemClick(_:)))
         item.tag=NavMenu.add.rawValue
         rightBBIs.append(item)
         
-        item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(self.onItemClick(_:)))
+        item = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.search, target: self, action: #selector(self.onItemClick(_:)))
         item.tag = NavMenu.search.rawValue
         rightBBIs.append(item)
         
@@ -40,12 +40,12 @@ class ItemListVC: FileChooserVC {
     }()
     
     lazy var contentTV:UITableView={
-        let contentTV = UITableView(frame: self.view.bounds, style: UITableViewStyle.plain)
+        let contentTV = UITableView(frame: self.view.bounds, style: UITableView.Style.plain)
         contentTV.delegate=self
         contentTV.dataSource=self
         contentTV.backgroundColor=UIColor(patternImage: iimg("common_bg")!)
         contentTV.separatorStyle = .none
-        contentTV.rowHeight = UITableViewAutomaticDimension
+        contentTV.rowHeight = UITableView.automaticDimension
         contentTV.estimatedRowHeight = 120
         contentTV.showsVerticalScrollIndicator=true
         contentTV.bounces=false
@@ -68,7 +68,7 @@ extension ItemListVC{
         contentTV.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
-        contentTV.contentInset=UIEdgeInsetsMake(5, 0, 15, 0)
+        contentTV.contentInset=UIEdgeInsets(top: 5, left: 0, bottom: 15, right: 0)
         navigationItem.rightBarButtonItems=rightBBIs
     }
     
@@ -125,7 +125,7 @@ extension ItemListVC{
         self.updateData()
     }
     
-    func onItemClick(_ sender:UIBarButtonItem){
+    @objc func onItemClick(_ sender:UIBarButtonItem){
         let tag = sender.tag
         
         if(tag==NavMenu.more.rawValue){
@@ -170,7 +170,7 @@ extension ItemListVC{
         }
     }
     
-    func updateData(){
+    @objc func updateData(){
         
     }
     
@@ -181,7 +181,7 @@ extension ItemListVC{
         
         navigationController?.show(vc, sender: nil)
     }
-    func multiDel(){
+    @objc func multiDel(){
         let count = contentTV.indexPathsForSelectedRows?.count ?? 0
         if count == 0 {
             iPop.toast("无被选中数据")
@@ -197,7 +197,7 @@ extension ItemListVC{
                     }
                     iPop.toast("删除\(AccountService.ins.delete(set))条数据")
                     self.datas!.removeAtIdxes(idxes: idxes)
-                    self.contentTV.deleteRows(at: self.contentTV.indexPathsForSelectedRows!, with: UITableViewRowAnimation.fade)
+                    self.contentTV.deleteRows(at: self.contentTV.indexPathsForSelectedRows!, with: UITableView.RowAnimation.fade)
                     self.toggleSelMod()
 
                 }
@@ -234,7 +234,7 @@ extension ItemListVC{
         _=av.show()
     }
     
-    func showSearchDailog(){}
+    @objc func showSearchDailog(){}
     
     func selectFile(){
         let vc = FilesystemVC()
@@ -319,10 +319,10 @@ extension ItemListVC:UITableViewDelegate,UITableViewDataSource,UIAlertViewDelega
         }
         
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if AccountService.ins.delete("\(datas![(indexPath as NSIndexPath).row][iConst.ID]!)"){
             datas!.remove(at: (indexPath as NSIndexPath).row)
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         }
     }
     

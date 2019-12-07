@@ -79,7 +79,7 @@ class FileSystemCV: UICollectionView {
         let fl = UICollectionViewFlowLayout()
         fl.minimumInteritemSpacing=2
         fl.minimumLineSpacing=4
-        fl.sectionInset=UIEdgeInsetsMake(2, 2, 2, 2)
+        fl.sectionInset=UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         let col:CGFloat = 5
         let wid = min(iScrW,iScrH)
         let w = (wid - 2*(col+1))/col
@@ -104,7 +104,7 @@ class FileSystemCV: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func lp(_ sender:UILongPressGestureRecognizer){
+    @objc func lp(_ sender:UILongPressGestureRecognizer){
         longPressed=true
         if sender.state == .cancelled{
             let po = sender.location(in: sender.view)

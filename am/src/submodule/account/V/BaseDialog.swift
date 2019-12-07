@@ -60,7 +60,7 @@ class BaseDialog: UIView {
     
     func dismiss(){
         
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIView.AnimationOptions(), animations: {
             self.alpha=0.02
             //            self.transform=CGAffineTransformMakeScale(0.1,0.1)
         }) { (b) in
@@ -76,7 +76,7 @@ class BaseDialog: UIView {
         }
         alpha=0
         view.transform=CGAffineTransform(scaleX: 0, y: 0)
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIView.AnimationOptions(), animations: {
             self.alpha=1
             self.view.transform=CGAffineTransform.identity
         }) { (b) in
@@ -94,7 +94,7 @@ class BaseDialog: UIView {
         
         alpha=0
         view.transform=CGAffineTransform(scaleX: 1, y: 0)
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIViewAnimationOptions(), animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5, options: UIView.AnimationOptions(), animations: {
             self.alpha=1
             self.view.transform=CGAffineTransform.identity
         }) { (b) in

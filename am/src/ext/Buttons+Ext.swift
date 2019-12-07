@@ -17,10 +17,10 @@ extension UIButton{
 
     
     func setTitle(title:String){
-        setTitle(title, for: UIControlState.normal)
+        setTitle(title, for: UIControl.State.normal)
     }
     
-    func toggleSelected(){
+    @objc func toggleSelected(){
         self.isSelected = !self.isSelected
     }
     convenience init(img:UIImage,selImg:UIImage,title:String) {
@@ -37,16 +37,16 @@ extension UIButton{
         self.init()
         let b=self
         if let _=img {
-            b.setImage(img, for: UIControlState.normal)
-            b.setImage(hlimg, for: UIControlState.highlighted)
+            b.setImage(img, for: UIControl.State.normal)
+            b.setImage(hlimg, for: UIControl.State.highlighted)
         }
         if let _=title{
-            b.setTitle(title, for: UIControlState.normal)
+            b.setTitle(title, for: UIControl.State.normal)
         }
         
         if let _=bgimg{
-            b.setBackgroundImage(bgimg, for: UIControlState.normal)
-            b.setBackgroundImage(hlbgimg, for: UIControlState.highlighted)
+            b.setBackgroundImage(bgimg, for: UIControl.State.normal)
+            b.setBackgroundImage(hlbgimg, for: UIControl.State.highlighted)
         }
         if let _=bgcolor{
             b.backgroundColor=bgcolor
@@ -61,10 +61,10 @@ extension UIButton{
         b.tag=tag
         
         if let _=tar{
-            b.addTarget(tar, action: action!, for: UIControlEvents.touchUpInside)
+            b.addTarget(tar, action: action!, for: UIControl.Event.touchUpInside)
         }
-        b.setTitleColor(titleColor, for: UIControlState.normal)
-        b.setTitleColor(titleHlColor, for: UIControlState.highlighted)
+        b.setTitleColor(titleColor, for: UIControl.State.normal)
+        b.setTitleColor(titleHlColor, for: UIControl.State.highlighted)
         b.titleLabel?.font=font
         
         if let iframe=frame{

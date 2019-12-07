@@ -46,7 +46,7 @@ class ItemDetailTVCell: UITableViewCell {
     }
     
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         backgroundColor=UIColor.clear
@@ -66,7 +66,7 @@ class ItemDetailTVCell: UITableViewCell {
 }
 
 extension ItemDetailTVCell{
-    func onClick(_ sender:UIButton){
+    @objc func onClick(_ sender:UIButton){
         if(sender == icon){
             let b = editable?.pointee ?? false
             if(b){
@@ -110,7 +110,7 @@ extension ItemDetailTVCell{
     class func cellWith(_ tv:UITableView,mod:NSMutableDictionary,b:UnsafeMutablePointer<Bool>)->ItemDetailTVCell{
         var cell:ItemDetailTVCell? = tv.dequeueReusableCell(withIdentifier: celliden) as? ItemDetailTVCell
         if cell == nil{
-            cell = ItemDetailTVCell(style: UITableViewCellStyle.value1, reuseIdentifier: celliden)
+            cell = ItemDetailTVCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: celliden)
             cell!.editable=b
         }
         cell!.mod=mod

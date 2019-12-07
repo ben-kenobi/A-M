@@ -27,7 +27,7 @@ class CommonListItemCell: UITableViewCell {
     
     
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 //        self.selectionStyle = .None
         initUI()
@@ -52,7 +52,7 @@ extension CommonListItemCell{
         return cell
     }
     
-    func updateUI(){
+    @objc func updateUI(){
        
     }
     func initUI(){

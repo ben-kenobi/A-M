@@ -73,7 +73,7 @@ extension FilesystemVC{
         if sender.isSelected {
             sender.isEnabled=false
             let tran = CGAffineTransform.init(scaleX: 0.0001, y: 0.0001)
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 self.moreOperationBar.transform=tran
             }) { (suc) in
                 sender.isSelected=false
@@ -84,7 +84,7 @@ extension FilesystemVC{
             _=moreOperationBar.transform
             let tran =  CGAffineTransform.identity
             
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIViewAnimationOptions.curveEaseInOut, animations: {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: UIView.AnimationOptions.curveEaseInOut, animations: {
                 self.moreOperationBar.transform=tran
             }) { (suc) in
                 sender.isEnabled=true
@@ -114,7 +114,7 @@ extension FilesystemVC{
         _=pop.show(self)
     }
     func getUsageCell()->UITableViewCell{
-        let cell:UITableViewCell=UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: nil)
+        let cell:UITableViewCell=UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
         cell.selectionStyle = .none
 
         let pv = UIProgressView(frame: nil, bg: iColor(0xffbbbbbb), corner: 4, bordercolor: iConst.khakiBg, borderW: 1)
@@ -149,7 +149,7 @@ extension FilesystemVC{
         return cell
     }
     func getUUIDCell()->UITableViewCell{
-        let cell:UITableViewCell=UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: nil)
+        let cell:UITableViewCell=UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
         cell.selectionStyle = .none
 
         let tf = UILabel(frame: nil, txt: "", color: iConst.iGlobalBlue, font: iFont(14), align: NSTextAlignment.center, line: 0, bgColor: iConst.iGlobalBG)

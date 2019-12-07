@@ -16,10 +16,10 @@ class BGStackV: UIStackView {
         let v=UIView()
         self.addSubview(v)
         v.translatesAutoresizingMaskIntoConstraints=false
-        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute:NSLayoutAttribute.top , multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute:NSLayoutAttribute.left , multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: self, attribute:NSLayoutAttribute.width , multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: self, attribute:NSLayoutAttribute.height , multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute:NSLayoutConstraint.Attribute.top , multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute:NSLayoutConstraint.Attribute.left , multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute:NSLayoutConstraint.Attribute.width , multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: v, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute:NSLayoutConstraint.Attribute.height , multiplier: 1, constant: 0))
         return v
     }()
     

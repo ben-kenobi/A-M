@@ -188,7 +188,7 @@
     }
 }
 
-- (void)layoutChildViewControllers {
+- (void)layoutchildren {
     int currentPage = (int)self.scrollView.contentOffset.x / _viewWidth;
     int start = currentPage == 0 ? currentPage : (currentPage - 1);
     int end = (currentPage == self.viewControllerClasses.count - 1) ? currentPage : (currentPage + 1);
@@ -381,7 +381,7 @@
 
 #pragma mark - UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self layoutChildViewControllers];
+    [self layoutchildren];
     if (_animate) {
         CGFloat contentOffsetX = scrollView.contentOffset.x;
         if (contentOffsetX < 0 ) {
@@ -430,7 +430,7 @@
     [self.scrollView setContentOffset:targetP animated:gap > 1 ? NO : self.pageAnimatable];
     if (gap > 1 || !self.pageAnimatable) {
         // 由于不触发 -scrollViewDidScroll: 手动处理控制器
-        [self layoutChildViewControllers];
+        [self layoutchildren];
         self.currentViewController = self.displayVC[@(self.selectIndex)];
         
         [self postFullyDisplayedNotificationWithCurrentIndex:(int)index];

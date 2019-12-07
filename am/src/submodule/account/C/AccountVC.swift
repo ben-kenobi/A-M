@@ -29,10 +29,10 @@ extension AccountVC{
         platform=iConst.ACCOUNT
         super.viewDidLoad()
         contentTV.register(AccountItemCell.self, forCellReuseIdentifier: CommonListItemCell.celliden)
-        iNotiCenter.addObserver(self, selector: #selector(AccountVC.onActive), name: .UIApplicationDidBecomeActive, object: nil)
+        iNotiCenter.addObserver(self, selector: #selector(AccountVC.onActive), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
     
-    func onActive(){
+    @objc func onActive(){
         if let idstr = AccountVC.SEARCH_ID{
             AccountVC.SEARCH_ID=nil
             datas=AccountService.ins.query(idstr)

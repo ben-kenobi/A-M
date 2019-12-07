@@ -22,25 +22,6 @@
 		184740061CE082750064E819 /* conf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18473F561CE082740064E819 /* conf.plist */; };
 		184740071CE082750064E819 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18473F571CE082740064E819 /* InfoPlist.strings */; };
 		184740081CE082750064E819 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18473F581CE082740064E819 /* Localizable.strings */; };
-		184740111CE082750064E819 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F671CE082740064E819 /* AFHTTPRequestOperation.m */; };
-		184740121CE082750064E819 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F691CE082740064E819 /* AFHTTPRequestOperationManager.m */; };
-		184740131CE082750064E819 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F6B1CE082740064E819 /* AFHTTPSessionManager.m */; };
-		184740141CE082750064E819 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F6E1CE082740064E819 /* AFNetworkReachabilityManager.m */; };
-		184740151CE082750064E819 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F701CE082740064E819 /* AFSecurityPolicy.m */; };
-		184740161CE082750064E819 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F721CE082740064E819 /* AFURLConnectionOperation.m */; };
-		184740171CE082750064E819 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F741CE082740064E819 /* AFURLRequestSerialization.m */; };
-		184740181CE082750064E819 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F761CE082740064E819 /* AFURLResponseSerialization.m */; };
-		184740191CE082750064E819 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F781CE082740064E819 /* AFURLSessionManager.m */; };
-		1847401A1CE082750064E819 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 18473F791CE082740064E819 /* LICENSE */; };
-		1847401B1CE082750064E819 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 18473F7A1CE082740064E819 /* README.md */; };
-		1847401C1CE082750064E819 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F7D1CE082740064E819 /* AFNetworkActivityIndicatorManager.m */; };
-		1847401D1CE082750064E819 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F7F1CE082740064E819 /* UIActivityIndicatorView+AFNetworking.m */; };
-		1847401E1CE082750064E819 /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F811CE082740064E819 /* UIAlertView+AFNetworking.m */; };
-		1847401F1CE082750064E819 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F831CE082740064E819 /* UIButton+AFNetworking.m */; };
-		184740201CE082750064E819 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F861CE082740064E819 /* UIImageView+AFNetworking.m */; };
-		184740211CE082750064E819 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F891CE082740064E819 /* UIProgressView+AFNetworking.m */; };
-		184740221CE082750064E819 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F8B1CE082740064E819 /* UIRefreshControl+AFNetworking.m */; };
-		184740231CE082750064E819 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F8D1CE082740064E819 /* UIWebView+AFNetworking.m */; };
 		184740241CE082750064E819 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F901CE082740064E819 /* FMDatabase.m */; };
 		184740251CE082750064E819 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F921CE082740064E819 /* FMDatabaseAdditions.m */; };
 		184740261CE082750064E819 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 18473F941CE082740064E819 /* FMDatabasePool.m */; };
@@ -187,45 +168,6 @@
 		18473F571CE082740064E819 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		18473F581CE082740064E819 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		18473F591CE082740064E819 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		18473F661CE082740064E819 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		18473F671CE082740064E819 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		18473F681CE082740064E819 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
-		18473F691CE082740064E819 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
-		18473F6A1CE082740064E819 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		18473F6B1CE082740064E819 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		18473F6C1CE082740064E819 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		18473F6D1CE082740064E819 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		18473F6E1CE082740064E819 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		18473F6F1CE082740064E819 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		18473F701CE082740064E819 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		18473F711CE082740064E819 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		18473F721CE082740064E819 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		18473F731CE082740064E819 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		18473F741CE082740064E819 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		18473F751CE082740064E819 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		18473F761CE082740064E819 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		18473F771CE082740064E819 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		18473F781CE082740064E819 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
-		18473F791CE082740064E819 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		18473F7A1CE082740064E819 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		18473F7C1CE082740064E819 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
-		18473F7D1CE082740064E819 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
-		18473F7E1CE082740064E819 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F7F1CE082740064E819 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
-		18473F801CE082740064E819 /* UIAlertView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F811CE082740064E819 /* UIAlertView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+AFNetworking.m"; sourceTree = "<group>"; };
-		18473F821CE082740064E819 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F831CE082740064E819 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
-		18473F841CE082740064E819 /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F851CE082740064E819 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F861CE082740064E819 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		18473F871CE082740064E819 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F881CE082740064E819 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F891CE082740064E819 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
-		18473F8A1CE082740064E819 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F8B1CE082740064E819 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
-		18473F8C1CE082740064E819 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
-		18473F8D1CE082740064E819 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		18473F8F1CE082740064E819 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
 		18473F901CE082740064E819 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
 		18473F911CE082740064E819 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
@@ -480,7 +422,6 @@
 		18473F631CE082740064E819 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				18473F641CE082740064E819 /* AFNetworking */,
 				18473F8E1CE082740064E819 /* fmdb */,
 				18473F9D1CE082740064E819 /* MJRefresh */,
 				18473FAE1CE082740064E819 /* NSStringEmoji */,
@@ -494,68 +435,6 @@
 				18473FD91CE082750064E819 /* WMPageController */,
 			);
 			path = libs;
-			sourceTree = "<group>";
-		};
-		18473F641CE082740064E819 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				18473F651CE082740064E819 /* AFNetworking */,
-				18473F791CE082740064E819 /* LICENSE */,
-				18473F7A1CE082740064E819 /* README.md */,
-				18473F7B1CE082740064E819 /* UIKit+AFNetworking */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		18473F651CE082740064E819 /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				18473F661CE082740064E819 /* AFHTTPRequestOperation.h */,
-				18473F671CE082740064E819 /* AFHTTPRequestOperation.m */,
-				18473F681CE082740064E819 /* AFHTTPRequestOperationManager.h */,
-				18473F691CE082740064E819 /* AFHTTPRequestOperationManager.m */,
-				18473F6A1CE082740064E819 /* AFHTTPSessionManager.h */,
-				18473F6B1CE082740064E819 /* AFHTTPSessionManager.m */,
-				18473F6C1CE082740064E819 /* AFNetworking.h */,
-				18473F6D1CE082740064E819 /* AFNetworkReachabilityManager.h */,
-				18473F6E1CE082740064E819 /* AFNetworkReachabilityManager.m */,
-				18473F6F1CE082740064E819 /* AFSecurityPolicy.h */,
-				18473F701CE082740064E819 /* AFSecurityPolicy.m */,
-				18473F711CE082740064E819 /* AFURLConnectionOperation.h */,
-				18473F721CE082740064E819 /* AFURLConnectionOperation.m */,
-				18473F731CE082740064E819 /* AFURLRequestSerialization.h */,
-				18473F741CE082740064E819 /* AFURLRequestSerialization.m */,
-				18473F751CE082740064E819 /* AFURLResponseSerialization.h */,
-				18473F761CE082740064E819 /* AFURLResponseSerialization.m */,
-				18473F771CE082740064E819 /* AFURLSessionManager.h */,
-				18473F781CE082740064E819 /* AFURLSessionManager.m */,
-			);
-			path = AFNetworking;
-			sourceTree = "<group>";
-		};
-		18473F7B1CE082740064E819 /* UIKit+AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				18473F7C1CE082740064E819 /* AFNetworkActivityIndicatorManager.h */,
-				18473F7D1CE082740064E819 /* AFNetworkActivityIndicatorManager.m */,
-				18473F7E1CE082740064E819 /* UIActivityIndicatorView+AFNetworking.h */,
-				18473F7F1CE082740064E819 /* UIActivityIndicatorView+AFNetworking.m */,
-				18473F801CE082740064E819 /* UIAlertView+AFNetworking.h */,
-				18473F811CE082740064E819 /* UIAlertView+AFNetworking.m */,
-				18473F821CE082740064E819 /* UIButton+AFNetworking.h */,
-				18473F831CE082740064E819 /* UIButton+AFNetworking.m */,
-				18473F841CE082740064E819 /* UIImage+AFNetworking.h */,
-				18473F851CE082740064E819 /* UIImageView+AFNetworking.h */,
-				18473F861CE082740064E819 /* UIImageView+AFNetworking.m */,
-				18473F871CE082740064E819 /* UIKit+AFNetworking.h */,
-				18473F881CE082740064E819 /* UIProgressView+AFNetworking.h */,
-				18473F891CE082740064E819 /* UIProgressView+AFNetworking.m */,
-				18473F8A1CE082740064E819 /* UIRefreshControl+AFNetworking.h */,
-				18473F8B1CE082740064E819 /* UIRefreshControl+AFNetworking.m */,
-				18473F8C1CE082740064E819 /* UIWebView+AFNetworking.h */,
-				18473F8D1CE082740064E819 /* UIWebView+AFNetworking.m */,
-			);
-			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
 		18473F8E1CE082740064E819 /* fmdb */ = {
@@ -1015,7 +894,6 @@
 				18473F151CE065EB0064E819 /* Frameworks */,
 				18473F161CE065EB0064E819 /* Resources */,
 				9472E70F229948D90310AFD7 /* [CP] Embed Pods Frameworks */,
-				FD98A751496B0C022CF57E49 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1035,7 +913,6 @@
 				18473F291CE065EB0064E819 /* Frameworks */,
 				18473F2A1CE065EB0064E819 /* Resources */,
 				1E8E7535ADE831FEFF89BF41 /* [CP] Embed Pods Frameworks */,
-				95FDE03E1BD9236FE99F0ACB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1056,7 +933,6 @@
 				18473F341CE065EB0064E819 /* Frameworks */,
 				18473F351CE065EB0064E819 /* Resources */,
 				ACB56D383EA1FD73967E597D /* [CP] Embed Pods Frameworks */,
-				F52F3DDA769EAD7935D2F03C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1080,7 +956,7 @@
 				TargetAttributes = {
 					18473F171CE065EB0064E819 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 6U96F6BXWV;
+						DevelopmentTeam = Q3Z23BVZ93;
 						LastSwiftMigration = 0800;
 					};
 					18473F2B1CE065EB0064E819 = {
@@ -1100,6 +976,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1121,7 +998,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				189AAEC51CEB655700234E17 /* strings.plist in Resources */,
-				1847401A1CE082750064E819 /* LICENSE in Resources */,
 				189AAEC71CEB66F800234E17 /* stringary.plist in Resources */,
 				184740081CE082750064E819 /* Localizable.strings in Resources */,
 				184740431CE082750064E819 /* LICENSE.txt in Resources */,
@@ -1160,13 +1036,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-amTests/Pods-amTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amTests/Pods-amTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-amTests/Pods-amTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2C1EE7918445CFB0AD8E9447 /* [CP] Check Pods Manifest.lock */ = {
@@ -1175,13 +1058,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-amUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9472E70F229948D90310AFD7 /* [CP] Embed Pods Frameworks */ = {
@@ -1190,28 +1076,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-am/Pods-am-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-am/Pods-am-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		95FDE03E1BD9236FE99F0ACB /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amTests/Pods-amTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-am/Pods-am-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ACB56D383EA1FD73967E597D /* [CP] Embed Pods Frameworks */ = {
@@ -1220,13 +1098,20 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-amUITests/Pods-amUITests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amUITests/Pods-amUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-amUITests/Pods-amUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B92A58709CF3FC1768184E75 /* [CP] Check Pods Manifest.lock */ = {
@@ -1235,13 +1120,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-amTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E78FA9C5891B6AC3D58C3939 /* [CP] Check Pods Manifest.lock */ = {
@@ -1250,43 +1138,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-am-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F52F3DDA769EAD7935D2F03C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-amUITests/Pods-amUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FD98A751496B0C022CF57E49 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-am/Pods-am-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1301,7 +1162,6 @@
 				1895D9131CF4331100D1F25E /* CommonListItemCell.swift in Sources */,
 				184740301CE082750064E819 /* UIScrollView+MJExtension.m in Sources */,
 				189AAECD1CECB3EB00234E17 /* ListPop.swift in Sources */,
-				184740111CE082750064E819 /* AFHTTPRequestOperation.m in Sources */,
 				184740571CE082750064E819 /* NetUtil.swift in Sources */,
 				1895D9151CF4452800D1F25E /* AccountItemCell.swift in Sources */,
 				18BE88A01DCAE8C5000C4AC4 /* InEditableTF.swift in Sources */,
@@ -1319,7 +1179,6 @@
 				1847402D1CE082750064E819 /* MJRefreshConst.m in Sources */,
 				184740051CE082750064E819 /* AppDelegate.swift in Sources */,
 				1847404B1CE082750064E819 /* UIImage+ImageEffects.m in Sources */,
-				184740131CE082750064E819 /* AFHTTPSessionManager.m in Sources */,
 				184F74421DB5D49C005B93A8 /* MetaData.swift in Sources */,
 				189AAED31CEDA35200234E17 /* FileChooserVC.swift in Sources */,
 				184740291CE082750064E819 /* FMDatabaseAdditionsVariadic.swift in Sources */,
@@ -1333,7 +1192,6 @@
 				18A6FC7A1CF7EAAF00920F10 /* CommonAlertView.swift in Sources */,
 				1847404D1CE082750064E819 /* WMMenuItem.m in Sources */,
 				184F744D1DB5D49C005B93A8 /* UIView+IBExt.swift in Sources */,
-				1847401F1CE082750064E819 /* UIButton+AFNetworking.m in Sources */,
 				184740341CE082750064E819 /* Reachability.m in Sources */,
 				184740731CE2313B0064E819 /* HomeVC.swift in Sources */,
 				184F743F1DB5D49B005B93A8 /* IDBMan_former.swift in Sources */,
@@ -1342,25 +1200,19 @@
 				189AAECB1CEC4C2C00234E17 /* BaseDialog.swift in Sources */,
 				189AAEDD1CEDE6B700234E17 /* ItemDetailTVCell.swift in Sources */,
 				184F74971DBDEC9B005B93A8 /* FilesystemVCEvent.swift in Sources */,
-				184740201CE082750064E819 /* UIImageView+AFNetworking.m in Sources */,
 				184F749D1DBF3ECF005B93A8 /* FileCell.swift in Sources */,
 				184740281CE082750064E819 /* FMResultSet.m in Sources */,
-				184740141CE082750064E819 /* AFNetworkReachabilityManager.m in Sources */,
 				1895D9051CEE16D300D1F25E /* PlatformVC.swift in Sources */,
 				184740331CE082750064E819 /* NSString+Emoji.m in Sources */,
 				184F749F1DC05C97005B93A8 /* FileSystemCV+Event.swift in Sources */,
-				184740211CE082750064E819 /* UIProgressView+AFNetworking.m in Sources */,
-				184740191CE082750064E819 /* AFURLSessionManager.m in Sources */,
 				B8E70CE32032E50500B709C9 /* AccountSearchableService.swift in Sources */,
 				184F744E1DB5D49C005B93A8 /* Utils.swift in Sources */,
 				184740271CE082750064E819 /* FMDatabaseQueue.m in Sources */,
 				189AAEC11CEAF88A00234E17 /* ContactsVC.swift in Sources */,
-				1847401C1CE082750064E819 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				1847404C1CE082750064E819 /* WMFooldView.m in Sources */,
 				184740771CE319310064E819 /* ISQLite.swift in Sources */,
 				18BE889E1DCAD61A000C4AC4 /* AutoDimListPop.swift in Sources */,
 				184F744A1DB5D49C005B93A8 /* Labels+Ext.swift in Sources */,
-				184740231CE082750064E819 /* UIWebView+AFNetworking.m in Sources */,
 				189AAEBF1CEAF82900234E17 /* FilesystemVC.swift in Sources */,
 				184740261CE082750064E819 /* FMDatabasePool.m in Sources */,
 				18BE88A21DCB2CE8000C4AC4 /* CBBtn.swift in Sources */,
@@ -1368,27 +1220,20 @@
 				184F74471DB5D49C005B93A8 /* Exes.swift in Sources */,
 				189AAED71CEDAEF600234E17 /* ItemDetailVC.swift in Sources */,
 				1895D9091CF1DAAC00D1F25E /* AccountService.swift in Sources */,
-				184740161CE082750064E819 /* AFURLConnectionOperation.m in Sources */,
-				1847401B1CE082750064E819 /* README.md in Sources */,
-				184740181CE082750064E819 /* AFURLResponseSerialization.m in Sources */,
-				184740171CE082750064E819 /* AFURLRequestSerialization.m in Sources */,
 				1847402C1CE082750064E819 /* MJRefreshBaseView.m in Sources */,
 				1847402F1CE082750064E819 /* MJRefreshHeaderView.m in Sources */,
-				184740221CE082750064E819 /* UIRefreshControl+AFNetworking.m in Sources */,
 				181430931DC7A2BF0038DC88 /* ExportImportTask.swift in Sources */,
 				184740491CE082750064E819 /* README.markdown in Sources */,
 				189AAED11CED9FB800234E17 /* ComUI.swift in Sources */,
 				189AAECF1CED8A2900234E17 /* CommonUtils.swift in Sources */,
 				184740321CE082750064E819 /* UIView+MJExtension.m in Sources */,
 				18114F001DC19E9A00B68723 /* IFileComparator.swift in Sources */,
-				1847401D1CE082750064E819 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				184F74411DB5D49C005B93A8 /* iFMDBMan_former.swift in Sources */,
 				18A6FC801CF9C4E600920F10 /* CommonDialog.swift in Sources */,
 				184740451CE082750064E819 /* SVIndefiniteAnimatedView.m in Sources */,
 				189AAED51CEDA9A800234E17 /* ItemListVC.swift in Sources */,
 				184F743B1DB5D49B005B93A8 /* CustTabBarItem.swift in Sources */,
 				184740501CE082750064E819 /* WMPageController.m in Sources */,
-				1847401E1CE082750064E819 /* UIAlertView+AFNetworking.m in Sources */,
 				1876E9261CFBC8E900A4BEA9 /* GridPop.swift in Sources */,
 				1847407F1CEA00800064E819 /* LoginVC.swift in Sources */,
 				184740521CE082750064E819 /* MainNavVC.swift in Sources */,
@@ -1401,12 +1246,10 @@
 				184F74401DB5D49B005B93A8 /* IFMDBMan.swift in Sources */,
 				184F749B1DBF326C005B93A8 /* FileSystemCVEx.swift in Sources */,
 				184740311CE082750064E819 /* UIScrollView+MJRefresh.m in Sources */,
-				184740121CE082750064E819 /* AFHTTPRequestOperationManager.m in Sources */,
 				189AAEDB1CEDBD6500234E17 /* StaticMod.swift in Sources */,
 				1847404F1CE082750064E819 /* WMProgressView.m in Sources */,
 				184F743A1DB5D49B005B93A8 /* BGStackV.swift in Sources */,
 				184F74481DB5D49C005B93A8 /* FileUtil.swift in Sources */,
-				184740151CE082750064E819 /* AFSecurityPolicy.m in Sources */,
 				184F743D1DB5D49B005B93A8 /* iConst.swift in Sources */,
 				184F74451DB5D49C005B93A8 /* Buttons+Ext.swift in Sources */,
 				184F74951DBDEC90005B93A8 /* FileSystemVCUI.swift in Sources */,
@@ -1554,11 +1397,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6U96F6BXWV;
+				DEVELOPMENT_TEAM = Q3Z23BVZ93;
 				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = am/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1568,7 +1411,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.am;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "am/src/conf/Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1579,11 +1422,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 6U96F6BXWV;
+				DEVELOPMENT_TEAM = Q3Z23BVZ93;
 				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = am/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1593,7 +1436,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.am;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "am/src/conf/Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1608,7 +1451,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.amTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/am.app/am";
 			};
 			name = Debug;
@@ -1623,7 +1466,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.amTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/am.app/am";
 			};
 			name = Release;
@@ -1637,7 +1480,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.amUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = am;
 			};
 			name = Debug;
@@ -1651,7 +1494,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yf.amUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = am;
 			};
 			name = Release;

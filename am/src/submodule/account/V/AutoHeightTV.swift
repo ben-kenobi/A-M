@@ -18,11 +18,11 @@ class AutoHeightTV: UITableView {
     }
     
     
-    override init(frame: CGRect, style: UITableViewStyle) {
+    override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.old, context: nil)
 //        iNotiCenter.addObserver(self, selector: #selector(self.updateHight), name:UIScreenModeDidChangeNotification, object: nil)
-    iNotiCenter.addObserver(self, selector: #selector(self.updateSize), name:NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        iNotiCenter.addObserver(self, selector: #selector(self.updateSize), name:UIDevice.orientationDidChangeNotification, object: nil)
         
     }
     
@@ -35,7 +35,7 @@ class AutoHeightTV: UITableView {
 
         }
     }
-    func updateSize(){
+    @objc func updateSize(){
        
         snp.updateConstraints({ (make) in
             let verinset=contentInset.bottom+contentInset.top

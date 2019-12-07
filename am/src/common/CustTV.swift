@@ -44,13 +44,13 @@ import UIKit
         super.init(frame: frame, textContainer: textContainer)
         self.addSubview(phlab)
         phlab.translatesAutoresizingMaskIntoConstraints=false
-       addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 6))
-        addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.left, multiplier: 1, constant: 6))
-         addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.lessThanOrEqual, toItem: self, attribute: NSLayoutAttribute.width, multiplier: 1, constant: -16))
+        addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutConstraint.Attribute.left, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 6))
+        addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutConstraint.Attribute.top, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.left, multiplier: 1, constant: 6))
+        addConstraint( NSLayoutConstraint(item: phlab, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.lessThanOrEqual, toItem: self, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant: -16))
 //        phlab.preferredMaxLayoutWidth=self.w-16
         
         
-        iNotiCenter.addObserver(self, selector: #selector(CustTV.onChange), name: NSNotification.Name.UITextViewTextDidChange, object: self)
+        iNotiCenter.addObserver(self, selector: #selector(CustTV.onChange), name: UITextView.textDidChangeNotification, object: self)
         
     }
 
@@ -58,7 +58,7 @@ import UIKit
         fatalError("init(coder:) has not been implemented")
     }
     
-    func onChange(){
+    @objc func onChange(){
 
         phlab.isHidden=hasText
     }
@@ -81,7 +81,7 @@ import UIKit
 //            let range=self.selectedRange
 //            let matr = NSMutableAttributedString(attributedString: self.attributedText)
 //            matr.replaceCharactersInRange(range, withAttributedString: EmoAttach.attStrWithEmo(emo))
-//            matr.addAttribute(NSFontAttributeName, value: self.font!, range: NSMakeRange(0,matr.length))
+//            matr.addAttribute(NSAttributedString.Key.fon, value: self.font!, range: NSMakeRange(0,matr.length))
 //            self.attributedText=matr
 //            self.selectedRange=NSMakeRange(range.location+1, 0)
 //            self.onChange()

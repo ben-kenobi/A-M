@@ -26,7 +26,7 @@ extension UIImage{
     func stretch()->UIImage{
         let v=size.height*0.5,
         h=size.width*0.5
-        return  resizableImage(withCapInsets: UIEdgeInsets(top: v, left: h, bottom: v, right: h), resizingMode: UIImageResizingMode.stretch)
+        return  resizableImage(withCapInsets: UIEdgeInsets(top: v, left: h, bottom: v, right: h), resizingMode: UIImage.ResizingMode.stretch)
     }
     
     func roundImg(_ w:CGFloat=0,boderColor:UIColor?=nil,borderW:CGFloat=0)->UIImage{
@@ -73,7 +73,7 @@ extension UIImage{
         }
         let scrsize=iScr.bounds.size
         for subdict in images {
-            let size=CGSizeFromString(subdict["UILaunchImageSize"] as! String)
+            let size=NSCoder.cgSize(for: subdict["UILaunchImageSize"] as! String)
             if size.equalTo(scrsize) {
                 return iimg( subdict["UILaunchImageName"] as? String)
             }
@@ -111,7 +111,7 @@ extension UIImage{
         return img!.stretch()
     }
     func alwayOrigin()->UIImage{
-        return self.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        return self.withRenderingMode(UIImage.RenderingMode.alwaysOriginal)
     }
     
     class func generateVideoImage(_ url:URL,cb:@escaping ((_ img:UIImage)->()))
@@ -120,11 +120,11 @@ extension UIImage{
         let generator = AVAssetImageGenerator(asset: asset)
         generator.appliesPreferredTrackTransform=true
         
-        let thumbTime = CMTimeMakeWithSeconds(0,30)
+        let thumbTime = CMTimeMakeWithSeconds(0,preferredTimescale: 30)
         
         let  handler:AVAssetImageGeneratorCompletionHandler = {( requestedTime,  im,  actualTime,  result,  error) in
             DispatchQueue.main.async {
-                if (result != AVAssetImageGeneratorResult.succeeded) {
+                if (result != AVAssetImageGenerator.Result.succeeded) {
                     iPop.toast("couldn't generate thumbnail, error:\(error)")
                     return
                 }

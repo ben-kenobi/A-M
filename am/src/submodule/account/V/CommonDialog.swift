@@ -74,7 +74,7 @@ class CommonDialog: BaseDialog {
         }
         
         
-        iNotiCenter.addObserver(grid, selector: #selector(grid.reloadData), name:NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        iNotiCenter.addObserver(grid, selector: #selector(grid.reloadData), name:UIDevice.orientationDidChangeNotification, object: nil)
 
 
     }

@@ -247,12 +247,12 @@ func idxof(_ ary:[String],tar:String?)->Int{
 
 func prosWithClz(_ clz:AnyClass)->[String]{
     var count:UInt32 = 0
-    let propertiesInAClass:UnsafeMutablePointer<Ivar?> = class_copyIvarList(clz, &count)
+    let propertiesInAClass:UnsafeMutablePointer<Ivar>? = class_copyIvarList(clz, &count)
     
     var ary:[String]=[]
     for i in 0..<count {
-        let  pro:objc_property_t = propertiesInAClass[Int(i)]!
-        if let str = NSString(cString: ivar_getName(pro), encoding: String.Encoding.utf8.rawValue) as? String{
+        let  pro:objc_property_t = propertiesInAClass![Int(i)]
+        if let str = NSString(cString: ivar_getName(pro)!, encoding: String.Encoding.utf8.rawValue) as? String{
             ary.append(str)
         }
     }
@@ -260,11 +260,11 @@ func prosWithClz(_ clz:AnyClass)->[String]{
 }
 func allprosWithClz(_ clz:AnyClass)->[String]{
     var count:UInt32 = 0
-    let propertiesInAClass:UnsafeMutablePointer<objc_property_t?> = class_copyPropertyList(clz, &count)
+    let propertiesInAClass:UnsafeMutablePointer<objc_property_t>? = class_copyPropertyList(clz, &count)
     
     var ary:[String]=[]
     for i in 0..<count {
-        let  pro:objc_property_t = propertiesInAClass[Int(i)]!
+        let  pro:objc_property_t = propertiesInAClass![Int(i)]
         if let str = NSString(cString: property_getName(pro), encoding: String.Encoding.utf8.rawValue) as? String{
             ary.append(str)
         }
@@ -309,12 +309,12 @@ func iClassFromStr(_ name:String?)->NSObject?{
 
 func iTimer(_ inteval:TimeInterval,tar:Any,sel:Selector)->Timer{
     let timer = Timer(timeInterval: inteval, target: tar, selector: sel, userInfo: nil, repeats: true)
-    iLoop.add(timer, forMode: RunLoopMode.commonModes)
+    iLoop.add(timer, forMode: RunLoop.Mode.common)
     return timer
 }
 func iDisLin(_ tar:Any,sel:Selector)->CADisplayLink{
     let dislin = CADisplayLink(target: tar, selector: sel)
-    dislin.add(to: iLoop, forMode: RunLoopMode.commonModes)
+    dislin.add(to: iLoop, forMode: RunLoop.Mode.common)
     return dislin
 }
 func isBlank(_ str:String?)->Bool{
@@ -849,7 +849,7 @@ extension String{
     
     
     func sizeWithFont(_ font:UIFont)->CGSize{
-        return (self as NSString).size(attributes: [NSFontAttributeName:font])
+        return (self as NSString).size(withAttributes: [NSAttributedString.Key.font:font])
     }
     
     static func isDecimal(_ deci:String?,scale:Int)->Bool {

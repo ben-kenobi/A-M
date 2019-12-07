@@ -56,7 +56,7 @@ class LoginVC: BaseVC {
     lazy var pwd:UITextField = {
         let pwd = UITextField(frame: nil, bg: iColor(255, 255, 255, 0.3), corner: 0, bordercolor: iColor(0, 0, 0, 0.3), borderW: 0.5)
         pwd.leftView=UIView(frame: CGRect(x: 0, y: 0, width: 12, height: 0))
-        pwd.leftViewMode = UITextFieldViewMode.always
+        pwd.leftViewMode = UITextField.ViewMode.always
         pwd.isSecureTextEntry=true
         pwd.returnKeyType=UIReturnKeyType.go
         pwd.delegate=self
@@ -73,7 +73,7 @@ class LoginVC: BaseVC {
     }()
     
     
-    func onClick(_ sender:UIView){
+    @objc func onClick(_ sender:UIView){
         if (sender == btn) {
             let pwdtext = pwd.text ?? ""
             if (isBlank(pwdtext) || !CommonService.login(pwdtext)){

@@ -57,7 +57,7 @@ class ScrolLab: UIView {
         setNeedsDisplay()
         
     }
-    func reset(){
+    @objc func reset(){
         lastPosition=0
         textsize = text.sizeWithFont(font)
         setNeedsDisplay()
@@ -77,8 +77,8 @@ class ScrolLab: UIView {
         self.dislin.isPaused = !able || pause
 
         
-        (text as NSString).draw(at: CGPoint(x: lastPosition, y: (rect.height-textsize.height)*0.5), withAttributes:[NSForegroundColorAttributeName:textColor,
-            NSFontAttributeName:font])
+        (text as NSString).draw(at: CGPoint(x: lastPosition, y: (rect.height-textsize.height)*0.5), withAttributes:[NSAttributedString.Key.foregroundColor:textColor,
+                                                                                                                    NSAttributedString.Key.font:font])
         
         
         lastPosition -= speed
@@ -92,7 +92,7 @@ class ScrolLab: UIView {
         super.init(frame: frame)
         backgroundColor=UIColor.white
         lastPosition=0
-        iNotiCenter.addObserver(self, selector: #selector(self.reset), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        iNotiCenter.addObserver(self, selector: #selector(self.reset), name: UIDevice.orientationDidChangeNotification, object: nil)
 
     }
  

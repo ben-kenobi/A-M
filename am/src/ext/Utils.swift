@@ -128,7 +128,7 @@ class INet{
         
         req.httpMethod="POST"
         
-        req.httpBody=body.replacingPercentEscapes(using:String.Encoding(rawValue: UInt(4)))?.data(using: String.Encoding(rawValue: UInt(4)))
+        req.httpBody=body.removingPercentEncoding?.data(using: String.Encoding(rawValue: UInt(4)))
         URLSession.shared.dataTask(with: req, completionHandler:{ (data, resp, err) -> Void in
             DispatchQueue.main.async {
                 cb?(data,resp,err)
@@ -207,7 +207,7 @@ class iPop{
 }
 class iDialog{
     class func dialogWith(_ title:String?,msg:String?,actions:[UIAlertAction],vc:UIViewController){
-        let ac = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        let ac = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         for action in actions{
             ac.addAction(action)
         }

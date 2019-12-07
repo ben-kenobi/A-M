@@ -23,7 +23,7 @@ class ListDropPop: BaseDialog {
     }
     var dropTitle:String?{
         didSet{
-             (titleView.viewWithTag(12) as! UIButton).setTitle(dropTitle, for: UIControlState())
+            (titleView.viewWithTag(12) as! UIButton).setTitle(dropTitle, for: UIControl.State())
         }
     }
     var headerTitle:String?{
@@ -59,7 +59,7 @@ class ListDropPop: BaseDialog {
         didSet{
             if let droplist=droplist , droplist.count>0{
                 if dropTitle == nil{
-                    (titleView.viewWithTag(12) as! UIButton).setTitle(droplist[0], for: UIControlState())
+                    (titleView.viewWithTag(12) as! UIButton).setTitle(droplist[0], for: UIControl.State())
                 }
             }
         }
@@ -71,12 +71,12 @@ class ListDropPop: BaseDialog {
     
     
     lazy var tv:AutoHeightTV = {
-        let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableViewStyle.plain)
+        let tv = AutoHeightTV(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: UITableView.Style.plain)
         tv.delegate=self
         tv.dataSource=self
         tv.register(ListPopCell2.self, forCellReuseIdentifier: self.celliden)
         
-        tv.separatorInset=UIEdgeInsetsMake(0, 22, 0, 22)
+        tv.separatorInset=UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 22)
         tv.separatorStyle = .singleLine
 
         tv.showsVerticalScrollIndicator=true
@@ -91,7 +91,7 @@ class ListDropPop: BaseDialog {
         lab.font=ibFont(16)
         lab.lineBreakMode = .byTruncatingMiddle
         lab.numberOfLines=2
-        titleview.addTarget(self, action: #selector(self.onClick(_:)), for: UIControlEvents.touchUpInside)
+        titleview.addTarget(self, action: #selector(self.onClick(_:)), for: UIControl.Event.touchUpInside)
         
         return titleview
     }()
@@ -152,7 +152,7 @@ class ListDropPop: BaseDialog {
 
 
 extension ListDropPop{
-    func onClick(_ sender:UIButton){
+    @objc func onClick(_ sender:UIButton){
         if sender == self.titleView{
             self.onItemSelCB?(-1,self)
         }
@@ -164,11 +164,11 @@ extension ListDropPop{
     
   
     
-    func showDropDialog(){
+    @objc func showDropDialog(){
         let v = titleView.viewWithTag(12) as! UIButton
         let lp = ListPop.listPopWith(droplist,  w: v.w, cb: { (str, pos) in
             if self.dropTitle == nil{
-                v.setTitle(str, for: UIControlState())
+                v.setTitle(str, for: UIControl.State())
             }
             self.onDropSelCB?(pos,self)
         })
@@ -226,7 +226,7 @@ extension ListDropPop:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
         return 66

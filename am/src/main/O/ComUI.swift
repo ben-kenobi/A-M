@@ -40,7 +40,7 @@ class ComUI{
 
    
     static func moreItem(_ target:AnyObject,sel:Selector)->UIBarButtonItem{
-        let item = UIBarButtonItem(image: iimg("ic_menu_moreoverflow_normal_holo_light"), style: UIBarButtonItemStyle.plain, target: target, action:sel)
+        let item = UIBarButtonItem(image: iimg("ic_menu_moreoverflow_normal_holo_light"), style: UIBarButtonItem.Style.plain, target: target, action:sel)
         item.tag=NavMenu.more.rawValue
         return item
     }
@@ -55,15 +55,15 @@ class ComUI{
     }
     static func dropBtn(_ title:String,tar:AnyObject?,sel:Selector,tag:Int)->UIButton{
         let b = DropBtn( img: iimg("triangle_down_blue"), title: title, font: ibFont(18), titleColor: iColor(0xff5555aa), bgimg: iimg("lightblue_noselect.9",pad:0.5), hlbgimg: iimg("button_select.9",pad:0.5),  corner: 0, bordercolor: iColor(0xffdddddd), borderW: 0, tar: tar, action: sel, tag: tag)
-        b.setBackgroundImage(iimg("button_select.9",pad:0.5), for: UIControlState.selected)
+        b.setBackgroundImage(iimg("button_select.9",pad:0.5), for: UIControl.State.selected)
         return b
         
     }
     
     static func comBtnTitle(_ title:String,labtag:Int=0)->UIButton{
         let view = UIButton()
-        view.setBackgroundImage(iimg(iColor(0xffffffff)), for: UIControlState())
-        view.setBackgroundImage(iimg(iConst.khakiBg), for: UIControlState.highlighted)
+        view.setBackgroundImage(iimg(iColor(0xffffffff)), for: UIControl.State())
+        view.setBackgroundImage(iimg(iConst.khakiBg), for: UIControl.State.highlighted)
         let lab = comTitleLab(title)
         lab.backgroundColor=UIColor.clear
         view.addSubview(lab)
@@ -103,8 +103,8 @@ class ComUI{
     }
     static func comDropTitleView(_ title:String,dropTitle:String,tar:AnyObject?,sel:Selector,labtag:Int,droptag:Int)->UIButton{
         let view = UIButton()
-        view.setBackgroundImage(iimg(iColor(0xffffffff)), for: UIControlState())
-        view.setBackgroundImage(iimg(iConst.khakiBg), for: UIControlState.highlighted)
+        view.setBackgroundImage(iimg(iColor(0xffffffff)), for: UIControl.State())
+        view.setBackgroundImage(iimg(iConst.khakiBg), for: UIControl.State.highlighted)
         let lab = comTitleLab(title)
         lab.backgroundColor=UIColor.clear
         view.addSubview(lab)
@@ -175,7 +175,7 @@ class ClearableTF:UITextField,UITextFieldDelegate{
         tf.rightView = rv
         
         rv.addSubview(btn)
-        iNotiCenter.addObserver(self, selector: #selector(self.onTextChanged(_:)), name: NSNotification.Name.UITextFieldTextDidChange, object: self)
+        iNotiCenter.addObserver(self, selector: #selector(self.onTextChanged(_:)), name: UITextField.textDidChangeNotification, object: self)
         addObserver(self, forKeyPath: "enabled", options: NSKeyValueObservingOptions.old, context: nil)
         addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions.old, context: nil)
         self.delegate=self
@@ -192,11 +192,11 @@ class ClearableTF:UITextField,UITextFieldDelegate{
         
     }
     
-   func  onClear(){
+    @objc func  onClear(){
         text=""
     }
    
-    func onTextChanged(_ noti:Notification?){
+    @objc func onTextChanged(_ noti:Notification?){
         btn.isHidden = isBlank(text)
         onTxtChangeCB?(self)
     }

@@ -12,14 +12,14 @@ class CBBtn: UIButton {
     var cb:((_ sender:UIButton)->())?
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addTarget(self, action: #selector(self.onClick(_:)), for: UIControlEvents.touchUpInside)
+        self.addTarget(self, action: #selector(self.onClick(_:)), for: UIControl.Event.touchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func onClick(_ sender:UIButton){
+    @objc func onClick(_ sender:UIButton){
         cb?(sender)
     }
 
