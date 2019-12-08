@@ -184,8 +184,9 @@ class ClearableTF:UITextField,UITextFieldDelegate{
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath! == "enabled"{
-            let ph = value(forKeyPath: "_placeholderLabel") as? UIView
-            ph?.isHidden = !isEnabled
+            // application BUG
+//            let ph = value(forKeyPath: "_placeholderLabel") as? UIView
+//            ph?.isHidden = !isEnabled
         }else if keyPath! == "text"{
             onTextChanged(nil)
         }

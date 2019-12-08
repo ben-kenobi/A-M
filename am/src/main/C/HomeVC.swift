@@ -86,12 +86,14 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
         if CommonService.isAccessKeyEnable(name ?? "") && !pass{
             let vc:LoginVC=LoginVC()
             vc.name=name
+            vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }else{
             if !pass{
                 CommonUtils.setAccessKey(nil)
             }
             let vc = CommonService.getIntentByAccessName(name ?? "")
+            vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
 
         }
