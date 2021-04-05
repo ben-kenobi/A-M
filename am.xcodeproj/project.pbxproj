@@ -1489,7 +1489,7 @@
 			baseConfigurationReference = A05C49584E95D873D5DFBA06 /* Pods-am.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 3W4XL8NW87;
+				DEVELOPMENT_TEAM = Q3Z23BVZ93;
 				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = am/Info.plist;
@@ -1500,7 +1500,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/am",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yf.am;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yf.am1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "am/src/conf/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
