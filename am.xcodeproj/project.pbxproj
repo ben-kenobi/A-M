@@ -84,7 +84,6 @@
 		184F744C1DB5D49C005B93A8 /* TableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74371DB5D49B005B93A8 /* TableView+Ext.swift */; };
 		184F744D1DB5D49C005B93A8 /* UIView+IBExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74381DB5D49B005B93A8 /* UIView+IBExt.swift */; };
 		184F744E1DB5D49C005B93A8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74391DB5D49B005B93A8 /* Utils.swift */; };
-		184F74911DB9C887005B93A8 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 184F74901DB9C887005B93A8 /* libsqlite3.dylib */; };
 		184F74931DB9C9EF005B93A8 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 184F74921DB9C9EF005B93A8 /* libsqlite3.0.tbd */; };
 		184F74951DBDEC90005B93A8 /* FileSystemVCUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74941DBDEC90005B93A8 /* FileSystemVCUI.swift */; };
 		184F74971DBDEC9B005B93A8 /* FilesystemVCEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184F74961DBDEC9B005B93A8 /* FilesystemVCEvent.swift */; };
@@ -374,7 +373,6 @@
 				184F74931DB9C9EF005B93A8 /* libsqlite3.0.tbd in Frameworks */,
 				184740601CE084870064E819 /* CFNetwork.framework in Frameworks */,
 				1847405E1CE0846F0064E819 /* SystemConfiguration.framework in Frameworks */,
-				184F74911DB9C887005B93A8 /* libsqlite3.dylib in Frameworks */,
 				E21D995FE21E33008B246950 /* libPods-am.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1466,7 +1464,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 54225A986995A82070BBEB89 /* Pods-am.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q3Z23BVZ93;
 				ENABLE_BITCODE = YES;
@@ -1479,7 +1476,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/am",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yf.am;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yf.am1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "am/src/conf/Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
@@ -1491,9 +1488,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A05C49584E95D873D5DFBA06 /* Pods-am.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q3Z23BVZ93;
+				DEVELOPMENT_TEAM = 3W4XL8NW87;
 				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = am/Info.plist;
